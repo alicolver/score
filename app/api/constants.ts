@@ -1,0 +1,1 @@
+export const API_GATEWAY = "https://11wg9zigkk.execute-api.eu-west-2.amazonaws.com"

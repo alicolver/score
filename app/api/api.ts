@@ -35,7 +35,4 @@ export default class Client {
             new UserApi(config)
         );
     }
-
-
-
 }

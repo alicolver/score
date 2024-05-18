@@ -1,10 +1,11 @@
 import { Configuration, CreateMatchRequest } from "@/client";
 import Client from "./api/api";
+import { API_GATEWAY } from "./api/constants";
 
 export default async function Home() {
   
   const apiClientConfig = new Configuration({
-    basePath: "https://11wg9zigkk.execute-api.eu-west-2.amazonaws.com"
+    basePath: API_GATEWAY
   })
   const client = Client.create(apiClientConfig);
 
