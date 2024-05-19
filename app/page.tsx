@@ -28,8 +28,10 @@ export default async function Home() {
   }
 
   return (
-    <>
-      <p>This page should either redirect you to /app or /login depending on whether you're logged in or not</p>
-    </>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+        PREDICTABALL.
+      </div>
+    </main>
   );
 }
