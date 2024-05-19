@@ -1,4 +1,5 @@
 import { AuthApi, Configuration, LeagueApi, MatchApi, PredictionApi, TeamApi, UserApi } from "@/client";
+import { API_GATEWAY } from "./constants";
 
 export default class Client {
 
@@ -36,3 +37,11 @@ export default class Client {
         );
     }
 }
+
+const apiClientConfig = new Configuration({
+    basePath: API_GATEWAY + '/prod',
+    headers: {
+        "Access-Control-Allow-Origin": "*"
+    }
+})
+export const CLIENT = Client.create(apiClientConfig);

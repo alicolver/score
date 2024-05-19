@@ -1,14 +1,9 @@
-import { Configuration, CreateMatchRequest } from "@/client";
-import Client from "./api/api";
-import { API_GATEWAY } from "./api/constants";
+import { CreateMatchRequest } from "@/client";
+import { CLIENT } from "./api/api";
+
 
 export default async function Home() {
   
-  const apiClientConfig = new Configuration({
-    basePath: API_GATEWAY
-  })
-  const client = Client.create(apiClientConfig);
-
   const matchRequest: CreateMatchRequest = {
     homeTeamId: "0",
     awayTeamId: "1",
@@ -19,7 +14,7 @@ export default async function Home() {
 
   async function wrappedCreate(): Promise<string | undefined>  {
     try {
-      const response = await client.matchApi.createMatch({ createMatchRequest: matchRequest })
+      const response = await CLIENT.matchApi.createMatch({ createMatchRequest: matchRequest })
       return response.matchId
     } catch (error) {
       console.log(error)
