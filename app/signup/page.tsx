@@ -1,41 +1,46 @@
 'use client'
 
-import { useState } from "react"
+import React, { useState } from "react"
 import validatePassword from "../auth/password"
 import { CLIENT } from "../api/api"
 import {SignupRequest} from "@/client";
+import ReactPasswordChecklist from "react-password-checklist";
+import {navigateToLogin} from "@/app/signup/actions";
 
 export default function SignUp() {
     
     const basicInputCss = "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    const passwordInputCss = "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    
+    const errorInputCss = "bg-gray-50 border border-red-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-red-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const [validEmail, setValidEmail] = useState(true)
     const [password, setPassword] = useState('')
-    const [confimPassword, setConfirmPassword] = useState('')
     const [isPasswordValid, setIsPasswordValid] = useState(false)
     const [doPasswordsMatch, setDoPasswordsMatch] = useState(true)
 
-    const handleEvent: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    const handleEvent: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault()
 
-        const reqBody: SignupRequest = {
-            email: "bob@test.com",
-            password: "1234567",
-            firstName: "Ali",
-            familyName: "Colver"
+        if (!isPasswordValid || !doPasswordsMatch) {
+            alert("there is an error with your password")
+            return
         }
 
-        console.log(reqBody)
-        console.log(CLIENT.userApi)
+        const reqBody: SignupRequest = {
+            email: email,
+            password: password,
+            firstName: firstName,
+            familyName: lastName
+        }
 
         try {
-            const response = CLIENT.userApi.signup({ signupRequest: reqBody })
-            console.log(response)
+            await CLIENT.userApi.signup({signupRequest: reqBody})
+            await navigateToLogin()
         } catch (error) {
-            console.log(error)
+            alert(":(")
         }
     }
     
@@ -46,7 +51,12 @@ export default function SignUp() {
 
     function handleConfirmPasswordChange(val: string) {
         setDoPasswordsMatch(val === password)
-        setConfirmPassword(val)
+    }
+
+    function handleEmailChange(val: string) {
+        const lowerCaseEmail = val.toLowerCase()
+        setEmail(lowerCaseEmail)
+        setValidEmail(emailRegex.test(lowerCaseEmail))
     }
 
     return(
@@ -88,11 +98,11 @@ export default function SignUp() {
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
                             <input 
-                                onChange={(input) => {setEmail(input.target.value)}}
+                                onChange={(input) => {handleEmailChange(input.target.value)}}
                                 type="email" 
                                 name="email" 
                                 id="email" 
-                                className={basicInputCss} 
+                                className={validEmail ? basicInputCss : errorInputCss}
                                 placeholder="scotland@champions.com"
                             />
                         </div>
@@ -104,7 +114,12 @@ export default function SignUp() {
                                 name="password" 
                                 id="password" 
                                 placeholder="••••••••" 
-                                className={passwordInputCss}
+                                className={isPasswordValid ? basicInputCss : errorInputCss}
+                            />
+                            <ReactPasswordChecklist
+                                rules={["minLength","lowercase","number"]}
+                                minLength={6}
+                                value={password}
                             />
                         </div>
                         <div>
@@ -115,10 +130,17 @@ export default function SignUp() {
                                 name="confirmpassword" 
                                 id="confirmpassword" 
                                 placeholder="••••••••" 
-                                className={passwordInputCss}
+                                className={doPasswordsMatch ? basicInputCss : errorInputCss}
                             />
                         </div>
-                        <button onClick={handleEvent} type="submit" className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create Account</button>
+                        <button
+                            onClick={handleEvent}
+                            disabled={!doPasswordsMatch || !isPasswordValid}
+                            type="submit"
+                            className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        >
+                            Create Account
+                        </button>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                             Already have an account? <a href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign In</a>
                         </p>
