@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import validatePassword from "../auth/password"
-import { error } from "console"
 import { CLIENT } from "../api/api"
+import {SignupRequest} from "@/client";
 
 export default function SignUp() {
     
@@ -21,10 +21,11 @@ export default function SignUp() {
     const handleEvent: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault()
 
-        const reqBody = {
-            email: email,
-            password: password,
-            name: firstName + " " + lastName
+        const reqBody: SignupRequest = {
+            email: "bob@test.com",
+            password: "1234567",
+            firstName: "Ali",
+            familyName: "Colver"
         }
 
         console.log(reqBody)

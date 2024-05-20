@@ -7,7 +7,7 @@
     "build": "npm run build-client && next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "fetch-client-contract": "curl https://raw.githubusercontent.com/alicolver/scorcerer/main/contract/api-contract.yaml -o contract.yaml",
+    "fetch-client-contract": "curl https://raw.githubusercontent.com/alicolver/scorcerer/main/lambdas/contract/api-contract.yaml -o contract.yaml",
     "build-client": "npm run fetch-client-contract && openapi-generator-cli generate -i contract.yaml -g typescript-fetch -o client/",
     "clean": "rm -rf client contract.yaml"
   },

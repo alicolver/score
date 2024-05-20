@@ -41,7 +41,7 @@ export default class Client {
 const apiClientConfig = new Configuration({
     basePath: API_GATEWAY + '/prod',
     headers: {
-        "Access-Control-Allow-Origin": "*"
+
     }
 })
 export const CLIENT = Client.create(apiClientConfig);
