@@ -2,10 +2,10 @@
 
 import React, { useState } from "react"
 import validatePassword from "../auth/password"
-import { CLIENT } from "../api/api"
+import {AUTH_CLIENT} from "../api/api"
 import {SignupRequest} from "@/client";
 import ReactPasswordChecklist from "react-password-checklist";
-import {navigateToLogin} from "@/app/signup/actions";
+import {navigateTo} from "@/app/actions";
 
 export default function SignUp() {
     
@@ -37,8 +37,8 @@ export default function SignUp() {
         }
 
         try {
-            await CLIENT.userApi.signup({signupRequest: reqBody})
-            await navigateToLogin()
+            await AUTH_CLIENT.userApi.signup({signupRequest: reqBody})
+            await navigateTo("login")
         } catch (error) {
             alert(":(")
         }

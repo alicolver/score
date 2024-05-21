@@ -1,9 +1,33 @@
-import { AuthApi, Configuration, LeagueApi, MatchApi, PredictionApi, TeamApi, UserApi } from "@/client";
-import { API_GATEWAY } from "./constants";
+import {AuthApi, Configuration, LeagueApi, MatchApi, PredictionApi, TeamApi, UserApi} from "@/client";
+import {API_GATEWAY} from "./constants";
+
+export class AuthClient {
+    readonly authApi: AuthApi
+    readonly userApi: UserApi
+
+    private constructor(
+        authApi: AuthApi,
+        userApi: UserApi
+    ) {
+        this.authApi = authApi
+        this.userApi = userApi
+    }
+
+    public static create(config: Configuration): AuthClient {
+        return new AuthClient(
+            new AuthApi(config),
+            new UserApi(config)
+        )
+    }
+}
+
+const authClientConfig = new Configuration({
+    basePath: API_GATEWAY + '/prod',
+})
+export const AUTH_CLIENT = AuthClient.create(authClientConfig)
 
 export default class Client {
 
-    readonly authApi: AuthApi
     readonly leagueApi: LeagueApi
     readonly matchApi: MatchApi
     readonly predictionApi: PredictionApi
@@ -11,14 +35,12 @@ export default class Client {
     readonly userApi: UserApi
 
     private constructor(
-        authApi: AuthApi,
         leagueApi: LeagueApi,
         matchApi: MatchApi,
         predictionApi: PredictionApi,
         teamApi: TeamApi,
         userApi: UserApi
     ) {
-        this.authApi = authApi
         this.leagueApi = leagueApi
         this.matchApi = matchApi
         this.predictionApi = predictionApi
@@ -28,7 +50,6 @@ export default class Client {
 
     public static create(config: Configuration) {
         return new Client(
-            new AuthApi(config),
             new LeagueApi(config),
             new MatchApi(config),
             new PredictionApi(config),
@@ -38,10 +59,13 @@ export default class Client {
     }
 }
 
-const apiClientConfig = new Configuration({
-    basePath: API_GATEWAY + '/prod',
-    headers: {
-
-    }
-})
-export const CLIENT = Client.create(apiClientConfig);
+export var CLIENT: Client | undefined = undefined
+export function setClient(authToken: string): void {
+    const apiClientConfig = new Configuration({
+        basePath: API_GATEWAY + '/prod',
+        headers: {
+            "Authorization": authToken
+        }
+    })
+    CLIENT = Client.create(apiClientConfig)
+}
