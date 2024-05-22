@@ -6,11 +6,15 @@ import {AUTH_CLIENT, TOKEN_COOKIE_KEY} from "@/app/api/api";
 import {navigateTo} from "@/app/actions";
 import Cookies from "js-cookie";
 import {Input} from "@nextui-org/react";
+import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 
 export default function Home() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isVisible, setIsVisible] = React.useState(false);
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
 
     const handleEvent: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault()
@@ -54,11 +58,20 @@ export default function Home() {
                             </div>
                             <div>
                                 <Input
+                                    label="Password"
                                     onChange={(event) => setPassword(event.target.value)}
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    label="password"
+                                    endContent={
+                                        <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                                            {isVisible ? (
+                                                <EyeSlashFilledIcon
+                                                    className="text-2xl text-default-400 pointer-events-none"/>
+                                            ) : (
+                                                <EyeFilledIcon
+                                                    className="text-2xl text-default-400 pointer-events-none"/>
+                                            )}
+                                        </button>
+                                    }
+                                    type={isVisible ? "text" : "password"}
                                 />
                             </div>
                             <div className="flex items-center justify-between">

@@ -4,7 +4,6 @@ import React, { useState } from "react"
 import validatePassword from "../auth/password"
 import {AUTH_CLIENT} from "../api/api"
 import {SignupRequest} from "@/client";
-import ReactPasswordChecklist from "react-password-checklist";
 import {navigateTo} from "@/app/actions";
 import {Input} from "@nextui-org/react";
 
@@ -55,9 +54,6 @@ export default function SignUp() {
     function handleEmailChange(val: string) {
         const lowerCaseEmail = val.toLowerCase()
         setEmail(lowerCaseEmail)
-    }
-
-    function validateEmail() {
         setValidEmail(emailRegex.test(email))
     }
 
@@ -91,15 +87,10 @@ export default function SignUp() {
                         <div>
                            <Input
                                 onChange={(input) => handleEmailChange(input.target.value)}
-                                isInvalid={!validEmail}
                                 type="email" 
                                 name="email" 
                                 id="email"
                                 label="email"
-                                onFocusChange={(isFocused) => {
-                                    if (!isFocused) {
-                                        validateEmail()
-                                }}}
                             />
                         </div>
                         <div>
