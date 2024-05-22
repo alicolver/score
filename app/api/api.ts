@@ -1,5 +1,6 @@
 import {AuthApi, Configuration, LeagueApi, MatchApi, PredictionApi, TeamApi, UserApi} from "@/client";
 import {API_GATEWAY} from "./constants";
+import Cookies from "js-cookie";
 
 export class AuthClient {
     readonly authApi: AuthApi
@@ -26,35 +27,13 @@ const authClientConfig = new Configuration({
 })
 export const AUTH_CLIENT = AuthClient.create(authClientConfig)
 
-export default class Client {
-
-    readonly leagueApi: LeagueApi
-    readonly matchApi: MatchApi
-    readonly predictionApi: PredictionApi
-    readonly teamApi: TeamApi
-    readonly userApi: UserApi
-
-    private constructor(
-        leagueApi: LeagueApi,
-        matchApi: MatchApi,
-        predictionApi: PredictionApi,
-        teamApi: TeamApi,
-        userApi: UserApi
-    ) {
-        this.leagueApi = leagueApi
-        this.matchApi = matchApi
-        this.predictionApi = predictionApi
-        this.teamApi = teamApi
-        this.userApi = userApi
-    }
-
-    public static create(config: Configuration) {
-        return new Client(
-            new LeagueApi(config),
-            new MatchApi(config),
-            new PredictionApi(config),
-            new TeamApi(config),
-            new UserApi(config)
-        );
-    }
+export function getConfigWithAuthHeader(): Configuration {
+    const token: string | undefined = Cookies.get("authToken")
+    const validatedToken: string = token ? token : ""
+    return new Configuration({
+        basePath: API_GATEWAY + '/prod',
+        headers: {
+            "Authorization": validatedToken
+        }
+    })
 }
