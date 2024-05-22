@@ -58,14 +58,3 @@ export default class Client {
         );
     }
 }
-
-export var CLIENT: Client | undefined = undefined
-export function setClient(authToken: string): void {
-    const apiClientConfig = new Configuration({
-        basePath: API_GATEWAY + '/prod',
-        headers: {
-            "Authorization": authToken
-        }
-    })
-    CLIENT = Client.create(apiClientConfig)
-}

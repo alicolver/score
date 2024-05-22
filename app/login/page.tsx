@@ -2,10 +2,10 @@
 
 import React, {useState} from "react";
 import {LoginRequest} from "@/client";
-import {AUTH_CLIENT, setClient} from "@/app/api/api";
-import {cookies} from "next/headers";
+import {AUTH_CLIENT} from "@/app/api/api";
 import {redirect} from "next/navigation";
 import {navigateTo} from "@/app/actions";
+import Cookies from "js-cookie";
 
 export default function Home() {
 
@@ -26,7 +26,7 @@ export default function Home() {
                 alert("error making login request")
                 return
             }
-            setClient(response.idToken)
+            Cookies.set("authToken", response.idToken)
             await navigateTo("app")
         } catch (error) {
             alert("failed login")
