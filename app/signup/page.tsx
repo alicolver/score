@@ -8,7 +8,7 @@ import {navigateTo} from "@/app/actions";
 import {Input} from "@nextui-org/react";
 
 export default function SignUp() {
-    
+
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const [firstName, setFirstName] = useState('')
@@ -41,7 +41,7 @@ export default function SignUp() {
             alert(":(")
         }
     }
-    
+
     function handlePasswordChange(val: string) {
         setIsPasswordValid(validatePassword(val))
         setPassword(val)
@@ -58,9 +58,9 @@ export default function SignUp() {
     }
 
     return(
-        <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <section className="bg-gray-900 h-screen">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0e">
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bborder-gray-700 align-bottom">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Sign Up For An Account
@@ -68,9 +68,9 @@ export default function SignUp() {
                     <form className="space-y-4 md:space-y-6" action="#">
                         <div>
                            <Input
-                                onChange={(input) => setFirstName(input.target.value)} 
-                                type="name" 
-                                name="firstname" 
+                                onChange={(input) => setFirstName(input.target.value)}
+                                type="name"
+                                name="firstname"
                                 id="firstname"
                                 label="First Name"
                              />
@@ -78,36 +78,36 @@ export default function SignUp() {
                         <div>
                             <Input
                                 onChange={(input) => setLastName(input.target.value)}
-                                type="name" 
-                                name="lastname" 
-                                id="lastname" 
+                                type="name"
+                                name="lastname"
+                                id="lastname"
                                 label="Last Name"
                             />
                         </div>
                         <div>
                            <Input
                                 onChange={(input) => handleEmailChange(input.target.value)}
-                                type="email" 
-                                name="email" 
+                                type="email"
+                                name="email"
                                 id="email"
                                 label="email"
                             />
                         </div>
                         <div>
                            <Input
-                                onChange={(input) => handlePasswordChange(input.target.value)} 
-                                type="password" 
-                                name="password" 
-                                id="password" 
+                                onChange={(input) => handlePasswordChange(input.target.value)}
+                                type="password"
+                                name="password"
+                                id="password"
                                 label="Password"
                            />
                         </div>
                         <div>
                             <Input
-                                onChange={(input) => handleConfirmPasswordChange(input.target.value)} 
-                                type="password" 
-                                name="confirmpassword" 
-                                id="confirmpassword" 
+                                onChange={(input) => handleConfirmPasswordChange(input.target.value)}
+                                type="password"
+                                name="confirmpassword"
+                                id="confirmpassword"
                                 label="Confirm Password"
                                 isInvalid={!isPasswordValid}
                             />
