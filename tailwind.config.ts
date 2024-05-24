@@ -18,16 +18,16 @@ const config: Config = {
             },
             animation: {
                 wiggle: 'wiggle 1s ease-in-out infinite',
-                slideup: 'slideup 15s linear infinite',
+                slide: 'slide 10s linear infinite',
             },
             keyframes: {
                 wiggle: {
                     '0%, 100%': {transform: 'rotate(-3deg)'},
                     '50%': {transform: 'rotate(3deg)'},
                 },
-                slideup: {
-                    '0%': {transform: 'translateY(calc(100vh + 100px))'},
-                    '100%': {transform: 'translateY(calc(0vh - 100px))'},
+                slide: {
+                    '0%': {transform: 'translateX(calc(100vw))'},
+                    '100%': {transform: 'translateX(calc(-100vw))'},
                 },
             }
         },

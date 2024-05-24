@@ -1,3 +1,4 @@
+import React from "react";
 import AnimatedFlags from "@/app/components/AnimatedFlags";
 
 export default async function Home() {
@@ -16,7 +17,9 @@ export default async function Home() {
                 </div>
             </div>
 
-            <AnimatedFlags/>
+            <AnimatedFlags bottom={"10%"} invert={false}/>
+            <AnimatedFlags bottom={"22.5%"} invert={true}/>
+            <AnimatedFlags bottom={"35%"} invert={false}/>
         </main>
     );
 }
