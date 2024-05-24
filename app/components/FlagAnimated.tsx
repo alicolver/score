@@ -9,6 +9,7 @@ interface FlagAnimatedProps {
 }
 
 export default function FlagAnimated(props: FlagAnimatedProps): React.JSX.Element {
+
     const animationStyle = {
         animationDelay: `${props.index * 1000}ms`,
         animationDirection: props.invert ? "reverse" : "normal",

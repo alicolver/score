@@ -18,8 +18,8 @@ export default async function Home() {
             </div>
 
             <AnimatedFlags bottom={"10%"} invert={false}/>
-            <AnimatedFlags bottom={"22.5%"} invert={true}/>
-            <AnimatedFlags bottom={"35%"} invert={false}/>
+            <AnimatedFlags bottom={"20%"} invert={true}/>
+            <AnimatedFlags bottom={"30%"} invert={false}/>
         </main>
     );
 }
