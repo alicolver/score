@@ -9,7 +9,7 @@ export function Header() {
         PREDICTABALL.LIVE
         <Button
             className={"bg-gradient-to-tr from-blue-600 to-green-300 inline-block shadow-lg text-white"}
-            onClick={() => navigateTo("/login")}
+            onClick={() => navigateTo("login")}
         >
             Login
         </Button>
