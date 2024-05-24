@@ -1,6 +1,7 @@
 import React from "react";
-import AnimatedFlags from "@/app/components/AnimatedFlags";
-import {Header} from "@/app/components/LandingHeader";
+import AnimatedFlags from "@/app/components/animated-flags";
+import {Header} from "@/app/components/landing-header";
+import {Button} from "@nextui-org/react";
 
 
 export default async function Home() {
@@ -9,7 +10,7 @@ export default async function Home() {
             className="bg-gray-900 flex flex-col items-center justify-between p-10 h-screen overflow-hidden text-white">
             <Header/>
             <div className="w-full absolute text-center z-40">
-                <div className="relative top-0 text-6xl mt-40">
+                <div className="relative top-0 text-6xl lg:mt-40 mt-30 pt-20">
                     Football Just Got <p
                     className="bg-gradient-to-r from-blue-600 to-green-300 inline-block text-transparent bg-clip-text">Funner</p>
                 </div>
@@ -18,9 +19,15 @@ export default async function Home() {
                 </div>
             </div>
 
-            <AnimatedFlags bottom={"10%"} invert={false}/>
-            <AnimatedFlags bottom={"20%"} invert={true}/>
-            <AnimatedFlags bottom={"30%"} invert={false}/>
+            <AnimatedFlags bottom={"20%"} invert={false}/>
+            <AnimatedFlags bottom={"30%"} invert={true}/>
+            <AnimatedFlags bottom={"40%"} invert={false}/>
+
+            <div>
+                <Button className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white">
+                    Find Out More
+                </Button>
+            </div>
         </main>
     );
 }
