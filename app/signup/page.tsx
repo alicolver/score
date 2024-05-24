@@ -27,7 +27,7 @@ export default function SignUp() {
             return
         }
 
-        const reqBody: SignupRequest = {
+        const signupRequest: SignupRequest = {
             email: email,
             password: password,
             firstName: firstName,
@@ -35,7 +35,7 @@ export default function SignUp() {
         }
 
         try {
-            await AUTH_CLIENT.userApi.signup({signupRequest: reqBody})
+            await AUTH_CLIENT.userApi.signup({signupRequest})
             await navigateTo("login")
         } catch (error) {
             alert(":(")
