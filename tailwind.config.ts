@@ -26,7 +26,10 @@ const config: Config = {
                     '50%': {transform: 'rotate(3deg)'},
                 },
                 slide: {
-                    '0%': {transform: 'translateX(calc(100vw))'},
+                    '0%': {
+                        visibility: "visible",
+                        transform: 'translateX(calc(100vw))'
+                    },
                     '100%': {transform: 'translateX(calc(-100vw))'},
                 },
             }
