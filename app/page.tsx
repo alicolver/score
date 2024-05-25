@@ -5,6 +5,13 @@ import {Button} from "@nextui-org/react";
 
 
 export default async function Home() {
+
+    function getFlags(): React.JSX.Element {
+        return Array.from(Array(3).keys()).map(i => {
+            return <AnimatedFlags bottom={`${(i * 10)+20}%`} invert={i % 2 == 0} key={i}/>
+        })
+    }
+
     return (
         <main
             className="bg-gray-900 flex flex-col items-center justify-between p-10 h-screen overflow-hidden text-white">
@@ -19,9 +26,7 @@ export default async function Home() {
                 </div>
             </div>
 
-            <AnimatedFlags bottom={"20%"} invert={false}/>
-            <AnimatedFlags bottom={"30%"} invert={true}/>
-            <AnimatedFlags bottom={"40%"} invert={false}/>
+            {getFlags()}
 
             <div>
                 <Button className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white">
