@@ -16,7 +16,7 @@ export default async function Home(): Promise<React.JSX.Element> {
 
     return (
         <main
-            className="bg-gray-900 flex flex-col items-center justify-between p-10 h-screen overflow-hidden text-white">
+            className="bg-gray-900 flex flex-col items-center justify-between p-10 h-svh overflow-hidden text-white">
             <Header/>
             <div className="w-full absolute text-center z-40">
                 <div className="relative top-0 text-6xl lg:mt-40 mt-30 pt-20">
