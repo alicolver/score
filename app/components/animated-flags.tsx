@@ -11,7 +11,7 @@ export default function AnimatedFlags(props: AnimatedFlagProps): React.JSX.Eleme
 
     function getFlags(): React.JSX.Element[] {
         const shuffledTeams = TEAMS.sort(() => 0.5 - Math.random())
-        return shuffledTeams.slice(0, 10).map((team, i) => 
+        return shuffledTeams.slice(0, 20).map((team, i) =>
             <FlagAnimated
                 bottom={props.bottom}
                 index={i}
