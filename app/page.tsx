@@ -5,7 +5,7 @@ import {Button} from "@nextui-org/react";
 
 export default async function Home(): Promise<React.JSX.Element> {
 
-    function getFlags(): React.JSX.Element {
+    function getFlags(): React.JSX.Element[] {
         return Array.from(Array(3).keys())
             .map(i => <AnimatedFlags
                 bottom={`${(i * 10) + 20}%`}
