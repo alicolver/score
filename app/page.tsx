@@ -3,13 +3,15 @@ import AnimatedFlags from "@/app/components/animated-flags";
 import {Header} from "@/app/components/landing-header";
 import {Button} from "@nextui-org/react";
 
-
-export default async function Home() {
+export default async function Home(): Promise<React.JSX.Element> {
 
     function getFlags(): React.JSX.Element {
-        return Array.from(Array(3).keys()).map(i => {
-            return <AnimatedFlags bottom={`${(i * 10)+20}%`} invert={i % 2 == 0} key={i}/>
-        })
+        return Array.from(Array(3).keys())
+            .map(i => <AnimatedFlags
+                bottom={`${(i * 10) + 20}%`}
+                invert={i % 2 == 0}
+                key={i}
+            />)
     }
 
     return (
@@ -29,7 +31,8 @@ export default async function Home() {
             {getFlags()}
 
             <div>
-                <Button className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white">
+                <Button
+                    className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white">
                     Find Out More
                 </Button>
             </div>
