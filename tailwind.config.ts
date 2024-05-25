@@ -19,6 +19,7 @@ const config: Config = {
             animation: {
                 wiggle: 'wiggle 1s ease-in-out infinite',
                 slide: 'slide 10s linear infinite',
+                slideslow: 'slide 20s linear infinite',
             },
             keyframes: {
                 wiggle: {

@@ -17,7 +17,7 @@ export default function FlagAnimated(props: FlagAnimatedProps): React.JSX.Elemen
     };
 
     return (
-        <div className={'z-0 fixed animate-slide overflow-hidden invisible'} style={animationStyle}>
+        <div className={'z-0 fixed lg:animate-slideslow animate-slide overflow-hidden invisible'} style={animationStyle}>
             <Image
                 alt={`flag of ${props.country}`}
                 src={`https://predictaball-teamflagsbucketb6ca46de-2uk8faboxd6r.s3.eu-west-2.amazonaws.com/${props.country}.svg`}
