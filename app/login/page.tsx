@@ -4,15 +4,18 @@ import React, {useState} from "react";
 import {LoginRequest} from "@/client";
 import {AUTH_CLIENT, TOKEN_COOKIE_KEY} from "@/app/api/api";
 import {navigateTo} from "@/app/actions";
-import Cookies from "js-cookie";
-import {Input} from "@nextui-org/react";
+import {Button, Input} from "@nextui-org/react";
 import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
+import {BUTTON_CLASS} from "@/app/util/css-classes";
+import {setCookie} from "cookies-next";
 
 export default function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isVisible, setIsVisible] = React.useState(false);
+    const [isVisible, setIsVisible] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [didFail, setDidFail] = useState(false)
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -24,71 +27,87 @@ export default function Login() {
             password: password
         }
 
+        setIsLoading(true)
+
         try {
-            const response = await AUTH_CLIENT.authApi.login({ loginRequest: requestBody })
+            const response = await AUTH_CLIENT.authApi.login({loginRequest: requestBody})
+            setIsLoading(false)
             if (!response.idToken) {
                 alert("error making login request")
                 return
             }
-            Cookies.set(TOKEN_COOKIE_KEY, response.idToken)
+            setCookie(TOKEN_COOKIE_KEY, response.idToken)
             await navigateTo("app")
         } catch (error) {
-            alert("failed login")
+            setIsLoading(false)
+            setDidFail(true)
         }
     }
 
     return (
         <section>
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div className="bg-gray-900 flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+                <h1 className="text-white pb-20">
+                    PREDICTABALL.LIVE
+                </h1>
                 <div
                     className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    <div className="p-6 space-y-4 items-center justify-between md:space-y-6 sm:p-8">
+                        <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                             Sign in to your account
                         </h1>
-                        <form className="space-y-4 md:space-y-6" action="#">
-                            <div>
-                                <Input
-                                    onChange={(event) => setEmail(event.target.value)}
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    label="email"
-                                />
-                            </div>
-                            <div>
-                                <Input
-                                    label="Password"
-                                    onChange={(event) => setPassword(event.target.value)}
-                                    endContent={
-                                        <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
-                                            {isVisible ? (
-                                                <EyeSlashFilledIcon
-                                                    className="text-2xl text-default-400 pointer-events-none"/>
-                                            ) : (
-                                                <EyeFilledIcon
-                                                    className="text-2xl text-default-400 pointer-events-none"/>
-                                            )}
-                                        </button>
-                                    }
-                                    type={isVisible ? "text" : "password"}
-                                />
-                            </div>
-                            <div className="flex items-center justify-between">
-                                <a href="#"
-                                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
-                                    password?</a>
-                            </div>
-                            <button onClick={handleEvent} type="submit"
-                                    className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign
-                                in
-                            </button>
-                            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don't have an account yet? <a href="/signup"
-                                                              className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign
-                                up</a>
-                            </p>
-                        </form>
+                        <div>
+                            <Input
+                                onChange={(event) =>  {
+                                    setDidFail(false)
+                                    setEmail(event.target.value)
+                                }}
+                                type="email"
+                                name="email"
+                                id="email"
+                                label="Email"
+                                isInvalid={didFail}
+                            />
+                        </div>
+                        <div>
+                            <Input
+                                label="Password"
+                                onChange={(event) => {
+                                    setPassword(event.target.value)
+                                    setDidFail(false)
+                                }}
+                                endContent={
+                                    <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                                        {isVisible ? (
+                                            <EyeSlashFilledIcon
+                                                className="text-2xl text-default-400 pointer-events-none"/>
+                                        ) : (
+                                            <EyeFilledIcon
+                                                className="text-2xl text-default-400 pointer-events-none"/>
+                                        )}
+                                    </button>
+                                }
+                                type={isVisible ? "text" : "password"}
+                                isInvalid={didFail}
+                            />
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <a href="#"
+                               className="text-sm font-medium text-indigo-600 hover:underline">Forgot
+                                password?</a>
+                        </div>
+                        <Button
+                            onClick={handleEvent}
+                            isLoading={isLoading}
+                            type="submit"
+                            className={"w-full " + BUTTON_CLASS}>
+                            Sign in
+                        </Button>
+                        <p className="text-center text-sm font-light text-gray-500">
+                            Don't have an account yet? <a href="/signup"
+                                                          className="font-medium hover:underline text-indigo-600">Sign
+                            up</a>
+                        </p>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-import {AuthApi, Configuration, LeagueApi, MatchApi, PredictionApi, TeamApi, UserApi} from "@/client";
+import {AuthApi, Configuration, UserApi} from "@/client";
 import {API_GATEWAY} from "./constants";
-import Cookies from "js-cookie";
+import {getCookie} from "cookies-next";
 
 export class AuthClient {
     readonly authApi: AuthApi
@@ -29,7 +29,7 @@ export const AUTH_CLIENT = AuthClient.create(authClientConfig)
 
 export const TOKEN_COOKIE_KEY = "authToken"
 export function getConfigWithAuthHeader(): Configuration {
-    const token: string | undefined = Cookies.get(TOKEN_COOKIE_KEY)
+    const token: string | undefined = getCookie(TOKEN_COOKIE_KEY)
     const validatedToken: string = token ? token : ""
     return new Configuration({
         basePath: API_GATEWAY + '/prod',

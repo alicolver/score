@@ -2,6 +2,7 @@ import React from "react";
 import AnimatedFlags from "@/app/components/animated-flags";
 import {Header} from "@/app/components/landing-header";
 import {Button} from "@nextui-org/react";
+import {BUTTON_CLASS} from "@/app/util/css-classes";
 
 export default async function Home(): Promise<React.JSX.Element> {
 
@@ -32,7 +33,7 @@ export default async function Home(): Promise<React.JSX.Element> {
 
             <div>
                 <Button
-                    className="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white">
+                    className={BUTTON_CLASS}>
                     Find Out More
                 </Button>
             </div>
