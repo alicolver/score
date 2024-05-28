@@ -33,7 +33,7 @@ export default function Login() {
             const response = await AUTH_CLIENT.authApi.login({loginRequest: requestBody})
             setIsLoading(false)
             if (!response.idToken) {
-                alert("error making login request")
+                setDidFail(true)
                 return
             }
             setCookie(TOKEN_COOKIE_KEY, response.idToken)
