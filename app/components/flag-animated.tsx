@@ -1,5 +1,6 @@
-import React from "react";
-import Image from "next/image";
+import React from "react"
+import Image from "next/image"
+import styles from "@/app/styles/Flag.module.css"
 
 interface FlagAnimatedProps {
     index: number,
@@ -21,8 +22,9 @@ export default function FlagAnimated(props: FlagAnimatedProps): React.JSX.Elemen
             <Image
                 alt={`flag of ${props.country}`}
                 src={`https://predictaball-teamflagsbucketb6ca46de-2uk8faboxd6r.s3.eu-west-2.amazonaws.com/${props.country}.svg`}
-                width={50}
-                height={30}
+                width={0}
+                height={0}
+                className={styles.flag}
             />
         </div>
     )

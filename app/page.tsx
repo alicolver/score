@@ -6,6 +6,11 @@ import {BUTTON_CLASS} from "@/app/util/css-classes";
 
 export default async function Home(): Promise<React.JSX.Element> {
 
+    // const hasValidToken = await validate()
+    // if (hasValidToken) {
+    //     console.log("valid valid valid")
+    // }
+
     function getFlags(): React.JSX.Element[] {
         return Array.from(Array(3).keys())
             .map(i => <AnimatedFlags
