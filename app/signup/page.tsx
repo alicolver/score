@@ -7,6 +7,7 @@ import {SignupRequest} from "@/client";
 import {navigateTo} from "@/app/actions";
 import {Button, Input} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
+import Link from "next/link";
 
 export default function SignUp() {
 
@@ -65,7 +66,7 @@ export default function SignUp() {
         <section className="bg-gray-900 h-screen">
             <div className="bg-gray-900 flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                 <h1 className="text-white pb-10">
-                    PREDICTABALL.LIVE
+                    <Link href="/">PREDICTABALL.LIVE</Link>
                 </h1>
                 <div
                     className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bborder-gray-700 align-bottom">

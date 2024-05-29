@@ -8,6 +8,7 @@ import {Button, Input} from "@nextui-org/react";
 import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import {setCookie} from "cookies-next";
+import Link from "next/link";
 
 export default function Login() {
 
@@ -48,7 +49,7 @@ export default function Login() {
         <section>
             <div className="bg-gray-900 flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                 <h1 className="text-white pb-20">
-                    PREDICTABALL.LIVE
+                    <Link href="/">PREDICTABALL.LIVE</Link>
                 </h1>
                 <div
                     className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
