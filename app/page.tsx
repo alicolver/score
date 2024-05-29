@@ -3,6 +3,7 @@ import AnimatedFlags from "@/app/components/animated-flags";
 import {Header} from "@/app/components/landing-header";
 import {Button} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
+import Link from "next/link";
 
 export default async function Home(): Promise<React.JSX.Element> {
 
@@ -32,10 +33,12 @@ export default async function Home(): Promise<React.JSX.Element> {
             {getFlags()}
 
             <div>
-                <Button
-                    className={BUTTON_CLASS}>
-                    Find Out More
-                </Button>
+                <Link href="/info">
+                    <Button
+                        className={BUTTON_CLASS}>
+                        Find Out More
+                    </Button>
+                </Link>
             </div>
         </main>
     );
