@@ -1,5 +1,5 @@
 import React from "react";
-import AnimatedFlags from "@/app/components/animated-flags";
+import AnimatedFlags from "@/app/components/flags/animated-flags";
 import {Header} from "@/app/components/landing-header";
 import {Button} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";

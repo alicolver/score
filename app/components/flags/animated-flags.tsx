@@ -1,4 +1,4 @@
-import FlagAnimated from "@/app/components/flag-animated";
+import FlagAnimated from "@/app/components/flags/flag-animated";
 import React from "react";
 import {TEAMS} from "@/app/util/teams";
 
