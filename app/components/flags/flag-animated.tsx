@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import styles from "@/app/styles/Flag.module.css"
+import {getFlagUrlForCountry} from "@/app/util/flag";
 
 interface FlagAnimatedProps {
     index: number,
@@ -21,7 +22,7 @@ export default function FlagAnimated(props: FlagAnimatedProps): React.JSX.Elemen
         <div className={'z-0 fixed lg:animate-slideslow animate-slide overflow-hidden invisible'} style={animationStyle}>
             <Image
                 alt={`flag of ${props.country}`}
-                src={`https://predictaball-teamflagsbucketb6ca46de-2uk8faboxd6r.s3.eu-west-2.amazonaws.com/${props.country}.svg`}
+                src={getFlagUrlForCountry(props.country)}
                 width={0}
                 height={0}
                 className={styles.flag}
