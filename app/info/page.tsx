@@ -1,6 +1,5 @@
 import React from "react";
 import {Header} from "@/app/components/landing-header";
-import {Card} from "@nextui-org/card";
 
 export default function MoreInfo(): React.JSX.Element {
     return(
