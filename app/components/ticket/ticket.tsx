@@ -1,10 +1,10 @@
 import React from "react";
 import {getFlagUrlForCountry} from "@/app/util/flag";
-import {toTitleCase} from "@/app/util/text";
+import {Match} from "@/client";
+import {Input} from "@nextui-org/react";
 
 interface TicketProps {
-    homeTeam: string,
-    awayTeam: string
+    match: Match
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
@@ -15,33 +15,41 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             color: "transparent",
-            fontSize: "3em",
-            WebkitTextStrokeColor: "black",
-            WebkitTextStrokeWidth: "0.1px",
-            position: "relative",
-            display: "block"
+            fontSize: "4.5rem",
+            //WebkitTextStrokeColor: "black",
+            //WebkitTextStrokeWidth: "0.1px",
         }
     }
 
     return (
-        <div className="w-full p-5">
-            <div className="w-full p-3 max-w-xl flex-row rounded-small bg-white">
-                <div className="content-center">
-                    <span style={getClippedTextForTeam(props.homeTeam)}>
-                        {props.homeTeam.toUpperCase().slice(0, 3)}
-                    </span>
-                    <span className="relative block text-xs justify-center">
-                        {toTitleCase(props.homeTeam)}
-                    </span>
+        <div className="w-full p-5 text-gray-600">
+            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-100">
+                <div className="text-center text-xs">
+                    {props.match.venue}
                 </div>
-                <div className="content-center">
-                    <div style={getClippedTextForTeam(props.awayTeam)}>
-                        {props.awayTeam.toUpperCase().slice(0, 3)}
+                <div className="flex justify-around" style={{marginTop: "-20px"}}>
+                    <div className="content-center">
+                    <span style={getClippedTextForTeam(props.match.homeTeam)}>
+                        {props.match.homeTeam.toUpperCase().slice(0, 3)}
+                    </span>
                     </div>
-                    <div className="text-xs">
-                        {toTitleCase(props.awayTeam)}
+                    <div className="content-center">
+                        <div style={getClippedTextForTeam(props.match.awayTeam)}>
+                            {props.match.awayTeam.toUpperCase().slice(0, 3)}
+                        </div>
                     </div>
                 </div>
+                <div className="flex justify-around" style={{marginTop: "-20px"}}>
+                    <div>
+                        <Input variant="bordered" className="max-w-10"/>
+                    </div>
+                    <div>
+                        <Input variant="bordered" className="max-w-10 text-xs"/>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full max-w-xl p-3 rounded-large bg-gray-100 text-center">
+                <div>{`${props.match.datetime.getDay()}/${props.match.datetime.getMonth()}/${props.match.datetime.getFullYear()}`}</div>
             </div>
         </div>
     )

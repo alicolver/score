@@ -1,5 +1,7 @@
 import {User} from "../../client/models/User"
 import {LeaderboardInner} from "../../client/models/LeaderboardInner"
+import {Match} from "@/client";
+import {getFlagUrlForCountry} from "@/app/util/flag";
 
 export const USER_1: User = {
     firstName: "Tom",
@@ -48,3 +50,14 @@ export const LEADERBOARD: LeaderboardInner[] = [
     LEADERBOARD_ENTRY_2,
     LEADERBOARD_ENTRY_1
 ]
+
+export const MATCH: Match = {
+    homeTeam: "germany",
+    awayTeam: "scotland",
+    homeTeamFlagUri: getFlagUrlForCountry("germany"),
+    awayTeamFlagUri: getFlagUrlForCountry("scotland"),
+    venue: "Allianz Arena, Munich",
+    matchId: "1",
+    matchDay: 1,
+    datetime: new Date(Date.UTC(2024, 6, 16, 20, 0, 0))
+}
