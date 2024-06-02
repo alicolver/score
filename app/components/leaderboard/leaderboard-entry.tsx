@@ -37,7 +37,7 @@ export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JS
                 {props.entry.position}
                 {MOVEMENT_TO_ICON.get(props.entry.movement)!}
             </div>
-            <div className="flex">
+            <div className="flex text-">
                 {props.entry.user.firstName + " " + props.entry.user.familyName}
             </div>
             <div className="flex-1 items-center justify-end text-right">

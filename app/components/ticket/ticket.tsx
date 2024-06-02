@@ -15,9 +15,11 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             color: "transparent",
-            fontSize: "30px",
+            fontSize: "3em",
             WebkitTextStrokeColor: "black",
-            WebkitTextStrokeWidth: "0.1px"
+            WebkitTextStrokeWidth: "0.1px",
+            position: "relative",
+            display: "block"
         }
     }
 
@@ -25,12 +27,12 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
         <div className="w-full p-5">
             <div className="w-full p-3 max-w-xl flex-row rounded-small bg-white">
                 <div className="content-center">
-                    <div style={getClippedTextForTeam(props.homeTeam)}>
+                    <span style={getClippedTextForTeam(props.homeTeam)}>
                         {props.homeTeam.toUpperCase().slice(0, 3)}
-                    </div>
-                    <div className="text-xs justify-center">
+                    </span>
+                    <span className="relative block text-xs justify-center">
                         {toTitleCase(props.homeTeam)}
-                    </div>
+                    </span>
                 </div>
                 <div className="content-center">
                     <div style={getClippedTextForTeam(props.awayTeam)}>
