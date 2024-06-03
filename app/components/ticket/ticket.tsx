@@ -2,6 +2,7 @@ import React from "react";
 import {getFlagUrlForCountry} from "@/app/util/flag";
 import {Match} from "@/client";
 import NumberInput from "./number-input";
+import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 
 interface TicketProps {
     match: Match
@@ -27,12 +28,12 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div className="content-center">
                     <span style={getClippedTextForTeam(props.match.homeTeam)}>
-                        {props.match.homeTeam.toUpperCase().slice(0, 3)}
+                        {COUNTRY_CODES[props.match.homeTeam.toLowerCase()]}
                     </span>
                     </div>
                     <div className="content-center">
                         <div style={getClippedTextForTeam(props.match.awayTeam)}>
-                            {props.match.awayTeam.toUpperCase().slice(0, 3)}
+                            {COUNTRY_CODES[props.match.awayTeam.toLowerCase()]}
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,25 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                     </div>
                 </div>
             </div>
-            <div className={"w-full flex max-w-xl p-3 rounded-large bg-gray-100"}>
+            <div className={"w-full max-w-xl p-3 rounded-large bg-gray-100"}>
+                <div className="w-full flex justify-between">
+                    <div className="flex-row">
+                        <div className="font-bold">
+                            UEFA RANKINGS
+                        </div>
+                        <div className="text-xs">
+                            {`${props.match.homeTeam.toUpperCase()}: ${UEFA_RANKINGS[props.match.homeTeam.toLowerCase()]}, ${props.match.awayTeam.toUpperCase()}: ${UEFA_RANKINGS[props.match.awayTeam.toLowerCase()]}`}
+                        </div>
+                    </div>
+                    <div className="flex-row text-right">
+                        <div className="font-bold">
+                            ROUND
+                        </div>
+                        <div className="text-xs">
+                            Group Stage
+                        </div>
+                    </div>
+                </div>
                 <div className="w-full flex justify-between">
                     <div className="flex-row">
                         <div className="font-bold">
