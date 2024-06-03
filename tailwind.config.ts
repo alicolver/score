@@ -1,6 +1,7 @@
 import type {Config} from "tailwindcss";
 import {nextui} from "@nextui-org/react";
 import plugin from "tailwindcss/plugin";
+import {nesting} from "postcss-selector-parser";
 
 const config: Config = {
     content: [
@@ -38,6 +39,7 @@ const config: Config = {
     },
     darkMode: "class",
     plugins: [
+        nesting,
         nextui({
             layout: {
                 disabledOpacity: "0.3",

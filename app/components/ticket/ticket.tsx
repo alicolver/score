@@ -24,9 +24,6 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
     return (
         <div className="w-full p-5 text-gray-600">
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-100">
-                <div className="text-center text-xs">
-                    {props.match.venue}
-                </div>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div className="content-center">
                     <span style={getClippedTextForTeam(props.match.homeTeam)}>
@@ -48,8 +45,25 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                     </div>
                 </div>
             </div>
-            <div className="w-full max-w-xl p-3 rounded-large bg-gray-100 text-center">
-                <div>{`${props.match.datetime.getDay()}/${props.match.datetime.getMonth()}/${props.match.datetime.getFullYear()}`}</div>
+            <div className={"w-full flex max-w-xl p-3 rounded-large bg-gray-100"}>
+                <div className="w-full flex justify-between">
+                    <div className="flex-row">
+                        <div className="font-bold">
+                            VENUE
+                        </div>
+                        <div className="text-xs">
+                            {props.match.venue}
+                        </div>
+                    </div>
+                    <div className="flex-row text-right">
+                        <div className="font-bold">
+                            DATE
+                        </div>
+                        <div className="text-xs">
+                            {props.match.datetime.toLocaleDateString("en-GB") + " " + props.match.datetime.toLocaleTimeString("en-GB")}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

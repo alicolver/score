@@ -30,17 +30,19 @@ export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JS
 
     return (
         <div
-            className="max-w-2xl w-full p-5 flex flex-row rounded-3xl text-white mb-5"
+            className="max-w-2xl w-full p-4 flex flex-row rounded-3xl text-white mb-5"
             style={MOVEMENT_TO_COLOR.get(props.entry.movement)!}
         >
-            <div className="flex-1 flex align-middle">
-                {props.entry.position}
-                {MOVEMENT_TO_ICON.get(props.entry.movement)!}
+            <div className="flex-1 flex items-center">
+                <div className="flex flex-row items-center justify-center font-bold">
+                    {props.entry.position}
+                    {MOVEMENT_TO_ICON.get(props.entry.movement)!}
+                </div>
             </div>
-            <div className="flex text-">
+            <div className="flex">
                 {props.entry.user.firstName + " " + props.entry.user.familyName}
             </div>
-            <div className="flex-1 items-center justify-end text-right">
+            <div className="flex-1 items-center justify-end text-right font-bold">
                 {props.entry.user.fixedPoints + props.entry.user.livePoints}
             </div>
         </div>
