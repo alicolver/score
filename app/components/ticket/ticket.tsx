@@ -1,7 +1,7 @@
 import React from "react";
 import {getFlagUrlForCountry} from "@/app/util/flag";
 import {Match} from "@/client";
-import {Input} from "@nextui-org/react";
+import NumberInput from "./number-input";
 
 interface TicketProps {
     match: Match
@@ -41,10 +41,10 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                 </div>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div>
-                        <Input variant="bordered" className="max-w-10"/>
+                        <NumberInput/>
                     </div>
                     <div>
-                        <Input variant="bordered" className="max-w-10 text-xs"/>
+                        <NumberInput/>
                     </div>
                 </div>
             </div>
