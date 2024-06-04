@@ -52,9 +52,9 @@ export const LEADERBOARD: LeaderboardInner[] = [
 ]
 
 export const MATCH: Match = {
-    homeTeam: "germany",
+    homeTeam: "switzerland",
     awayTeam: "scotland",
-    homeTeamFlagUri: getFlagUrlForCountry("germany"),
+    homeTeamFlagUri: getFlagUrlForCountry("switzerland"),
     awayTeamFlagUri: getFlagUrlForCountry("scotland"),
     venue: "Allianz Arena, Munich",
     matchId: "1",

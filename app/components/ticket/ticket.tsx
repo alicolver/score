@@ -3,6 +3,7 @@ import {getFlagUrlForCountry} from "@/app/util/flag";
 import {Match} from "@/client";
 import NumberInput from "./number-input";
 import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
+import Entry from "@/app/components/ticket/entry";
 
 interface TicketProps {
     match: Match
@@ -37,17 +38,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-around" style={{marginTop: "-20px"}}>
-                    <div>
-                        <NumberInput/>
-                    </div>
-                    <div>
-                        <NumberInput/>
-                    </div>
-                </div>
-            </div>
-            <div className={"w-full max-w-xl p-3 rounded-large bg-gray-100"}>
-                <div className="w-full flex justify-between">
+                <div className="w-full flex justify-between" style={{marginTop: "-20px"}}>
                     <div className="flex-row">
                         <div className="font-bold">
                             UEFA RANKINGS
@@ -83,6 +74,9 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className={"w-full max-w-xl p-3 rounded-large bg-gray-100"}>
+                <Entry match={props.match}/>
             </div>
         </div>
     )
