@@ -3,7 +3,6 @@
 import React, {useState} from "react";
 import {Match} from "@/client";
 import Crest from "@/app/components/ticket/crest";
-import {getCrestUrlForCountry} from "@/app/util/flag";
 
 interface EntryProps {
     match: Match

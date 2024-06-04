@@ -1,6 +1,7 @@
 import {AuthApi, Configuration, UserApi} from "@/client";
 import {API_GATEWAY} from "./constants";
 import {getCookie} from "cookies-next";
+import {cookies} from "next/headers";
 
 export class AuthClient {
     readonly authApi: AuthApi
@@ -28,13 +29,3 @@ const authClientConfig = new Configuration({
 export const AUTH_CLIENT = AuthClient.create(authClientConfig)
 
 export const TOKEN_COOKIE_KEY = "authToken"
-export function getConfigWithAuthHeader(): Configuration {
-    const token: string | undefined = getCookie(TOKEN_COOKIE_KEY)
-    const validatedToken: string = token ? token : ""
-    return new Configuration({
-        basePath: API_GATEWAY + '/prod',
-        headers: {
-            "Authorization": validatedToken
-        }
-    })
-}
