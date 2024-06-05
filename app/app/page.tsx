@@ -24,7 +24,6 @@ export default async function Home(): Promise<React.JSX.Element> {
             {(await getGames()).map(match => {
                 return (<Ticket match={match} key={match.matchId}/>)
             })}
-            <Ticket match={MATCH}/>
             <Leaderboard entries={[...LEADERBOARD, ...LEADERBOARD]}/>
         </main>
     );

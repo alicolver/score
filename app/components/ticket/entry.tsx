@@ -29,7 +29,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
     return (
         <>
             <div className="flex items-center">
-                <div className="flex justify-between items-center mr-2" style={{width: "50%", height: "70px"}}>
+                <div className="flex justify-around items-center mr-2" style={{width: "50%", height: "70px"}}>
                     <Crest country={props.match.homeTeam}/>
                     <div className={Styles.inputBox}>
                         <input
@@ -41,7 +41,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                         />
                     </div>
                 </div>
-                <div className="flex justify-between items-center ml-2" style={{width: "50%", height: "70px"}}>
+                <div className="flex justify-around items-center ml-2" style={{width: "50%", height: "70px"}}>
                     <div className={Styles.inputBox}>
                         <input type="text"
                                value={awayScore}
