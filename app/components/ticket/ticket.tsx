@@ -24,7 +24,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
     }
 
     return (
-        <div className="w-full p-5 text-gray-600">
+        <div className="w-full p-3 text-gray-600 relative">
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-100">
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div className="content-center">
