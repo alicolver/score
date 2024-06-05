@@ -14,8 +14,12 @@ interface EntryProps {
 
 export default function Entry(props: EntryProps): React.JSX.Element {
 
-    const [homeScore, setHomeScore] = useState<string>()
-    const [awayScore, setAwayScore] = useState<string>()
+    const [homeScore, setHomeScore] = useState<string>(
+        props.match.prediction ? props.match.prediction.homeScore.toString : ""
+    )
+    const [awayScore, setAwayScore] = useState<string>(
+        props.match.prediction ? props.match.prediction.awayScore.toString : ""
+    )
     const [isPredictionSending, setIsPredictionSending] = useState<boolean>(false)
 
     function handleHomeScore(event: React.ChangeEvent<HTMLInputElement>) {
@@ -41,10 +45,12 @@ export default function Entry(props: EntryProps): React.JSX.Element {
             awayScore: Number(awayScore),
             matchId: props.match.matchId
         }
+        console.log(createPredictionRequest)
         try {
             const response = predictionApi.createPrediction({
                 createPredictionRequest: createPredictionRequest
             })
+            console.log(response)
             return;
         } catch (error){
             console.log(error)
@@ -79,7 +85,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     </div>
                 </div>
                 <div>
-                    <Button onClick={submitPrediction} isLoading={isPredictionSending} style={{height: "25px"}} className={BUTTON_CLASS}>Submit</Button>
+                    <Button onClick={() => submitPrediction()} isLoading={isPredictionSending} style={{height: "25px"}} className={BUTTON_CLASS}>Submit</Button>
                 </div>
             </div>
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>

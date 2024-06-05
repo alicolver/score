@@ -1,6 +1,5 @@
 import React from "react";
 import Leaderboard from "@/app/components/leaderboard/leaderboard";
-import {LEADERBOARD} from "@/app/util/sample-api-data";
 import MatchesToPredict from "@/app/components/ticket/matches-to-predict";
 
 export default async function Home(): Promise<React.JSX.Element> {
