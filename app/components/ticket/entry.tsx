@@ -1,12 +1,12 @@
 'use client'
 
 import React, {useState} from "react";
-import {Match, PredictionApi} from "@/client";
+import {Match} from "@/client";
 import Crest from "@/app/components/ticket/crest";
 import Styles from "@/app/styles/Input.module.scss"
 import {Button} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
-import {getConfigWithAuthHeader} from "@/app/api/client-config";
+import { handlePrediction } from "./submit-prediction"
 
 interface EntryProps {
     match: Match
@@ -15,10 +15,10 @@ interface EntryProps {
 export default function Entry(props: EntryProps): React.JSX.Element {
 
     const [homeScore, setHomeScore] = useState<string>(
-        props.match.prediction ? props.match.prediction.homeScore.toString : ""
+        props.match.prediction ? props.match.prediction.homeScore.toString() : ""
     )
     const [awayScore, setAwayScore] = useState<string>(
-        props.match.prediction ? props.match.prediction.awayScore.toString : ""
+        props.match.prediction ? props.match.prediction.awayScore.toString() : ""
     )
     const [isPredictionSending, setIsPredictionSending] = useState<boolean>(false)
 
@@ -39,23 +39,17 @@ export default function Entry(props: EntryProps): React.JSX.Element {
             return
         }
         setIsPredictionSending(true)
-        const predictionApi = new PredictionApi(await getConfigWithAuthHeader())
-        const createPredictionRequest  = {
-            homeScore: Number(homeScore),
-            awayScore: Number(awayScore),
-            matchId: props.match.matchId
-        }
-        console.log(createPredictionRequest)
         try {
-            const response = predictionApi.createPrediction({
-                createPredictionRequest: createPredictionRequest
-            })
-            console.log(response)
-            return;
-        } catch (error){
-            console.log(error)
+            const response = await handlePrediction(
+                Number(homeScore),
+                Number(awayScore), 
+                props.match.matchId
+            );
+            console.log(response);
+        } catch (error) {
+            console.log(error);
         } finally {
-            setIsPredictionSending(false)
+            setIsPredictionSending(false);
         }
     }
 
