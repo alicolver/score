@@ -1,9 +1,9 @@
 import React from "react";
 import {getFlagUrlForCountry} from "@/app/util/flag";
 import {Match} from "@/client";
-import NumberInput from "./number-input";
 import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
+import Styles from "@/app/styles/Input.module.scss";
 
 interface TicketProps {
     match: Match

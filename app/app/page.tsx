@@ -1,6 +1,6 @@
 import React from "react";
 import Leaderboard from "@/app/components/leaderboard/leaderboard";
-import {LEADERBOARD} from "@/app/util/sample-api-data";
+import {LEADERBOARD, MATCH} from "@/app/util/sample-api-data";
 import Ticket from "@/app/components/ticket/ticket";
 import {ListMatchesFilterTypeEnum, Match, MatchApi} from "@/client";
 import {getConfigWithAuthHeader} from "@/app/api/client-config";
@@ -11,6 +11,7 @@ export default async function Home(): Promise<React.JSX.Element> {
         try {
             const matchApi = new MatchApi(await getConfigWithAuthHeader())
             const matches = await matchApi.listMatches({ filterType: ListMatchesFilterTypeEnum.Upcoming })
+            console.log(matches)
             return matches
         } catch (error) {
             console.log(error)
@@ -23,6 +24,7 @@ export default async function Home(): Promise<React.JSX.Element> {
             {(await getGames()).map(match => {
                 return (<Ticket match={match} key={match.matchId}/>)
             })}
+            <Ticket match={MATCH}/>
             <Leaderboard entries={[...LEADERBOARD, ...LEADERBOARD]}/>
         </main>
     );
