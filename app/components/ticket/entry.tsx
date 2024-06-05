@@ -54,7 +54,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
     }
 
     return (
-        <div className="flex items-center" style={{marginTop: "-15px"}}>
+        <div className="flex items-center">
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
                 <Crest country={props.match.homeTeam}/>
             </div>

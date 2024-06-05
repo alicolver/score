@@ -3,7 +3,6 @@ import {getFlagUrlForCountry} from "@/app/util/flag";
 import {Match} from "@/client";
 import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
-import Styles from "@/app/styles/Input.module.scss";
 
 interface TicketProps {
     match: Match
@@ -38,28 +37,24 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
-                <Entry match={props.match}/>
-            </div>
-            <div className={"w-full justify-between max-w-xl p-3 rounded-large bg-gray-100"}>
-                <div className="flex justify-between">
-                <div className="flex-row">
-                    <div className="font-bold">
-                        UEFA RANKINGS
+                <div className="w-full flex justify-between" style={{marginTop: "-20px"}}>
+                    <div className="flex-row">
+                        <div className="font-bold">
+                            UEFA RANKINGS
+                        </div>
+                        <div className="text-xs">
+                            {`${props.match.homeTeam.toUpperCase()}: ${UEFA_RANKINGS[props.match.homeTeam.toLowerCase()]}, ${props.match.awayTeam.toUpperCase()}: ${UEFA_RANKINGS[props.match.awayTeam.toLowerCase()]}`}
+                        </div>
                     </div>
-                    <div className="text-xs">
-                        {`${props.match.homeTeam.toUpperCase()}: ${UEFA_RANKINGS[props.match.homeTeam.toLowerCase()]}, ${props.match.awayTeam.toUpperCase()}: ${UEFA_RANKINGS[props.match.awayTeam.toLowerCase()]}`}
-                    </div>
-                </div>
-                <div className="flex-row text-right">
-                    <div className="font-bold">
-                        ROUND
-                    </div>
-                    <div className="text-xs">
-                        Group Stage
+                    <div className="flex-row text-right">
+                        <div className="font-bold">
+                            ROUND
+                        </div>
+                        <div className="text-xs">
+                            Group Stage
+                        </div>
                     </div>
                 </div>
-                </div>
-                <div>
                 <div className="w-full flex justify-between">
                     <div className="flex-row">
                         <div className="font-bold">
@@ -78,7 +73,9 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
+            <div className={"w-full max-w-xl p-3 rounded-large bg-gray-100"}>
+                <Entry match={props.match}/>
             </div>
         </div>
     )
