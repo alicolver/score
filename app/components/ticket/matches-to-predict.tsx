@@ -8,9 +8,7 @@ export default async function MatchesToPredict(): Promise<React.JSX.Element> {
     async function getGames(): Promise<Match[]> {
         try {
             const matchApi = new MatchApi(await getConfigWithAuthHeader())
-            const matches = await matchApi.listMatches({ filterType: ListMatchesFilterTypeEnum.Upcoming })
-            console.log(matches)
-            return matches
+            return await matchApi.listMatches({filterType: ListMatchesFilterTypeEnum.Upcoming})
         } catch (error) {
             console.log(error)
             return []

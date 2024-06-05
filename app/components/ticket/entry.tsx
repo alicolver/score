@@ -45,7 +45,6 @@ export default function Entry(props: EntryProps): React.JSX.Element {
             const response = predictionApi.createPrediction({
                 createPredictionRequest: createPredictionRequest
             })
-            console.log(response)
             return;
         } catch (error){
             console.log(error)

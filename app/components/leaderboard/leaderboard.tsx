@@ -13,12 +13,10 @@ export default async function Leaderboard(props: LeaderboardProps): Promise<Reac
         try {
             const leagueApi = new LeagueApi(await getConfigWithAuthHeader())
             const league = await leagueApi.getLeagueLeaderboard({leagueId: props.leagueId})
-            console.log(league)
             return league.leaderboard
         } catch (error) {
-            console.log(error)
+            return []
         }
-        return []
     }
 
     return (

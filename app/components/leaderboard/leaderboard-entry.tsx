@@ -1,4 +1,4 @@
-import React, {CSSProperties} from "react";
+import React from "react";
 import {LeaderboardInner, LeaderboardInnerMovementEnum} from "@/client";
 import {DOWN_ARROW, NEUTRAL_ARROW, UP_ARROW} from "@/app/components/leaderboard/icons";
 
@@ -8,18 +8,23 @@ interface LeaderboardEntryProps {
 
 export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JSX.Element {
 
+    const scale = props.entry.position === 1 ? 1 : 0.95
+
     const MOVEMENT_TO_COLOR: Map<LeaderboardInnerMovementEnum, React.CSSProperties> = new Map([
         [LeaderboardInnerMovementEnum.Improved, {
             backgroundColor: "#08e8ea",
-            backgroundImage: "linear-gradient(0deg, #08e8ea 0%, #2AF598 100%)"
+            backgroundImage: "linear-gradient(0deg, #08e8ea 0%, #2AF598 100%)",
+            scale: scale
         }],
         [LeaderboardInnerMovementEnum.Worsened, {
             backgroundColor: "#FFE53B",
-            backgroundImage: "linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+            backgroundImage: "linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)",
+            scale: scale
         }],
         [LeaderboardInnerMovementEnum.Unchanged, {
             backgroundColor: "#21D4FD",
-            backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)"
+            backgroundImage: "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)",
+            scale: scale
         }]
     ])
     const MOVEMENT_TO_ICON: Map<LeaderboardInnerMovementEnum, React.JSX.Element> = new Map([
