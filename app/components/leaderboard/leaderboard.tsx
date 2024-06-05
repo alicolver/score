@@ -20,8 +20,7 @@ export default async function Leaderboard(props: LeaderboardProps): Promise<Reac
     }
 
     return (
-        <div className="w-full max-w-2xl p-5 text-center">
-            <p className="pb-2 text-white text-xl font-bold">Standings</p>
+        <div className="w-full max-w-2xl p-5">
             {(await getLeaderboard()).map(x => <LeaderboardEntry
                 key={x.position}
                 entry={x}
