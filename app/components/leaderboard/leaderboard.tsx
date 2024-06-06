@@ -1,31 +1,28 @@
-import React from "react";
-import {LeaderboardInner, LeagueApi} from "@/client";
+import React, {Suspense} from "react";
+import {LeaderboardInnerMovementEnum, User} from "@/client";
 import LeaderboardEntry from "./leaderboard-entry";
-import {getConfigWithAuthHeader} from "@/app/api/client-config";
+import Entries from "@/app/components/leaderboard/entries";
 
 interface LeaderboardProps {
     leagueId: string
 }
 
-export default async function Leaderboard(props: LeaderboardProps): Promise<React.JSX.Element> {
+export default function Leaderboard(props: LeaderboardProps): React.JSX.Element {
 
-    async function getLeaderboard(): Promise<LeaderboardInner[]> {
-        try {
-            const leagueApi = new LeagueApi(await getConfigWithAuthHeader())
-            const league = await leagueApi.getLeagueLeaderboard({leagueId: props.leagueId})
-            return league.leaderboard
-        } catch (error) {
-            return []
-        }
+    const defaultUser: User = {
+        firstName: "Loading...",
+        familyName: "",
+        fixedPoints: 0,
+        livePoints: 0,
+        userId: ""
     }
 
     return (
         <div className="w-full max-w-2xl p-5 text-center">
             <p className="pb-2 text-white text-xl font-bold">Standings</p>
-            {(await getLeaderboard()).map(x => <LeaderboardEntry
-                key={x.position}
-                entry={x}
-            />)}
+            <Suspense fallback={<LeaderboardEntry entry={{ position: 1, movement: LeaderboardInnerMovementEnum.Unchanged, user: defaultUser}} />}>
+                <Entries leagueId={props.leagueId}/>
+            </Suspense>
         </div>
     )
 }
