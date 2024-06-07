@@ -9,6 +9,12 @@ interface TicketProps {
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
+    function upperSnakeCaseToTitleCase(value: string): string {
+        return value
+            .split('_')
+            .map(word => word.charAt(0) + word.slice(1).toLowerCase())
+            .join(' ');
+    }
 
     function getClippedTextForTeam(team: string): React.CSSProperties {
         return {
@@ -51,7 +57,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                             ROUND
                         </div>
                         <div className="text-xs">
-                            Group Stage
+                            {upperSnakeCaseToTitleCase(props.match.round)}
                         </div>
                     </div>
                 </div>
