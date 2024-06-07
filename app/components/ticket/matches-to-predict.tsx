@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import Ticket from "@/app/components/ticket/ticket";
 import Tickets from "@/app/components/ticket/tickets";
-import {Match} from "@/client";
+import {Match, MatchRoundEnum} from "@/client";
 
 export default async function MatchesToPredict(): Promise<React.JSX.Element> {
 
@@ -13,7 +13,8 @@ export default async function MatchesToPredict(): Promise<React.JSX.Element> {
         matchId: "",
         venue: "loading...",
         datetime: new Date(),
-        matchDay: 0
+        matchDay: 0,
+        round: MatchRoundEnum.GroupStage
     }
 
     return (

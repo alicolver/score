@@ -1,6 +1,6 @@
 import {User} from "../../client/models/User"
 import {LeaderboardInner} from "../../client/models/LeaderboardInner"
-import {Match} from "@/client";
+import {Match, MatchRoundEnum} from "@/client";
 import {getFlagUrlForCountry} from "@/app/util/flag";
 
 export const USER_1: User = {
@@ -59,5 +59,6 @@ export const MATCH: Match = {
     venue: "Allianz Arena, Munich",
     matchId: "1",
     matchDay: 1,
-    datetime: new Date(Date.UTC(2024, 6, 16, 20, 0, 0))
+    datetime: new Date(Date.UTC(2024, 6, 16, 20, 0, 0)),
+    round: MatchRoundEnum.GroupStage
 }
