@@ -66,7 +66,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                             DATE
                         </div>
                         <div className="text-xs">
-                            {props.match.datetime.toLocaleDateString("en-GB") + " " + props.match.datetime.toLocaleTimeString("en-GB")}
+                            {props.match.datetime.toLocaleDateString("en-GB", {timeZone: "Europe/London"}) + " " + props.match.datetime.toLocaleTimeString("en-GB", {timeZone: "Europe/London"})}
                         </div>
                     </div>
                 </div>
