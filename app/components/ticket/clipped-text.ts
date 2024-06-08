@@ -7,6 +7,8 @@ export function getClippedTextForTeam(url: string): React.CSSProperties {
         WebkitBackgroundClip: "text",
         color: "transparent",
         fontSize: "4.5rem",
+        width: "auto",
+        height: "auto"
         //WebkitTextStrokeColor: "black",
         //WebkitTextStrokeWidth: "0.1px",
     }

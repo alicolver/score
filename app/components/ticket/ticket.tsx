@@ -6,6 +6,7 @@ import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
 import {getClippedTextForTeam} from "@/app/components/ticket/clipped-text";
 import {getFlagUrlForCountry} from "@/app/util/flag";
+import {DROP_DOWN, DROP_UP} from "@/app/components/ticket/drop-downs";
 
 interface TicketProps {
     match: Match,
@@ -26,7 +27,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
 
     return (
         <div className="w-full p-3 text-gray-600 relative">
-            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200" style={{height: "5.5rem"}} onClick={() => setCollapse(!collapse)}>
+            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200" style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div className="content-center">
                     <span style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>
@@ -39,8 +40,11 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
+                <div className={"w-full flex justify-center content-center items-center animate-bounce"} style={{marginTop: "-25px"}}>
+                    {collapse ? DROP_DOWN : DROP_UP}
+                </div>
             </div>
-            {!collapse && <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200">
+            {!collapse && <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200 animate-appearance-in">
                 <div className="w-full flex justify-between">
                     <div className="flex-row">
                         <div className="font-bold">
@@ -78,7 +82,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                     </div>
                 </div>
             </div>}
-            {!collapse && <div className={"w-full max-w-xl p-3 rounded-large border-gray-200 border-2"} >
+            {!collapse && <div className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
                 <Entry match={props.match}/>
             </div>}
         </div>
