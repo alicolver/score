@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useState } from "react"
-import validatePassword from "../auth/password"
+import React, {useState} from "react"
 import {AUTH_CLIENT} from "../api/api"
 import {SignupRequest} from "@/client";
 import {navigateTo} from "@/app/actions";
 import {Button, Input} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import Link from "next/link";
+import {doesContainDigit, doesContainLowerCase} from "@/app/util/regex";
 
 export default function SignUp() {
 
@@ -18,7 +18,9 @@ export default function SignUp() {
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(true)
     const [password, setPassword] = useState('')
-    const [isPasswordValid, setIsPasswordValid] = useState(false)
+    const [validLength, setIsValidLength] = useState(false)
+    const [containsDigit, setContainsDigit] = useState(false)
+    const [containsLowerCase, setContainsLowerCase] = useState(false)
     const [doPasswordsMatch, setDoPasswordsMatch] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -44,7 +46,9 @@ export default function SignUp() {
     }
 
     function handlePasswordChange(val: string): void {
-        setIsPasswordValid(validatePassword(val))
+        setIsValidLength(val.length >= 6)
+        setContainsDigit(doesContainDigit(val))
+        setContainsLowerCase(doesContainLowerCase(val))
         setPassword(val)
     }
 
@@ -58,11 +62,17 @@ export default function SignUp() {
         setValidEmail(emailRegex.test(email))
     }
 
-    function isFormValid(): boolean {
-        return !doPasswordsMatch || !isPasswordValid || !validEmail || firstName === "" || lastName === "";
+    function isFormInvalid(): boolean {
+        return !doPasswordsMatch
+            || !containsLowerCase
+            || !containsDigit
+            || !validLength
+            || !validEmail
+            || firstName === ""
+            || lastName === "";
     }
 
-    return(
+    return (
         <section className="bg-gray-900 h-screen">
             <div className="bg-gray-900 flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                 <h1 className="text-white pb-10">
@@ -115,6 +125,13 @@ export default function SignUp() {
                                     label="Password"
                                     style={{fontSize: "18px"}}
                                 />
+                                {password.length !== 0 &&
+                                    <div className="p-2 text-xs">
+                                        <p><span className="font-bold">{containsLowerCase ? "✓" : "•"}</span> At least one lowercase letter</p>
+                                        <p><span className="font-bold">{containsDigit ? "✓" : "•"}</span> At least one digit</p>
+                                        <p><span className="font-bold">{validLength ? "✓" : "•"}</span> At least 6 characters in length</p>
+                                    </div>
+                                }
                             </div>
                             <div>
                                 <Input
@@ -130,7 +147,7 @@ export default function SignUp() {
                             <Button
                                 onClick={handleEvent}
                                 isLoading={isLoading}
-                                disabled={isFormValid()}
+                                disabled={isFormInvalid()}
                                 type="submit"
                                 className={"w-full " + BUTTON_CLASS}>
                                 Create Account

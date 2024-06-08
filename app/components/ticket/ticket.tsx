@@ -1,4 +1,6 @@
-import React from "react";
+'use client'
+
+import React, {useState} from "react";
 import {Match, MatchRoundEnum} from "@/client";
 import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
@@ -6,10 +8,13 @@ import {getClippedTextForTeam} from "@/app/components/ticket/clipped-text";
 import {getFlagUrlForCountry} from "@/app/util/flag";
 
 interface TicketProps {
-    match: Match
+    match: Match,
+    collapse: boolean
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
+
+    const [collapse, setCollapse] = useState<boolean>(props.collapse)
 
     const RoundToString: Map<MatchRoundEnum, string> = new Map([
         [MatchRoundEnum.GroupStage, "Group Stage"],
@@ -21,7 +26,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
 
     return (
         <div className="w-full p-3 text-gray-600 relative">
-            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200">
+            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200" style={{height: "5.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div className="content-center">
                     <span style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>
@@ -34,7 +39,9 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
-                <div className="w-full flex justify-between" style={{marginTop: "-20px"}}>
+            </div>
+            {!collapse && <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200">
+                <div className="w-full flex justify-between">
                     <div className="flex-row">
                         <div className="font-bold">
                             UEFA RANKINGS
@@ -70,10 +77,10 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className={"w-full max-w-xl p-3 rounded-large border-gray-200 border-2"} >
+            </div>}
+            {!collapse && <div className={"w-full max-w-xl p-3 rounded-large border-gray-200 border-2"} >
                 <Entry match={props.match}/>
-            </div>
+            </div>}
         </div>
     )
 }

@@ -17,8 +17,8 @@ export default async function Tickets(): Promise<React.JSX.Element> {
 
     return (
         <>
-            {(await getGames()).map((match) => {
-                return (<Ticket match={match} key={match.matchId}/>)
+            {(await getGames()).map((match, index) => {
+                return (<Ticket match={match} key={match.matchId} collapse={index !== 0}/>)
             })}
         </>
     )
