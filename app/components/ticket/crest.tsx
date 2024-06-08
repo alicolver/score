@@ -17,7 +17,7 @@ export default function Crest(props: CrestProps): React.JSX.Element {
                 unoptimized={true}
                 style={{maxWidth: "75px", width: "auto", height: "auto", maxHeight: "75px"}}
             />
-            <span className="text-center text-xs font-bold">
+            <span className="text-center text-xs font-bold text-white">
                 {props.country.charAt(0).toUpperCase() + props.country.slice(1)}
             </span>
         </div>

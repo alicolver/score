@@ -9,6 +9,7 @@ import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import {setCookie} from "cookies-next";
 import Link from "next/link";
+import {redirectIfTokenExists} from "@/app/login/redirect";
 
 export default function Login() {
 
@@ -37,13 +38,15 @@ export default function Login() {
                 setDidFail(true)
                 return
             }
-            setCookie(TOKEN_COOKIE_KEY, response.idToken)
+            setCookie(TOKEN_COOKIE_KEY, response.idToken, {maxAge: 60 * 60 * 24 * 7})
             await navigateTo("app")
         } catch (error) {
             setIsLoading(false)
             setDidFail(true)
         }
     }
+
+    redirectIfTokenExists()
 
     return (
         <section>
@@ -59,7 +62,7 @@ export default function Login() {
                         </h1>
                         <div>
                             <Input
-                                onChange={(event) =>  {
+                                onChange={(event) => {
                                     setDidFail(false)
                                     setEmail(event.target.value)
                                 }}

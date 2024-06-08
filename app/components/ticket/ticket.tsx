@@ -1,8 +1,9 @@
 import React from "react";
-import {getFlagUrlForCountry} from "@/app/util/flag";
 import {Match, MatchRoundEnum} from "@/client";
 import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
+import {getClippedTextForTeam} from "@/app/components/ticket/clipped-text";
+import {getFlagUrlForCountry} from "@/app/util/flag";
 
 interface TicketProps {
     match: Match
@@ -18,29 +19,17 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
         [MatchRoundEnum.Final, "Final"]
     ])
 
-    function getClippedTextForTeam(team: string): React.CSSProperties {
-        return {
-            backgroundImage: "url('" + getFlagUrlForCountry(team) + "')",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-            fontSize: "4.5rem",
-            //WebkitTextStrokeColor: "black",
-            //WebkitTextStrokeWidth: "0.1px",
-        }
-    }
-
     return (
         <div className="w-full p-3 text-gray-600 relative">
-            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-100">
+            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200">
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div className="content-center">
-                    <span style={getClippedTextForTeam(props.match.homeTeam)}>
+                    <span style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>
                         {COUNTRY_CODES[props.match.homeTeam.toLowerCase()]}
                     </span>
                     </div>
                     <div className="content-center">
-                        <div style={getClippedTextForTeam(props.match.awayTeam)}>
+                        <div style={getClippedTextForTeam(getFlagUrlForCountry(props.match.awayTeam))}>
                             {COUNTRY_CODES[props.match.awayTeam.toLowerCase()]}
                         </div>
                     </div>
@@ -82,7 +71,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                     </div>
                 </div>
             </div>
-            <div className={"w-full max-w-xl p-3 rounded-large bg-gray-100"}>
+            <div className={"w-full max-w-xl p-3 rounded-large border-gray-200 border-2"} >
                 <Entry match={props.match}/>
             </div>
         </div>
