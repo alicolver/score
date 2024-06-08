@@ -6,11 +6,9 @@ export function getUserId(): string | undefined {
     try {
         const token: string | undefined = cookies().get(TOKEN_COOKIE_KEY)?.value
         if (token === undefined) {
-            return ""
+            return undefined
         }
-        const decoded = jwtDecode(token)
-        console.log(decoded)
-        return decoded.sub
+        return jwtDecode(token).sub
     } catch (error) {
         console.log(error)
         return undefined
