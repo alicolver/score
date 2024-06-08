@@ -68,6 +68,7 @@ export default function Login() {
                                 id="email"
                                 label="Email"
                                 isInvalid={didFail}
+                                style={{fontSize: "18px"}}
                             />
                         </div>
                         <div>
@@ -77,6 +78,7 @@ export default function Login() {
                                     setPassword(event.target.value)
                                     setDidFail(false)
                                 }}
+                                style={{fontSize: "18px"}}
                                 endContent={
                                     <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
                                         {isVisible ? (

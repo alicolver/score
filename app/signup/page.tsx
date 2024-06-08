@@ -82,6 +82,7 @@ export default function SignUp() {
                                     name="firstname"
                                     id="firstname"
                                     label="First Name"
+                                    style={{fontSize: "18px"}}
                                 />
                             </div>
                             <div>
@@ -91,6 +92,7 @@ export default function SignUp() {
                                     name="lastname"
                                     id="lastname"
                                     label="Last Name"
+                                    style={{fontSize: "18px"}}
                                 />
                             </div>
                             <div>
@@ -101,6 +103,7 @@ export default function SignUp() {
                                     id="email"
                                     label="email"
                                     isInvalid={!validEmail}
+                                    style={{fontSize: "18px"}}
                                 />
                             </div>
                             <div>
@@ -110,6 +113,7 @@ export default function SignUp() {
                                     name="password"
                                     id="password"
                                     label="Password"
+                                    style={{fontSize: "18px"}}
                                 />
                             </div>
                             <div>
@@ -120,6 +124,7 @@ export default function SignUp() {
                                     id="confirmpassword"
                                     label="Confirm Password"
                                     isInvalid={!doPasswordsMatch}
+                                    style={{fontSize: "18px"}}
                                 />
                             </div>
                             <Button

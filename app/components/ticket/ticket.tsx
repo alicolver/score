@@ -1,6 +1,6 @@
 import React from "react";
 import {getFlagUrlForCountry} from "@/app/util/flag";
-import {Match} from "@/client";
+import {Match, MatchRoundEnum} from "@/client";
 import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
 
@@ -9,12 +9,14 @@ interface TicketProps {
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
-    function upperSnakeCaseToTitleCase(value: string): string {
-        return value
-            .split('_')
-            .map(word => word.charAt(0) + word.slice(1).toLowerCase())
-            .join(' ');
-    }
+
+    const RoundToString: Map<MatchRoundEnum, string> = new Map([
+        [MatchRoundEnum.GroupStage, "Group Stage"],
+        [MatchRoundEnum.RoundOfSixteen, "Round of Sixteen"],
+        [MatchRoundEnum.QuarterFinal, "Quarter-Final"],
+        [MatchRoundEnum.SemiFinal, "Semi-Final"],
+        [MatchRoundEnum.Final, "Final"]
+    ])
 
     function getClippedTextForTeam(team: string): React.CSSProperties {
         return {
@@ -57,7 +59,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                             ROUND
                         </div>
                         <div className="text-xs">
-                            {upperSnakeCaseToTitleCase(props.match.round)}
+                            {RoundToString.get(props.match.round)}
                         </div>
                     </div>
                 </div>
