@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {LoginRequest} from "@/client";
 import {AUTH_CLIENT, TOKEN_COOKIE_KEY} from "@/app/api/api";
 import {navigateTo} from "@/app/actions";
@@ -9,8 +9,6 @@ import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import {setCookie} from "cookies-next";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
 
 export default function Login() {
 
@@ -46,18 +44,8 @@ export default function Login() {
         }
     }
 
-    const searchParams = useSearchParams()
-    const reset = searchParams.get('reset')
-
-    useEffect(() => {
-         if (reset !== null) {
-            toast("Password Reset Successfully")
-        }
-    }, [])
-
     return (
         <section>
-            <Toaster/>
             <div className="bg-gray-900 flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
                 <h1 className="text-white pb-20">
                     <Link href="/">PREDICTABALL.LIVE</Link>
