@@ -3,12 +3,13 @@ import {LeaderboardInner, LeaderboardInnerMovementEnum} from "@/client";
 import {DOWN_ARROW, NEUTRAL_ARROW, UP_ARROW} from "@/app/components/leaderboard/icons";
 
 interface LeaderboardEntryProps {
-    entry: LeaderboardInner
+    entry: LeaderboardInner,
+    isUser: boolean
 }
 
 export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JSX.Element {
 
-    const scale = props.entry.position === 1 ? 1 : 0.95
+    const scale = props.entry.position === 1 ? 1 : props.isUser ? 0.95 : 0.90
 
     const MOVEMENT_TO_COLOR: Map<LeaderboardInnerMovementEnum, React.CSSProperties> = new Map([
         [LeaderboardInnerMovementEnum.Improved, {

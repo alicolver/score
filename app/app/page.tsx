@@ -31,7 +31,7 @@ const Home = async () => {
             <HeadlineSuspense/>
             <MatchesToPredict/>
             <Dashboard/>
-            <Leaderboard leagueId={"global"}/>
+            <Leaderboard leagueId={"global"} limit={true}/>
         </main>
     );
 }

@@ -17,7 +17,7 @@ export default function Home({params}: { params: { leagueId: string } }): React.
                 </Link>
             </div>
             <div className="min-h-screen p-2 w-full bg-gray-900 flex items-center justify-center">
-                <Leaderboard leagueId={params.leagueId}/>
+                <Leaderboard leagueId={params.leagueId} limit={false}/>
             </div>
         </>
     );
