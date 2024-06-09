@@ -6,6 +6,7 @@ import {getUserId} from "@/app/auth/jtw-handler";
 import {getPositionForLeague} from "@/app/app/league/get-position-for-league";
 import JoinLeague from "@/app/app/league/join";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
+import CreateLeague from "@/app/app/league/create";
 
 export default async function Leagues(): Promise<React.JSX.Element> {
 
@@ -49,13 +50,7 @@ export default async function Leagues(): Promise<React.JSX.Element> {
                     </Link>
                 </div>
             ))}
-            <div className="w-full justify-around pt-2">
-                <Link href="/app/league/create" className="w-full">
-                    <Button className={BUTTON_CLASS} style={{width: "100%", marginBottom: "5px"}}>
-                        Create a League
-                    </Button>
-                </Link>
-            </div>
+            <CreateLeague/>
             <JoinLeague/>
         </div>
     )
