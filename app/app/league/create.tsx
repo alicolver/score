@@ -26,35 +26,35 @@ export default function CreateLeague(): React.JSX.Element {
     const [leagueName, setLeagueName] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
-    async function join(): Promise<boolean> {
+    async function createLeague(): Promise<string | undefined> {
         setIsLoading(true)
         try {
             const leagueApi = new LeagueApi(await getConfigWithAuthHeaderClient())
-            await leagueApi.createLeague({
+            const response = await leagueApi.createLeague({
                 createLeagueRequest: {
                     leagueName: leagueName
                 }
             })
             setDidFail(false)
             setIsLoading(false)
-            return true
+            return response.leagueId 
         } catch (error) {
             setDidFail(true)
             setIsLoading(false)
-            return false
+            return undefined
         }
     }
 
     function getOnPress(onClose: () => void) {
         return (_: PressEvent) => {
-            join().then(r => {
-                if (r) {
-                    copyToClipboard(`https://www.predictaball.live/app/league/${leagueName}/join`)
+            createLeague().then(leagueId => {
+                if (leagueId !== undefined) {
+                    copyToClipboard(`https://www.predictaball.live/app/league/${leagueId}/join`)
                         .then(didCopy => {
                             if (didCopy) {
-                                toast.success("League Created and Copied Join Link To Clipboard")
+                                toast.success("League Created and Copied Join Link To Clipboard", {duration: 4000})
                             } else {
-                                toast("League Created Successfully")
+                                toast("League Created Successfully", {duration: 3000})
                             }
                         })
                     onClose()
