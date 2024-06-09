@@ -27,7 +27,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
     ])
 
     return (
-        <div className="w-full p-3 text-gray-600 relative">
+        <div className="w-full max-w-lg p-3 text-gray-600 relative">
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200"
                  style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
