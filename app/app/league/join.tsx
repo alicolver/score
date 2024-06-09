@@ -15,6 +15,7 @@ import {BUTTON_CLASS} from "@/app/util/css-classes";
 import {LeagueApi} from "@/client";
 import {getConfigWithAuthHeader} from "@/app/api/client-config";
 import {PressEvent} from "@react-types/shared";
+import toast from "react-hot-toast";
 
 export default function JoinLeague(): React.JSX.Element {
 
@@ -43,6 +44,7 @@ export default function JoinLeague(): React.JSX.Element {
         return (_: PressEvent) => {
             join().then(r => {
                 if (r) {
+                    toast.success("Joined League Successfully")
                     onClose()
                 }
             })
