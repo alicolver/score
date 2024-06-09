@@ -1,48 +1,65 @@
 'use client'
 
 import React, {useState} from "react";
-import {LoginRequest} from "@/client";
-import {AUTH_CLIENT, TOKEN_COOKIE_KEY} from "@/app/api/api";
+import {ResetPasswordConfirmRequest, ResetPasswordRequest} from "@/client";
+import {AUTH_CLIENT} from "@/app/api/api";
 import {navigateTo} from "@/app/actions";
 import {Button, Input} from "@nextui-org/react";
 import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
-import {setCookie} from "cookies-next";
 import Link from "next/link";
 
-export default function Login() {
+export default function Reset() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [otp, setOtp] = useState("")
     const [isVisible, setIsVisible] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingCode, setIsLoadingCode] = useState(false)
+    const [isLoadingConfirmation, setIsLoadingConfirmation] = useState(false)
+    const [isRequested, setIsRequested] = useState(false)
     const [didFail, setDidFail] = useState(false)
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 
-    const handleEvent: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+    const handleVerificationCodeRequest: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault()
 
-        const requestBody: LoginRequest = {
+        const requestBody: ResetPasswordRequest = {
+            email: email
+        }
+
+        setIsLoadingCode(true)
+
+        try {
+            await AUTH_CLIENT.authApi.resetPassword({resetPasswordRequest: requestBody})
+            setIsRequested(true)
+        } catch (error) {
+            setDidFail(true)
+        }
+
+        setIsLoadingCode(false)
+    }
+
+    const handlePasswordResetRequest: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault()
+
+        const requestBody: ResetPasswordConfirmRequest = {
             email: email,
+            otp: otp,
             password: password
         }
 
-        setIsLoading(true)
+        setIsLoadingConfirmation(true)
 
         try {
-            const response = await AUTH_CLIENT.authApi.login({loginRequest: requestBody})
-            setIsLoading(false)
-            if (!response.idToken) {
-                setDidFail(true)
-                return
-            }
-            setCookie(TOKEN_COOKIE_KEY, response.idToken, {maxAge: 60 * 60 * 24 * 7})
-            await navigateTo("app")
+            await AUTH_CLIENT.authApi.resetPasswordConfirm({resetPasswordConfirmRequest: requestBody})
+            await navigateTo("login")
         } catch (error) {
-            setIsLoading(false)
             setDidFail(true)
         }
+
+        setIsLoadingConfirmation(false)
     }
 
     return (
@@ -55,7 +72,7 @@ export default function Login() {
                     className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 items-center justify-between md:space-y-6 sm:p-8">
                         <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                            Sign in to your account
+                            Reset your password
                         </h1>
                         <div>
                             <Input
@@ -69,15 +86,40 @@ export default function Login() {
                                 label="Email"
                                 isInvalid={didFail}
                                 style={{fontSize: "18px"}}
+                                disabled={isRequested}
+                                value={email}
                             />
+                        </div>
+                        <Button
+                            onClick={handleVerificationCodeRequest}
+                            disabled={isRequested}
+                            isLoading={isLoadingCode}
+                            type="submit"
+                            className={"w-full " + BUTTON_CLASS + " disabled:bg-gray-300"}>
+                            Request Verification Code
+                        </Button>
+                        <div>
+                                <Input
+                                    onChange={(event) => {
+                                        setDidFail(false)
+                                        setOtp(event.target.value)
+                                    }}
+                                    type="text"
+                                    name="verification code"
+                                    id="otp"
+                                    label="Verification Code"
+                                    style={{fontSize: "18px"}}
+                                    isDisabled={!isRequested}
+                                />
                         </div>
                         <div>
                             <Input
-                                label="Password"
+                                label="New Password"
                                 onChange={(event) => {
                                     setPassword(event.target.value)
                                     setDidFail(false)
                                 }}
+                                value={password}
                                 style={{fontSize: "18px"}}
                                 endContent={
                                     <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
@@ -92,26 +134,17 @@ export default function Login() {
                                 }
                                 type={isVisible ? "text" : "password"}
                                 isInvalid={didFail}
+                                isDisabled={!isRequested}
                             />
                         </div>
-                        <div className="flex items-center justify-between">
-                            <a href="/reset"
-                               className="text-sm font-medium text-indigo-600 hover:underline">
-                                Forgot password?
-                            </a>
-                        </div>
                         <Button
-                            onClick={handleEvent}
-                            isLoading={isLoading}
+                            disabled={!isRequested}
+                            onClick={handlePasswordResetRequest}
+                            isLoading={isLoadingConfirmation}
                             type="submit"
-                            className={"w-full " + BUTTON_CLASS}>
-                            Sign in
+                            className={"w-full " + (!isRequested ? "bg-gray-300" : BUTTON_CLASS)}>
+                            Reset Password
                         </Button>
-                        <p className="text-center text-sm font-light text-gray-500">
-                            Don't have an account yet? <a href="/signup"
-                                                          className="font-medium hover:underline text-indigo-600">Sign
-                            up</a>
-                        </p>
                     </div>
                 </div>
             </div>
