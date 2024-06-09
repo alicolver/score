@@ -26,7 +26,7 @@ const getAuthPayload = async () => {
     const token: string | undefined = cookies().get(TOKEN_COOKIE_KEY)?.value
     if (token === undefined) throw new Error("Auth cookie does not exist")
 
-    await verifier.hydrate
+    await verifier.hydrate()
     return await verifier.verify(token)
 }
 
