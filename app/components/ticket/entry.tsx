@@ -6,7 +6,7 @@ import Crest from "@/app/components/ticket/crest";
 import Styles from "@/app/styles/Input.module.scss"
 import {Button} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
-import { handlePrediction } from "./submit-prediction"
+import {handlePrediction} from "./submit-prediction"
 import toast from "react-hot-toast";
 
 interface EntryProps {
@@ -67,6 +67,26 @@ export default function Entry(props: EntryProps): React.JSX.Element {
 
     const upcomingMatch = props.match.state === MatchStateEnum.Upcoming
 
+    function getPredictionOrSubmitButton() {
+        return !upcomingMatch ? (props.match.prediction !== undefined &&
+                <div className="text-center">
+                    <p className="text-white text-sm">Prediction</p>
+                    <p className="text-white text-sm">{props.match.prediction?.homeScore}{props.match.prediction?.awayScore}</p>
+                </div>
+            )
+            :
+            (
+                <Button
+                    disabled={props.disable}
+                    onClick={() => submitPrediction()} isLoading={isPredictionSending}
+                    style={{height: "25px"}}
+                    className={BUTTON_CLASS}
+                >
+                    {props.match.prediction !== undefined || predictionSetSuccess ? "Update" : "Submit"}
+                </Button>
+            )
+    }
+
     return (
         <div className="flex items-center">
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
@@ -94,17 +114,9 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                         />
                     </div>
                 </div>
-                {upcomingMatch && <div>
-                    <Button
-                        disabled={props.disable}
-                        onClick={() => submitPrediction()} isLoading={isPredictionSending}
-                        style={{height: "25px"}}
-                        className={BUTTON_CLASS}
-                    >
-                        {props.match.prediction !== undefined || predictionSetSuccess ? "Update" : "Submit"}
-                    </Button>
-                </div>}
-                {!upcomingMatch && <p>{props.match.prediction?.points || 0} points</p>}
+                <div>
+                    {getPredictionOrSubmitButton()}
+                </div>
             </div>
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
                 <Crest country={props.match.awayTeam}/>

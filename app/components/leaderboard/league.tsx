@@ -12,7 +12,7 @@ export default function LeagueComponent(props: LeagueProps): React.JSX.Element {
     return (
         <div key={props.leagueId} className="w-full flex mb-2">
             <Link href={`app/league/${props.leagueId}/leaderboard`} className="w-full">
-                <div className="absolute left-5"><ClickIcon/></div>
+                <div className="absolute left-3"><ClickIcon/></div>
                 <div className="flex w-full justify-around rounded-3xl p-2 text-white"
                      style={{
                          backgroundColor: "#21D4FD",
