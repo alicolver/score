@@ -7,6 +7,7 @@ import Styles from "@/app/styles/Input.module.scss"
 import {Button} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import { handlePrediction } from "./submit-prediction"
+import toast from "react-hot-toast";
 
 interface EntryProps {
     match: Match
@@ -21,6 +22,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
         props.match.prediction ? props.match.prediction.awayScore.toString() : ""
     )
     const [isPredictionSending, setIsPredictionSending] = useState<boolean>(false)
+    const [predictionSetSuccess, setPredictionSetSuccess] = useState(false)
 
     function handleHomeScore(event: React.ChangeEvent<HTMLInputElement>) {
         if (/^\d*$/.test(event.target.value)) { // Only allow digits
@@ -40,14 +42,15 @@ export default function Entry(props: EntryProps): React.JSX.Element {
         }
         setIsPredictionSending(true)
         try {
-            const response = await handlePrediction(
+            await handlePrediction(
                 Number(homeScore),
                 Number(awayScore), 
                 props.match.matchId
             );
-            console.log(response);
+            setPredictionSetSuccess(true)
         } catch (error) {
-            console.log(error);
+            toast.error("Error Sending Prediction, try again")
+            setPredictionSetSuccess(false)
         } finally {
             setIsPredictionSending(false);
         }
@@ -79,7 +82,9 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     </div>
                 </div>
                 <div>
-                    <Button onClick={() => submitPrediction()} isLoading={isPredictionSending} style={{height: "25px"}} className={BUTTON_CLASS}>Submit</Button>
+                    <Button onClick={() => submitPrediction()} isLoading={isPredictionSending} style={{height: "25px"}} className={BUTTON_CLASS}>
+                        {props.match.prediction !== undefined || predictionSetSuccess ? "Edit" : "Submit"}
+                    </Button>
                 </div>
             </div>
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
