@@ -90,7 +90,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                         style={{height: "25px"}}
                         className={BUTTON_CLASS}
                     >
-                        {props.match.prediction !== undefined || predictionSetSuccess ? "Edit" : "Submit"}
+                        {props.match.prediction !== undefined || predictionSetSuccess ? "Submit Edit" : "Submit"}
                     </Button>
                 </div>
             </div>
