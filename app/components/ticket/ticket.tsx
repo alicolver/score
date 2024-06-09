@@ -31,6 +31,13 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200"
                  style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
+                    <div
+                        className="absolute p-2"
+                        style={{
+                            visibility: /*props.match.prediction?.points === undefined*/ false ? "hidden" : "visible"
+                        }}>
+                        <span className="text-8xl text-gray-900 opacity-50">5</span>
+                    </div>
                     {props.filterType === ListMatchesFilterTypeEnum.Live &&
                         <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>}
                     <div className="content-center">
