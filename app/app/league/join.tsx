@@ -59,7 +59,7 @@ export default function JoinLeague(): React.JSX.Element {
             <Modal
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
-                placement="center"
+                placement="top-center"
                 backdrop="blur"
             >
                 <ModalContent>
@@ -73,7 +73,6 @@ export default function JoinLeague(): React.JSX.Element {
                             <ModalBody>
                                 <span>Enter the League Id below:</span>
                                 <Input
-                                    autoFocus
                                     label="LeagueId"
                                     style={{fontSize: "18px"}}
                                     onChange={(event) => {
