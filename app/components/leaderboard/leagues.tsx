@@ -6,7 +6,7 @@ import LeagueComponent from "@/app/components/leaderboard/league";
 
 export default function Leagues(): React.JSX.Element {
     return (
-        <div className="w-full max-w-xl p-4 mb-2 text-center">
+        <div className="w-full max-w-2xl p-4 mb-2 text-center">
             <span className="text-white font-bold text-lg">Your Leagues</span>
             <div className="w-full flex">
                 <div className="flex w-full justify-around rounded-3xl p-2 text-white">

@@ -26,7 +26,7 @@ export default async function Headline(): Promise<React.JSX.Element> {
     const fetchedData = await fetchUserData()
 
     return (
-        <div className="w-full flex mt-1 items-center text-center justify-around p-2">
+        <div className="w-full flex mt-1 max-w-xl items-center text-center justify-around p-2">
             <div className="w-1/5">
                 <div className="flex-row">
                     <div className="font-bold text-white mb-1">Position</div>
