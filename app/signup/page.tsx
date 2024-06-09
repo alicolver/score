@@ -38,7 +38,6 @@ export default function SignUp() {
 
         try {
             await AUTH_CLIENT.userApi.signup({signupRequest})
-            setIsLoading(false)
             await navigateTo("login")
         } catch (error) {
             setIsLoading(false)

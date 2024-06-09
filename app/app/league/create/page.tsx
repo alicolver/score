@@ -25,10 +25,9 @@ export default function CreateLeague(): React.JSX.Element {
             const leagueApi = new LeagueApi(await getConfigWithAuthHeaderClient())
             await leagueApi.createLeague({createLeagueRequest: requestBody})
             setCreateSuccess(true)
-            await navigateTo("/app")
+            await navigateTo("app")
         } catch (error) {
             setCreateSuccess(false)
-        } finally {
             setIsLoading(false)
         }
     }
@@ -50,6 +49,7 @@ export default function CreateLeague(): React.JSX.Element {
                         }}
                         isInvalid={createSuccess !== undefined && !createSuccess}
                         errorMessage="League create failed, it may already exist, try another name"
+                        style={{fontSize: "18px"}}
                     />
                     <div className="w-full">
                         <div>

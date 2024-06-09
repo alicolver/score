@@ -4,11 +4,11 @@ import MatchesToPredict from "@/app/components/ticket/matches-to-predict";
 import Link from "next/link";
 import SignOutButton from "@/app/components/sign-out-button";
 import Dashboard from "@/app/components/leaderboard/dashboard";
-import Headline from "@/app/components/points/headline";
 import { isAdmin, isLoggedIn } from "../auth/jtw-handler";
 import { redirect } from "next/navigation";
 import { Button } from "@nextui-org/react";
 import { BUTTON_CLASS } from "../util/css-classes";
+import HeadlineSuspense from "@/app/components/points/headline-suspense";
 
 
 const Home = async () => {
@@ -26,7 +26,7 @@ const Home = async () => {
                 <Link href="/app/admin"><Button size="sm" className={BUTTON_CLASS}>Admin</Button></Link>
             </div>}
             <p className="text-xl font-bold mt-4 text-white">PREDICTABALL</p>
-            <Headline/>
+            <HeadlineSuspense/>
             <MatchesToPredict/>
             <Dashboard/>
             <Leaderboard leagueId={"global"}/>
