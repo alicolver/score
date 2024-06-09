@@ -76,7 +76,10 @@ export default function JoinLeague(): React.JSX.Element {
                                     autoFocus
                                     label="LeagueId"
                                     style={{fontSize: "18px"}}
-                                    onChange={(event) => setLeagueId(event.target.value)}
+                                    onChange={(event) => {
+                                        setDidFail(false)
+                                        setLeagueId(event.target.value)}
+                                    }
                                     isInvalid={didFail}
                                 />
                             </ModalBody>
