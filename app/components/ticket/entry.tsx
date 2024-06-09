@@ -10,8 +10,7 @@ import {handlePrediction} from "./submit-prediction"
 import toast from "react-hot-toast";
 
 interface EntryProps {
-    match: Match,
-    disable: boolean
+    match: Match
 }
 
 export default function Entry(props: EntryProps): React.JSX.Element {
@@ -65,19 +64,18 @@ export default function Entry(props: EntryProps): React.JSX.Element {
         }
     }
 
-    const upcomingMatch = props.match.state === MatchStateEnum.Upcoming
+    const matchState = props.match.state
+    const isUpcoming = matchState === MatchStateEnum.Upcoming
 
     function getPredictionOrSubmitButton() {
-        return !upcomingMatch ? (props.match.prediction !== undefined &&
+        return !isUpcoming ? (props.match.prediction !== undefined &&
                 <div className="text-center">
                     <p className="text-white text-sm">Prediction</p>
                     <p className="text-white text-sm">{props.match.prediction?.homeScore}{props.match.prediction?.awayScore}</p>
                 </div>
             )
-            :
-            (
+            : (
                 <Button
-                    disabled={props.disable}
                     onClick={() => submitPrediction()} isLoading={isPredictionSending}
                     style={{height: "25px"}}
                     className={BUTTON_CLASS}
@@ -97,20 +95,20 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     <div className={Styles.inputBox}>
                         <input
                             type="text"
-                            value={upcomingMatch ? homeScore : props.match.homeScore}
+                            value={isUpcoming ? homeScore : props.match.homeScore}
                             onChange={handleHomeScore}
                             maxLength={1}
                             placeholder={"_"}
-                            disabled={!upcomingMatch}
+                            disabled={!isUpcoming}
                         />
                     </div>
                     <div className={Styles.inputBox}>
                         <input type="text"
-                               value={upcomingMatch ? awayScore : props.match.awayScore}
+                               value={isUpcoming ? awayScore : props.match.awayScore}
                                onChange={handleAwayScore}
                                maxLength={1}
                                placeholder={"_"}
-                               disabled={!upcomingMatch}
+                               disabled={!isUpcoming}
                         />
                     </div>
                 </div>

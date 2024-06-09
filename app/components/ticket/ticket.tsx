@@ -32,22 +32,24 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                  style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <div
-                        className="absolute p-2"
+                        className="absolute mt-4 z-40"
                         style={{
-                            visibility: /*props.match.prediction?.points === undefined*/ false ? "hidden" : "visible"
+                            visibility: props.match.prediction?.points === undefined ? "hidden" : "visible"
                         }}>
-                        <span className="text-8xl text-gray-900 opacity-50">5</span>
+                        <span className="font-bold text-7xl text-gray-900">{props.match.prediction?.points}5</span>
                     </div>
                     {props.filterType === ListMatchesFilterTypeEnum.Live &&
-                        <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>}
-                    <div className="content-center">
+                        <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full animate-ping overflow-hidden"></div>}
+                    <div className="flex justify-around" style={{opacity: props.match.prediction?.points === undefined ? "100%" : "30%"}}>
+                        <div className="content-center">
                     <span style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>
                         {COUNTRY_CODES[props.match.homeTeam.toLowerCase()]}
                     </span>
-                    </div>
-                    <div className="content-center">
-                        <div style={getClippedTextForTeam(getFlagUrlForCountry(props.match.awayTeam))}>
-                            {COUNTRY_CODES[props.match.awayTeam.toLowerCase()]}
+                        </div>
+                        <div className="content-center">
+                            <div style={getClippedTextForTeam(getFlagUrlForCountry(props.match.awayTeam))}>
+                                {COUNTRY_CODES[props.match.awayTeam.toLowerCase()]}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,7 +99,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
             </div>}
             <div
                 className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
-                <Entry match={props.match} disable={props.filterType !== ListMatchesFilterTypeEnum.Upcoming}/>
+                <Entry match={props.match}/>
             </div>
         </div>
     )
