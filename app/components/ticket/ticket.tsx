@@ -30,6 +30,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
         <div className="w-full p-3 text-gray-600 relative">
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200" style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
+                    { props.filterType === ListMatchesFilterTypeEnum.Live && <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>}
                     <div className="content-center">
                     <span style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>
                         {COUNTRY_CODES[props.match.homeTeam.toLowerCase()]}
