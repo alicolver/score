@@ -21,7 +21,6 @@ export default function Leaderboard(props: LeaderboardProps): React.JSX.Element 
 
     return (
         <div className="w-full max-w-2xl p-5 text-center">
-            <p className="pb-2 text-white text-xl font-bold">{capitalizeFirstLetter(props.leagueId)} Standings</p>
             <Suspense fallback={<LeaderboardEntry entry={{ position: 1, movement: LeaderboardInnerMovementEnum.Unchanged, user: defaultUser}} isUser={false} />}>
                 <Entries leagueId={props.leagueId} limit={props.limit}/>
             </Suspense>
