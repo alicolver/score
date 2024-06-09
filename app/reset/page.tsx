@@ -54,7 +54,7 @@ export default function Reset() {
 
         try {
             await AUTH_CLIENT.authApi.resetPasswordConfirm({resetPasswordConfirmRequest: requestBody})
-            await navigateTo("login")
+            await navigateTo("login?reset")
         } catch (error) {
             setDidFail(true)
         }
