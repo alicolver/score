@@ -2,11 +2,10 @@
 
 import React, {useState} from "react";
 import {ListMatchesFilterTypeEnum, Match, MatchRoundEnum} from "@/client";
-import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
+import {UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
-import {getClippedTextForTeam} from "@/app/components/ticket/clipped-text";
-import {getFlagUrlForCountry} from "@/app/util/flag";
 import {DROP_DOWN, DROP_UP} from "@/app/components/ticket/drop-downs";
+import TeamsHeader from "@/app/components/ticket/teams-header";
 
 interface TicketProps {
     match: Match,
@@ -26,48 +25,12 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
         [MatchRoundEnum.Final, "Final"]
     ])
 
-    function getLivePulse() {
-        return props.filterType === ListMatchesFilterTypeEnum.Live &&
-            <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full animate-ping overflow-hidden"></div>
-    }
-
-    function getPointsElement() {
-        return <div
-            className="absolute mt-4 z-40"
-            style={{
-                visibility: props.match.prediction?.points === undefined ? "hidden" : "visible"
-            }}>
-            <span className="font-bold text-7xl text-gray-900">{props.match.prediction?.points}</span>
-        </div>
-    }
-
-    function getTeamsHeader() {
-        return <div className="w-full">
-            {getPointsElement()}
-            {getLivePulse()}
-            <div className="flex justify-around"
-                 style={{opacity: props.match.prediction?.points === undefined ? "100%" : "30%"}}
-            >
-                <div className="content-center">
-                    <div style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>
-                        {COUNTRY_CODES[props.match.homeTeam.toLowerCase()]}
-                    </div>
-                </div>
-                <div className="content-center">
-                    <div style={getClippedTextForTeam(getFlagUrlForCountry(props.match.awayTeam))}>
-                        {COUNTRY_CODES[props.match.awayTeam.toLowerCase()]}
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
     return (
         <div className="w-full max-w-lg p-3 text-gray-600 relative">
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200"
                  style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
-                    {getTeamsHeader()}
+                    <TeamsHeader match={props.match}/>
                 </div>
                 <div className={"w-full flex justify-center content-center items-center animate-bounce"}
                      style={{marginTop: "-25px"}}>
