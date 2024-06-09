@@ -28,9 +28,11 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
 
     return (
         <div className="w-full p-3 text-gray-600 relative">
-            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200" style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
+            <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200"
+                 style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
-                    { props.filterType === ListMatchesFilterTypeEnum.Live && <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>}
+                    {props.filterType === ListMatchesFilterTypeEnum.Live &&
+                        <div className="absolute top-1 right-1 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>}
                     <div className="content-center">
                     <span style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>
                         {COUNTRY_CODES[props.match.homeTeam.toLowerCase()]}
@@ -42,11 +44,13 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                         </div>
                     </div>
                 </div>
-                <div className={"w-full flex justify-center content-center items-center animate-bounce"} style={{marginTop: "-25px"}}>
+                <div className={"w-full flex justify-center content-center items-center animate-bounce"}
+                     style={{marginTop: "-25px"}}>
                     {collapse ? DROP_DOWN : DROP_UP}
                 </div>
             </div>
-            {!collapse && <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200 animate-appearance-in">
+            {!collapse && <div
+                className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200 animate-appearance-in">
                 <div className="w-full flex justify-between">
                     <div className="flex-row">
                         <div className="font-bold">
@@ -84,9 +88,13 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                     </div>
                 </div>
             </div>}
-            {!collapse && <div className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
+            {props.filterType === ListMatchesFilterTypeEnum.Upcoming && <div
+                className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
                 <Entry match={props.match} disable={props.filterType !== ListMatchesFilterTypeEnum.Upcoming}/>
             </div>}
+            {(props.filterType === ListMatchesFilterTypeEnum.Live || props.filterType === ListMatchesFilterTypeEnum.Completed) &&
+                <>PlaceHolder for submitted entry and historic score</>
+            }
         </div>
     )
 }
