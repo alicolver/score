@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@nextui-org/react";
 import { BUTTON_CLASS } from "../util/css-classes";
 import HeadlineSuspense from "@/app/components/points/headline-suspense";
+import { Toaster } from "react-hot-toast";
 
 
 const Home = async () => {
@@ -19,6 +20,7 @@ const Home = async () => {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between bg-gray-900">
+            <Toaster/>
             <div className="absolute right-4 top-3">
                 <Link href="/"><SignOutButton/></Link>
             </div>

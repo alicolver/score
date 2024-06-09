@@ -50,9 +50,9 @@ export default function JoinLeague(): React.JSX.Element {
     }
 
     return (
-        <div className="w-full justify-around pt-1">
+        <div className="w-full justify-around ml-2">
             <Button className={BUTTON_CLASS} style={{width: "100%"}} onPress={onOpen}>
-                Join a League
+                Join
             </Button>
             <Modal
                 isOpen={isOpen}

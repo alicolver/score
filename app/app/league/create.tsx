@@ -15,6 +15,8 @@ import React, {useState} from "react";
 import {LeagueApi} from "@/client";
 import {PressEvent} from "@react-types/shared";
 import {getConfigWithAuthHeaderClient} from "@/app/api/client-config-client-side";
+import {copyToClipboard} from "@/app/util/clipboard";
+import toast from "react-hot-toast";
 
 export default function CreateLeague(): React.JSX.Element {
 
@@ -47,6 +49,14 @@ export default function CreateLeague(): React.JSX.Element {
         return (_: PressEvent) => {
             join().then(r => {
                 if (r) {
+                    copyToClipboard(leagueName)
+                        .then(didCopy => {
+                            if (didCopy) {
+                                toast.success("Copied Join Link To Clipboard")
+                            } else {
+                                toast("League Created Successfully")
+                            }
+                        })
                     onClose()
                 }
             })
@@ -54,9 +64,9 @@ export default function CreateLeague(): React.JSX.Element {
     }
 
     return (
-        <div className="w-full justify-around pt-2">
-            <Button className={BUTTON_CLASS} onPress={onOpen} style={{width: "100%", marginBottom: "5px"}}>
-                Create a League
+        <div className="w-full justify-around mr-2">
+            <Button className={BUTTON_CLASS} onPress={onOpen} style={{width: "100%"}}>
+                Create
             </Button>
             <Modal
                 isOpen={isOpen}
@@ -69,7 +79,7 @@ export default function CreateLeague(): React.JSX.Element {
                         <div>
                             <ModalHeader>
                                 <div className="w-full text-center">
-                                    Join a League
+                                    Create a League
                                 </div>
                             </ModalHeader>
                             <ModalBody>
@@ -82,6 +92,7 @@ export default function CreateLeague(): React.JSX.Element {
                                         setDidFail(false)
                                         setLeagueName(event.target.value)
                                     }}
+                                    disabled={isLoading}
                                     isInvalid={didFail}
                                 />
                             </ModalBody>

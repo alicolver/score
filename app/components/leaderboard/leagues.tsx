@@ -50,8 +50,10 @@ export default async function Leagues(): Promise<React.JSX.Element> {
                     </Link>
                 </div>
             ))}
-            <CreateLeague/>
-            <JoinLeague/>
+            <div className="flex justify-around">
+                <CreateLeague/>
+                <JoinLeague/>
+            </div>
         </div>
     )
 }
