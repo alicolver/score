@@ -32,7 +32,6 @@ export default function Login() {
 
         try {
             const response = await AUTH_CLIENT.authApi.login({loginRequest: requestBody})
-            setIsLoading(false)
             if (!response.idToken) {
                 setDidFail(true)
                 return

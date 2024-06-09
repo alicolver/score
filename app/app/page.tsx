@@ -10,6 +10,7 @@ import { Button } from "@nextui-org/react";
 import { BUTTON_CLASS } from "../util/css-classes";
 import HeadlineSuspense from "@/app/components/points/headline-suspense";
 import { Toaster } from "react-hot-toast";
+import LiveMatches from "@/app/components/ticket/live-matches";
 
 
 const Home = async () => {
@@ -29,6 +30,7 @@ const Home = async () => {
             </div>}
             <p className="text-xl font-bold mt-4 text-white">PREDICTABALL</p>
             <HeadlineSuspense/>
+            <LiveMatches/>
             <MatchesToPredict/>
             <Dashboard/>
             <Leaderboard leagueId={"global"} limit={true}/>

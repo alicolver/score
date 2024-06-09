@@ -10,7 +10,8 @@ import { handlePrediction } from "./submit-prediction"
 import toast from "react-hot-toast";
 
 interface EntryProps {
-    match: Match
+    match: Match,
+    disable: boolean
 }
 
 export default function Entry(props: EntryProps): React.JSX.Element {
@@ -82,7 +83,12 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     </div>
                 </div>
                 <div>
-                    <Button onClick={() => submitPrediction()} isLoading={isPredictionSending} style={{height: "25px"}} className={BUTTON_CLASS}>
+                    <Button
+                        disabled={props.disable}
+                        onClick={() => submitPrediction()} isLoading={isPredictionSending}
+                        style={{height: "25px"}}
+                        className={BUTTON_CLASS}
+                    >
                         {props.match.prediction !== undefined || predictionSetSuccess ? "Edit" : "Submit"}
                     </Button>
                 </div>

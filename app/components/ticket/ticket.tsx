@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from "react";
-import {Match, MatchRoundEnum} from "@/client";
+import {ListMatchesFilterTypeEnum, Match, MatchRoundEnum} from "@/client";
 import {COUNTRY_CODES, UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
 import {getClippedTextForTeam} from "@/app/components/ticket/clipped-text";
@@ -10,7 +10,8 @@ import {DROP_DOWN, DROP_UP} from "@/app/components/ticket/drop-downs";
 
 interface TicketProps {
     match: Match,
-    collapse: boolean
+    collapse: boolean,
+    filterType: ListMatchesFilterTypeEnum
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
@@ -83,7 +84,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                 </div>
             </div>}
             {!collapse && <div className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
-                <Entry match={props.match}/>
+                <Entry match={props.match} disable={props.filterType !== ListMatchesFilterTypeEnum.Upcoming}/>
             </div>}
         </div>
     )
