@@ -16,11 +16,11 @@ interface EntryProps {
 
 export default function Entry(props: EntryProps): React.JSX.Element {
 
-    const [homeScore, setHomeScore] = useState<string>(
-        props.match.prediction ? props.match.prediction.homeScore.toString() : ""
+    const [homeScore, setHomeScore] = useState<string | undefined>(
+        props.match.prediction ? props.match.prediction.homeScore.toString() : undefined
     )
-    const [awayScore, setAwayScore] = useState<string>(
-        props.match.prediction ? props.match.prediction.awayScore.toString() : ""
+    const [awayScore, setAwayScore] = useState<string | undefined>(
+        props.match.prediction ? props.match.prediction.awayScore.toString() : undefined
     )
     const [isPredictionSending, setIsPredictionSending] = useState<boolean>(false)
     const [predictionSetSuccess, setPredictionSetSuccess] = useState(false)
@@ -42,11 +42,18 @@ export default function Entry(props: EntryProps): React.JSX.Element {
             toast.error("You need to enter a score for both teams")
             return
         }
+        const homeScoreAsNumber = Number(homeScore)
+        const awayScoreAsNumber = Number(awayScore)
+        if (isNaN(homeScoreAsNumber) || isNaN(awayScoreAsNumber)) {
+            toast.error("You must enter a number")
+            return
+        }
+
         setIsPredictionSending(true)
         try {
             await handlePrediction(
-                Number(homeScore),
-                Number(awayScore), 
+                homeScoreAsNumber,
+                awayScoreAsNumber,
                 props.match.matchId
             );
             setPredictionSetSuccess(true)
@@ -90,7 +97,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                         style={{height: "25px"}}
                         className={BUTTON_CLASS}
                     >
-                        {props.match.prediction !== undefined || predictionSetSuccess ? "Submit Edit" : "Submit"}
+                        {props.match.prediction !== undefined || predictionSetSuccess ? "Update" : "Submit"}
                     </Button>
                 </div>
             </div>
