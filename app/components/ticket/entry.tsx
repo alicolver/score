@@ -39,6 +39,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
 
     async function submitPrediction(): Promise<void> {
         if (homeScore === undefined || awayScore === undefined) {
+            toast.error("You need to enter a score for both teams")
             return
         }
         setIsPredictionSending(true)
