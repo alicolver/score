@@ -49,10 +49,10 @@ export default function CreateLeague(): React.JSX.Element {
         return (_: PressEvent) => {
             join().then(r => {
                 if (r) {
-                    copyToClipboard(leagueName)
+                    copyToClipboard(`https://www.predictaball.live/app/league/${leagueName}/join`)
                         .then(didCopy => {
                             if (didCopy) {
-                                toast.success("Copied Join Link To Clipboard")
+                                toast.success("League Created and Copied Join Link To Clipboard")
                             } else {
                                 toast("League Created Successfully")
                             }
