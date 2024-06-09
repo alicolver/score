@@ -5,7 +5,7 @@ import {ListMatchesFilterTypeEnum} from "@/client";
 
 export default function LiveMatches(): React.JSX.Element {
     return (
-        <div className="items-center">
+        <div className="flex flex-wrap w-full content-center justify-center">
             <Suspense fallback={<></>}>
                 <Tickets title={"Live Matches"} filterType={ListMatchesFilterTypeEnum.Live}/>
             </Suspense>

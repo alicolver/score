@@ -14,7 +14,7 @@ export default async function Home({params}: { params: { leagueId: string } }) {
         console.log(error)
     }
 
-    if (joined) redirect("/app")
+    if (joined) redirect(`/app/league/${params.leagueId}/leaderboard`)
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between bg-gray-900">

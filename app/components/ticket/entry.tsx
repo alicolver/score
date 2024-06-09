@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from "react";
-import {Match} from "@/client";
+import {Match, MatchStateEnum} from "@/client";
 import Crest from "@/app/components/ticket/crest";
 import Styles from "@/app/styles/Input.module.scss"
 import {Button} from "@nextui-org/react";
@@ -65,6 +65,8 @@ export default function Entry(props: EntryProps): React.JSX.Element {
         }
     }
 
+    const upcomingMatch = props.match.state === MatchStateEnum.Upcoming
+
     return (
         <div className="flex items-center">
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
@@ -75,22 +77,24 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     <div className={Styles.inputBox}>
                         <input
                             type="text"
-                            value={homeScore}
+                            value={upcomingMatch ? homeScore : props.match.homeScore}
                             onChange={handleHomeScore}
                             maxLength={1}
                             placeholder={"_"}
+                            disabled={!upcomingMatch}
                         />
                     </div>
                     <div className={Styles.inputBox}>
                         <input type="text"
-                               value={awayScore}
+                               value={upcomingMatch ? awayScore : props.match.awayScore}
                                onChange={handleAwayScore}
                                maxLength={1}
                                placeholder={"_"}
+                               disabled={!upcomingMatch}
                         />
                     </div>
                 </div>
-                <div>
+                {upcomingMatch && <div>
                     <Button
                         disabled={props.disable}
                         onClick={() => submitPrediction()} isLoading={isPredictionSending}
@@ -99,7 +103,8 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     >
                         {props.match.prediction !== undefined || predictionSetSuccess ? "Update" : "Submit"}
                     </Button>
-                </div>
+                </div>}
+                {!upcomingMatch && <p>{props.match.prediction?.points || 0} points</p>}
             </div>
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
                 <Crest country={props.match.awayTeam}/>

@@ -88,13 +88,10 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                     </div>
                 </div>
             </div>}
-            {props.filterType === ListMatchesFilterTypeEnum.Upcoming && <div
+            <div
                 className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
                 <Entry match={props.match} disable={props.filterType !== ListMatchesFilterTypeEnum.Upcoming}/>
-            </div>}
-            {(props.filterType === ListMatchesFilterTypeEnum.Live || props.filterType === ListMatchesFilterTypeEnum.Completed) &&
-                <>PlaceHolder for submitted entry and historic score</>
-            }
+            </div>
         </div>
     )
 }
