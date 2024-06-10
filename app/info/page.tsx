@@ -12,7 +12,7 @@ export default function MoreInfo(): React.JSX.Element {
                 takes place during Euro 2024. The better your predictions are, the more points you will receive.
                 </p>
                 <p className="pt-10 text-2xl">The Prize</p>
-                <p>Bragging rights, and £100 :)</p>
+                <p>Bragging rights :)</p>
 
                 <p className="pt-10 text-2xl">Scoring</p>
                 <p>5 points for a correct score</p>
