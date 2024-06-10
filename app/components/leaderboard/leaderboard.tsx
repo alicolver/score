@@ -1,8 +1,8 @@
-import React, {Suspense} from "react";
-import {LeaderboardInnerMovementEnum, User} from "@/client";
+import React, { Suspense } from "react";
+import { LeaderboardInnerMovementEnum, User } from "@/client";
 import LeaderboardEntry from "./leaderboard-entry";
 import Entries from "@/app/components/leaderboard/entries";
-import {capitalizeFirstLetter} from "@/app/util/text";
+import { capitalizeFirstLetter } from "@/app/util/text";
 
 interface LeaderboardProps {
     leagueId: string,
@@ -20,10 +20,11 @@ export default function Leaderboard(props: LeaderboardProps): React.JSX.Element 
     }
 
     return (
-        <div className="w-full max-w-2xl p-5 text-center">
-            <Suspense fallback={<LeaderboardEntry entry={{ position: 1, movement: LeaderboardInnerMovementEnum.Unchanged, user: defaultUser}} isUser={false} />}>
-                <Entries leagueId={props.leagueId} limit={props.limit}/>
-            </Suspense>
-        </div>
+        <div className="w-full mx-auto">
+            <div className="w-full max-w-2xl p-5 text-center mx-auto">
+                <Suspense fallback={<LeaderboardEntry entry={{ position: 1, movement: LeaderboardInnerMovementEnum.Unchanged, user: defaultUser }} isUser={false} />}>
+                    <Entries leagueId={props.leagueId} limit={props.limit} />
+                </Suspense>
+            </div></div>
     )
 }
