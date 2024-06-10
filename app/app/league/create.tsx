@@ -83,9 +83,9 @@ export default function CreateLeague(): React.JSX.Element {
                                 </div>
                             </ModalHeader>
                             <ModalBody>
-                                <span>Enter the League Id below:</span>
+                                <span>Enter the League Name below:</span>
                                 <Input
-                                    label="LeagueId"
+                                    label="League Name"
                                     style={{fontSize: "18px"}}
                                     onChange={(event) => {
                                         setDidFail(false)
