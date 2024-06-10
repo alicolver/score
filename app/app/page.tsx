@@ -17,20 +17,22 @@ const Home = async () => {
     const isUserAdmin = await isAdmin()
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between bg-gray-900">
-            <Toaster/>
-            <div className="absolute right-4 top-3">
-                <Link href="/"><SignOutButton/></Link>
+        <main className="bg-gray-900">
+            <div className="w-full max-w-screen-lg mx-auto relative flex min-h-screen flex-col items-center justify-between">
+                <Toaster />
+                <div className="absolute right-4 top-3">
+                    <Link href="/"><SignOutButton /></Link>
+                </div>
+                {isUserAdmin && <div className="absolute left-4 top-3">
+                    <Link href="/app/admin"><Button size="sm" className={BUTTON_CLASS}>Admin</Button></Link>
+                </div>}
+                <p className="text-xl font-bold mt-4 text-white text-center">PREDICTABALL</p>
+                <HeadlineSuspense />
+                <LiveMatches />
+                <MatchesToPredict />
+                <Dashboard />
+                <Leaderboard leagueId={"global"} limit={true} />
             </div>
-            {isUserAdmin && <div className="absolute left-4 top-3">
-                <Link href="/app/admin"><Button size="sm" className={BUTTON_CLASS}>Admin</Button></Link>
-            </div>}
-            <p className="text-xl font-bold mt-4 text-white">PREDICTABALL</p>
-            <HeadlineSuspense/>
-            <LiveMatches/>
-            <MatchesToPredict/>
-            <Dashboard/>
-            <Leaderboard leagueId={"global"} limit={true}/>
         </main>
     );
 }
