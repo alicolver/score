@@ -10,8 +10,14 @@ import Link from "next/link";
 import {doesContainDigit, doesContainLowerCase} from "@/app/util/regex";
 import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 
-export default function SignUp() {
-
+export default function SignUp({
+  params,
+  searchParams,
+}: {
+  params: { }
+  searchParams: { [key: string]: string | undefined }
+}) {
+    const leagueId = searchParams["leagueId"]
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const [firstName, setFirstName] = useState('')
@@ -25,6 +31,8 @@ export default function SignUp() {
     const [doPasswordsMatch, setDoPasswordsMatch] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
+
+    const logInLink = "login" + ((leagueId && `?leagueId=${leagueId}`) || "")
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -42,7 +50,7 @@ export default function SignUp() {
 
         try {
             await AUTH_CLIENT.userApi.signup({signupRequest})
-            await navigateTo("login")
+            await navigateTo(logInLink)
         } catch (error) {
             setIsLoading(false)
         }
@@ -178,7 +186,7 @@ export default function SignUp() {
                                 Create Account
                             </Button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Already have an account? <a href="/login"
+                                Already have an account? <a href={`/${logInLink}`}
                                                             className="font-medium text-indigo-600 hover:underline">Sign
                                 In</a>
                             </p>

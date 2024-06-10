@@ -44,6 +44,8 @@ export default function Login({leagueId}: {leagueId: string | undefined}) {
         }
     }
 
+    const signUpLink = "/signup" + ((leagueId && `?leagueId=${leagueId}`) || "")
+
     return (
         <section>
             <div className="bg-gray-900 flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
@@ -107,7 +109,7 @@ export default function Login({leagueId}: {leagueId: string | undefined}) {
                             Sign in
                         </Button>
                         <p className="text-center text-sm font-light text-gray-500">
-                            Don't have an account yet? <a href="/signup"
+                            Don't have an account yet? <a href={signUpLink}
                                                           className="font-medium hover:underline text-indigo-600">Sign
                             up</a>
                         </p>
