@@ -8,11 +8,13 @@ export default function MoreInfo(): React.JSX.Element {
             <Header/>
             <div className="max-w-3xl absolute text-center pt-40">
                 <p className="text-2xl">About</p>
-                <p>Predictaball is a game where you are challenged to predict the scores of *every* game that
+                <p>Predictaball is a game where you are challenged to predict the scores of <span className="font-bold">every</span> game that
                 takes place during Euro 2024. The better your predictions are, the more points you will receive.
                 </p>
+                <p>Upcoming games will be displayed for the next 2 match days, come back each day to submit your predictions.</p>
                 <p className="pt-10 text-2xl">The Prize</p>
                 <p>Bragging rights :)</p>
+                <p>Create leagues and invite friends if you want to stake a prize or come up with some forfeits.</p>
 
                 <p className="pt-10 text-2xl">Scoring</p>
                 <p>5 points for a correct score</p>
