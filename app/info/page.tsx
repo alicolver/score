@@ -14,7 +14,7 @@ export default function MoreInfo(): React.JSX.Element {
                 </p>
                 <p>Upcoming games will be displayed for the next 2 match days, come back each day to submit your predictions</p>
                 <p className="pt-10 text-2xl">The Prize</p>
-                <p>Bragging rights &#128512;</p>
+                <p>Bragging rights &#128526;</p>
                 <p>Create leagues and invite friends if you want to stake a prize or come up with some forfeits &#127942;</p>
 
                 <p className="pt-10 text-2xl">Scoring</p>
