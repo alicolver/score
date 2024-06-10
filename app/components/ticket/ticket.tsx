@@ -6,6 +6,7 @@ import {UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
 import {DROP_DOWN, DROP_UP} from "@/app/components/ticket/drop-downs";
 import TeamsHeader from "@/app/components/ticket/teams-header";
+import { LocalTime } from "./local-time";
 
 interface TicketProps {
     match: Match,
@@ -71,7 +72,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                             DATE
                         </div>
                         <div className="text-xs">
-                            {props.match.datetime.toLocaleDateString("en-GB", {timeZone: "Europe/London"}) + " " + props.match.datetime.toLocaleTimeString("en-GB", {timeZone: "Europe/London"})}
+                            <LocalTime date={props.match.datetime}/>
                         </div>
                     </div>
                 </div>
