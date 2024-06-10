@@ -21,7 +21,7 @@ export default function Share({leagueId}: { leagueId: string}): React.JSX.Elemen
     return (
         <>
             <Toaster/>
-            <Button onPress={shareInvite} size="sm" className={BUTTON_CLASS}>Share Invite</Button>
+            <Button onPress={shareInvite} className={BUTTON_CLASS}>Share Invite</Button>
         </>
     )
 }
