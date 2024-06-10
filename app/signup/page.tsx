@@ -141,9 +141,9 @@ export default function SignUp() {
                                 />
                                 {password.length !== 0 &&
                                     <div className="p-2 text-xs">
-                                        <p><span className="font-bold">{containsLowerCase ? "✓" : "•"}</span> At least one lowercase letter</p>
-                                        <p><span className="font-bold">{containsDigit ? "✓" : "•"}</span> At least one digit</p>
-                                        <p><span className="font-bold">{validLength ? "✓" : "•"}</span> At least 6 characters in length</p>
+                                        <p><span className="font-bold" style={containsLowerCase ? {"color": "green"} : {"color": "red"}}>{containsLowerCase ? "✓" : "x"}</span> At least one lowercase letter</p>
+                                        <p><span className="font-bold" style={containsDigit ? {"color": "green"} : {"color": "red"}}>{containsDigit ? "✓" : "x"}</span> At least one digit</p>
+                                        <p><span className="font-bold" style={validLength ? {"color": "green"} : {"color": "red"}}>{validLength ? "✓" : "x"}</span> At least 6 characters in length</p>
                                     </div>
                                 }
                             </div>
