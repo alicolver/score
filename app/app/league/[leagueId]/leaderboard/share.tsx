@@ -16,6 +16,8 @@ export default function Share({leagueId}: { leagueId: string}): React.JSX.Elemen
         })
     }
 
+    if (leagueId === "global") return <></>
+
     return (
         <>
             <Toaster/>
