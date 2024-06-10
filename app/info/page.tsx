@@ -15,12 +15,16 @@ export default function MoreInfo(): React.JSX.Element {
                 <p>Upcoming games will be displayed for the next 2 match days, come back each day to submit your predictions</p>
                 <p className="pt-10 text-2xl">The Prize</p>
                 <p>Bragging rights &#128526;</p>
+
+                <p className="pt-10 text-2xl">Leagues</p>
                 <p>Create leagues and invite friends if you want to stake a prize or come up with some forfeits &#127942;</p>
 
                 <p className="pt-10 text-2xl">Scoring</p>
                 <p>5 points for a correct score &#129306;</p>
                 <p>2 points for a correct result &#9996;</p>
                 <p>&#10024; Look out for an updated scoring system during knockout games &#10024;</p>
+
+                <p className="pt-10 text-xl">Sign up now and start predicting!</p>
             </div>
         </main>
     )
