@@ -8,6 +8,7 @@ import {Button, Input} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import Link from "next/link";
 import {doesContainDigit, doesContainLowerCase} from "@/app/util/regex";
+import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 
 export default function SignUp() {
 
@@ -23,6 +24,9 @@ export default function SignUp() {
     const [containsLowerCase, setContainsLowerCase] = useState(false)
     const [doPasswordsMatch, setDoPasswordsMatch] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
 
     const handleEvent: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault()
@@ -118,11 +122,22 @@ export default function SignUp() {
                             <div>
                                 <Input
                                     onChange={(input) => handlePasswordChange(input.target.value)}
-                                    type="password"
+                                    type={isVisible ? "text" : "password"}
                                     name="password"
                                     id="password"
                                     label="Password"
                                     style={{fontSize: "18px"}}
+                                    endContent={
+                                        <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                                            {isVisible ? (
+                                                <EyeSlashFilledIcon
+                                                    className="text-2xl text-default-400 pointer-events-none"/>
+                                            ) : (
+                                                <EyeFilledIcon
+                                                    className="text-2xl text-default-400 pointer-events-none"/>
+                                            )}
+                                        </button>
+                                    }
                                 />
                                 {password.length !== 0 &&
                                     <div className="p-2 text-xs">
@@ -135,12 +150,23 @@ export default function SignUp() {
                             <div>
                                 <Input
                                     onChange={(input) => handleConfirmPasswordChange(input.target.value)}
-                                    type="password"
+                                    type={isVisible ? "text" : "password"}
                                     name="confirmpassword"
                                     id="confirmpassword"
                                     label="Confirm Password"
                                     isInvalid={!doPasswordsMatch}
                                     style={{fontSize: "18px"}}
+                                    endContent={
+                                        <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+                                            {isVisible ? (
+                                                <EyeSlashFilledIcon
+                                                    className="text-2xl text-default-400 pointer-events-none"/>
+                                            ) : (
+                                                <EyeFilledIcon
+                                                    className="text-2xl text-default-400 pointer-events-none"/>
+                                            )}
+                                        </button>
+                                    }
                                 />
                             </div>
                             <Button
