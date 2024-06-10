@@ -14,6 +14,9 @@ import LiveMatches from "@/app/components/ticket/live-matches";
 
 
 const Home = async () => {
+    const loggedIn = await isLoggedIn()
+    if (!loggedIn) redirect("/login")
+        
     const isUserAdmin = await isAdmin()
 
     return (

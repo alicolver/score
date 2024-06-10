@@ -3,8 +3,13 @@ import Leaderboard from "@/app/components/leaderboard/leaderboard";
 import Link from "next/link";
 import { Button } from "@nextui-org/react";
 import {BackIcon} from "@/app/util/back";
+import { isLoggedIn } from "@/app/auth/jtw-handler";
+import { redirect } from "next/navigation";
 
-export default function Home(): React.JSX.Element {
+export default async function Home(): Promise<React.JSX.Element> {
+    const loggedIn = await isLoggedIn()
+    if (!loggedIn) redirect("/login")
+
     return (
         <>
             <div className="absolute left-4 top-4">

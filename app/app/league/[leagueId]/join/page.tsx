@@ -3,9 +3,14 @@ import {getConfigWithAuthHeader} from "@/app/api/client-config";
 import {redirect} from "next/navigation";
 import { Button, Link } from "@nextui-org/react";
 import { BUTTON_CLASS } from "@/app/util/css-classes";
+import { isLoggedIn } from "@/app/auth/jtw-handler";
 
 export default async function Home({params}: { params: { leagueId: string } }) {
+    const loggedIn = await isLoggedIn()
+    if (!loggedIn) redirect(`/login?leagueId=${params.leagueId}`)
+    
     let joined = false
+    
     try {
         const leagueApi = new LeagueApi(await getConfigWithAuthHeader())
         await leagueApi.joinLeague({ leagueId: params.leagueId })

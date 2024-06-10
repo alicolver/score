@@ -10,7 +10,7 @@ import {BUTTON_CLASS} from "@/app/util/css-classes";
 import {setCookie} from "cookies-next";
 import Link from "next/link";
 
-export default function Login() {
+export default function Login({leagueId}: {leagueId: string | undefined}) {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -37,7 +37,7 @@ export default function Login() {
                 return
             }
             setCookie(TOKEN_COOKIE_KEY, response.idToken, {maxAge: 60 * 60 * 24 * 7})
-            await navigateTo("app")
+            await navigateTo((leagueId !== undefined) ? `app/league/${leagueId}/join`: "app")
         } catch (error) {
             setIsLoading(false)
             setDidFail(true)
