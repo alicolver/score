@@ -4,9 +4,9 @@ import {Header} from "@/app/components/landing-header";
 export default function MoreInfo(): React.JSX.Element {
     return(
         <main
-            className="bg-gray-900 flex flex-col items-center justify-between p-10 h-svh overflow-hidden text-white">
+            className="bg-gray-900 flex flex-col items-center justify-between p-10 min-h-svh overflow-auto text-white">
             <Header/>
-            <div className="max-w-3xl absolute text-center pt-40">
+            <div className="max-w-3xl text-center lg:pt-40 pt-20">
                 <p className="text-2xl">About</p>
                 <p>Predictaball is a game where you are challenged to predict the scores of <span className="font-bold">every</span> game that
                 takes place during Euro 2024 &#9917;</p>
