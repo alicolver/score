@@ -25,7 +25,7 @@ export default async function Tickets(props: TicketsProps): Promise<React.JSX.El
     return (
         <>
             {games.length > 0 && <>
-                <p className="w-full text-center text-white mt-3">{props.title}</p>
+                <p className="w-full text-center text-white text-l font-bold mt-3">{props.title}</p>
                 {games.map((match, index) => {
                     return (<Ticket match={match} key={match.matchId} collapse={index !== 0} filterType={props.filterType}/>)
                 })}

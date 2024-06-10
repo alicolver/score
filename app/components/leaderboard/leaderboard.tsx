@@ -20,11 +20,10 @@ export default function Leaderboard(props: LeaderboardProps): React.JSX.Element 
     }
 
     return (
-        <div className="w-full mx-auto">
-            <div className="w-full max-w-2xl p-5 text-center mx-auto">
-                <Suspense fallback={<LeaderboardEntry entry={{ position: 1, movement: LeaderboardInnerMovementEnum.Unchanged, user: defaultUser }} isUser={false} />}>
-                    <Entries leagueId={props.leagueId} limit={props.limit} />
-                </Suspense>
-            </div></div>
+        <div className="w-full p-5 text-center mx-auto flex flex-col items-center">
+            <Suspense fallback={<LeaderboardEntry entry={{ position: 1, movement: LeaderboardInnerMovementEnum.Unchanged, user: defaultUser }} isUser={false} />}>
+                <Entries leagueId={props.leagueId} limit={props.limit} />
+            </Suspense>
+        </div>
     )
 }

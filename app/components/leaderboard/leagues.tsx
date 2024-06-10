@@ -8,7 +8,7 @@ export default function Leagues(): React.JSX.Element {
     return (
         <div className="w-full mx-auto">
             <div className="w-full max-w-2xl p-4 mb-2 text-center mx-auto">
-                <span className="text-white font-bold text-lg">Your Leagues</span>
+                <span className="text-white font-bold text-l">Your Leagues</span>
                 <div className="w-full flex">
                     <div className="flex w-full justify-around rounded-3xl p-2 text-white">
                         <div className="w-2/3 font-bold">League Name</div>

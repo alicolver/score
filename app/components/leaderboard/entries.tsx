@@ -46,7 +46,7 @@ export default async function Entries(props: EntriesProps): Promise<React.JSX.El
 
     return (
         <>
-            <p className="pb-2 text-white text-xl font-bold">{leaderboardData?.leagueName} Standings</p>
+            <p className="pb-2 text-white text-l font-bold">{leaderboardData?.leagueName} Standings</p>
             {(await leaderboard()).map(x => <LeaderboardEntry
                 key={x.position}
                 entry={x}
