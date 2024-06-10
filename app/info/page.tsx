@@ -9,9 +9,9 @@ export default function MoreInfo(): React.JSX.Element {
             <div className="max-w-3xl absolute text-center pt-40">
                 <p className="text-2xl">About</p>
                 <p>Predictaball is a game where you are challenged to predict the scores of <span className="font-bold">every</span> game that
-                takes place during Euro 2024 &#9917; 
+                takes place during Euro 2024 &#9917;</p>
                 <p>The better your predictions are, the more points you will receive &#128175;</p>
-                </p>
+                
                 <p>Upcoming games will be displayed for the next 2 match days, come back each day to submit your predictions</p>
                 <p className="pt-10 text-2xl">The Prize</p>
                 <p>Bragging rights &#128526;</p>
