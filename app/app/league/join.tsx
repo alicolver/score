@@ -13,9 +13,9 @@ import {
 } from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import {LeagueApi} from "@/client";
-import {getConfigWithAuthHeader} from "@/app/api/client-config";
 import {PressEvent} from "@react-types/shared";
-import toast from "react-hot-toast";
+import { getConfigWithAuthHeaderClient } from "@/app/api/client-config-client-side";
+import { navigateTo } from "@/app/actions";
 
 export default function JoinLeague(): React.JSX.Element {
 
@@ -28,7 +28,7 @@ export default function JoinLeague(): React.JSX.Element {
     async function join(): Promise<boolean> {
         setIsLoading(true)
         try {
-            const leagueApi = new LeagueApi(await getConfigWithAuthHeader())
+            const leagueApi = new LeagueApi(await getConfigWithAuthHeaderClient())
             await leagueApi.joinLeague({leagueId: leagueId})
             setDidFail(false)
             setIsLoading(false)
@@ -44,7 +44,7 @@ export default function JoinLeague(): React.JSX.Element {
         return (_: PressEvent) => {
             join().then(r => {
                 if (r) {
-                    toast.success("Joined League Successfully")
+                    navigateTo(`app/league/${leagueId}/leaderboard`)
                     onClose()
                 }
             })
