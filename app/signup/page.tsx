@@ -70,7 +70,7 @@ export default function SignUp({
     function handleEmailChange(val: string): void {
         const lowerCaseEmail = val.toLowerCase()
         setEmail(lowerCaseEmail)
-        setValidEmail(emailRegex.test(email))
+        setValidEmail(emailRegex.test(lowerCaseEmail))
     }
 
     function isFormInvalid(): boolean {
