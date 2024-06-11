@@ -1,34 +1,41 @@
-import {getUserId} from "@/app/auth/jtw-handler";
-import {getConfigWithAuthHeader} from "@/app/api/client-config";
-import {League, UserApi} from "@/client";
-import {getPositionForLeague} from "@/app/app/league/get-position-for-league";
-import React from "react";
+'use client'
+
+import {Configuration, League, UserApi} from "@/client";
+import React, {useEffect, useState} from "react";
 import LeagueComponent from "@/app/components/leaderboard/league";
+import {getConfigWithAuthHeaderClient} from "@/app/api/client-config-client-side";
 
-export default async function YourLeaguesFetch(): Promise<React.JSX.Element> {
+export default function YourLeaguesFetch(): React.JSX.Element {
 
-    const userId = getUserId()
-    const config = await getConfigWithAuthHeader()
+    const [leagues, setLeagues] = useState<League[]>([])
+    const [config, setConfig] = useState<Configuration | undefined>(undefined)
 
-    async function getLeagues(): Promise<League[]> {
-        try {
-            const userClient = new UserApi(config)
-            return await userClient.getUserLeagues()
-        } catch (error) {
-            console.log(error)
-            return []
-        }
-    }
+    useEffect(() => {
+            try {
+                getConfigWithAuthHeaderClient().then(
+                    config => {
+                        setConfig(config)
+                        const client = new UserApi(config)
+                        client.getUserLeagues().then(
+                            result => setLeagues(result)
+                        )
+                    }
+                )
+            } catch (error) {
+                console.log(error)
+                setLeagues([])
+            }
+        }, []
+    )
 
-    return(
+    return (
         <>
-            {(await getLeagues()).map(async league => {
-                    const position = await getPositionForLeague(league.leagueId, config, userId)
+            {leagues.map(league => {
                     return <LeagueComponent
                         key={league.leagueId}
                         leagueId={league.leagueId}
                         leagueName={league.name}
-                        position={position}
+                        config={config}
                     />
                 }
             )}

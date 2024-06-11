@@ -1,7 +1,7 @@
 import {cookies} from "next/headers";
 import {TOKEN_COOKIE_KEY} from "@/app/api/api";
 import {jwtDecode} from "jwt-decode";
-import { CognitoJwtVerifier } from "aws-jwt-verify";
+import {CognitoJwtVerifier} from "aws-jwt-verify";
 
 export function getUserId(): string | undefined {
     try {
