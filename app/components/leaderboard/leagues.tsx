@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, {Suspense} from "react";
 import JoinLeague from "@/app/app/league/join";
 import CreateLeague from "@/app/app/league/create";
 import YourLeaguesFetch from "@/app/components/leaderboard/your-leagues-fetch";
@@ -17,12 +17,10 @@ export default function Leagues(): React.JSX.Element {
                         </div>
                     </div>
                 </div>
-                <Suspense fallback={<LeagueComponent leagueId={"loading"} leagueName={"loading"} position={0} />}>
-                    <YourLeaguesFetch />
-                </Suspense>
+                <YourLeaguesFetch/>
                 <div className="flex justify-around">
-                    <CreateLeague />
-                    <JoinLeague />
+                    <CreateLeague/>
+                    <JoinLeague/>
                 </div>
             </div>
         </div>

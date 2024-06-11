@@ -30,15 +30,17 @@ export default function YourLeaguesFetch(): React.JSX.Element {
 
     return (
         <>
-            {leagues.map(league => {
-                    return <LeagueComponent
-                        key={league.leagueId}
-                        leagueId={league.leagueId}
-                        leagueName={league.name}
-                        config={config}
-                    />
-                }
-            )}
+            {leagues.length === 0
+                ? <LeagueComponent leagueId={"loading"} leagueName={"loading"} config={undefined}/>
+                : leagues.map(league => {
+                        return <LeagueComponent
+                            key={league.leagueId}
+                            leagueId={league.leagueId}
+                            leagueName={league.name}
+                            config={config}
+                        />
+                    }
+                )}
         </>
     )
 
