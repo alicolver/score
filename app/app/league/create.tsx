@@ -15,8 +15,7 @@ import React, {useState} from "react";
 import {LeagueApi} from "@/client";
 import {PressEvent} from "@react-types/shared";
 import {getConfigWithAuthHeaderClient} from "@/app/api/client-config-client-side";
-import {copyToClipboard} from "@/app/util/clipboard";
-import toast from "react-hot-toast";
+import { navigateTo } from "@/app/actions";
 
 export default function CreateLeague(): React.JSX.Element {
 
@@ -49,14 +48,7 @@ export default function CreateLeague(): React.JSX.Element {
         return (_: PressEvent) => {
             createLeague().then(leagueId => {
                 if (leagueId !== undefined) {
-                    copyToClipboard(`https://www.predictaball.live/app/league/${leagueId}/join`)
-                        .then(didCopy => {
-                            if (didCopy) {
-                                toast.success("League Created and Copied Join Link To Clipboard", {duration: 4000})
-                            } else {
-                                toast("League Created Successfully", {duration: 3000})
-                            }
-                        })
+                    navigateTo(`app/league/${leagueId}/leaderboard`)
                     onClose()
                 }
             })
