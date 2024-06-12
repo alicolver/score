@@ -17,9 +17,12 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
 
     const [currentPage, setCurrentPage] = useState(0)
     const windowsSize = useWindowDimensions()
-    const itemsPerPage = windowsSize.height !== undefined ? Math.max((Math.round(windowsSize.height / 100)) - 1, 1) : 10;
+    const itemsPerPage = windowsSize.height !== undefined ? Math.max((Math.round(windowsSize.height / 100)) - 1, 1) : 10
 
     const getPaginatedLeaderboard = (leaderboard: any[]) => {
+        if (!props.shouldPaginate) {
+            return leaderboard
+        }
         const startIndex = currentPage * itemsPerPage;
         return leaderboard.slice(startIndex, startIndex + itemsPerPage);
     };
