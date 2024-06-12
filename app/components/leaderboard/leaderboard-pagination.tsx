@@ -40,10 +40,6 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
                         classNames={{
                             cursor: BUTTON_CLASS,
                             item: "bg-transparent text-white hover:text-black",
-                            //prev: "bg-transparent white",
-                            //next: "bg-transparent white",
-                            //forwardIcon: "white",
-                            //chevronNext: "white"
                         }}
             />}
     </>
