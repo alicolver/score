@@ -34,7 +34,7 @@ const Home = async () => {
                 <LiveMatches />
                 <MatchesToPredict />
                 <Dashboard />
-                <Leaderboard leagueId={"global"} limit={true} />
+                <Leaderboard shouldPaginate={false} leagueId={"global"} limit={true} />
             </div>
         </main>
     );

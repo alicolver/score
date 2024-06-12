@@ -6,7 +6,8 @@ import { capitalizeFirstLetter } from "@/app/util/text";
 
 interface LeaderboardProps {
     leagueId: string,
-    limit: boolean
+    limit: boolean,
+    shouldPaginate: boolean
 }
 
 export default function Leaderboard(props: LeaderboardProps): React.JSX.Element {
@@ -22,7 +23,7 @@ export default function Leaderboard(props: LeaderboardProps): React.JSX.Element 
     return (
         <div className="w-full p-5 text-center mx-auto flex flex-col items-center">
             <Suspense fallback={<LeaderboardEntry entry={{ position: 1, movement: LeaderboardInnerMovementEnum.Unchanged, user: defaultUser }} isUser={false} />}>
-                <Entries leagueId={props.leagueId} limit={props.limit} />
+                <Entries shouldPaginate={props.shouldPaginate} leagueId={props.leagueId} limit={props.limit} />
             </Suspense>
         </div>
     )

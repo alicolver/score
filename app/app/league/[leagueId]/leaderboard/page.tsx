@@ -31,7 +31,7 @@ export default async function Home({ params }: { params: { leagueId: string } })
                     </div>
                 </div>
                 <div className="p-2 w-full bg-gray-900 flex flex-col items-center">
-                    <Leaderboard leagueId={params.leagueId} limit={false} />
+                    <Leaderboard shouldPaginate={true} leagueId={params.leagueId} limit={false} />
                 </div>
             </div>
         </div>

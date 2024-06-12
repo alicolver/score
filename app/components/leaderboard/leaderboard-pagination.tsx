@@ -10,6 +10,7 @@ import useWindowDimensions from "@/app/hooks/use-window-dimension";
 interface LeaderboardPaginationProps {
     leaderboardInners: LeaderboardInner[]
     userId: string | undefined
+    shouldPaginate: boolean
 }
 
 export default function LeaderboardPagination(props: LeaderboardPaginationProps): React.JSX.Element {
@@ -17,7 +18,6 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
     const [currentPage, setCurrentPage] = useState(0)
     const windowsSize = useWindowDimensions()
     const itemsPerPage = windowsSize.height !== undefined ? Math.max((Math.round(windowsSize.height / 100)) - 1, 1) : 10;
-    console.log(itemsPerPage)
 
     const getPaginatedLeaderboard = (leaderboard: any[]) => {
         const startIndex = currentPage * itemsPerPage;
@@ -38,7 +38,7 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
                 isUser={entry.user.userId === props.userId}
             />
         ))}
-        {totalPages > 1 &&
+        {props.shouldPaginate &&
             <Pagination showControls radius="full" total={totalPages} initialPage={1} onChange={handlePageChange}
                         className="fixed bottom-4"
                         classNames={{

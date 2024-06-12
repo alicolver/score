@@ -7,7 +7,8 @@ import LeaderboardPagination from "./leaderboard-pagination";
 
 export interface EntriesProps {
     leagueId: string,
-    limit: boolean
+    limit: boolean,
+    shouldPaginate: boolean
 }
 
 export default async function Entries(props: EntriesProps): Promise<React.JSX.Element> {
@@ -47,7 +48,7 @@ export default async function Entries(props: EntriesProps): Promise<React.JSX.El
     return (
         <>
             <p className="pb-2 text-white text-l font-bold">{leaderboardData?.leagueName} Standings</p>
-            <LeaderboardPagination leaderboardInners={await leaderboard()} userId={userId}/>
+            <LeaderboardPagination shouldPaginate={props.shouldPaginate} leaderboardInners={await leaderboard()} userId={userId}/>
         </>
     )
 }
