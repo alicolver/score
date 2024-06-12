@@ -1,9 +1,9 @@
-import LeaderboardEntry from "@/app/components/leaderboard/leaderboard-entry";
 import React from "react";
 import {GetLeagueLeaderboard200Response, LeagueApi} from "@/client";
 import {getConfigWithAuthHeader} from "@/app/api/client-config";
 import {filterWithContext} from "@/app/util/array";
 import {getUserId} from "@/app/auth/jtw-handler";
+import LeaderboardPagination from "./leaderboard-pagination";
 
 export interface EntriesProps {
     leagueId: string,
@@ -47,11 +47,7 @@ export default async function Entries(props: EntriesProps): Promise<React.JSX.El
     return (
         <>
             <p className="pb-2 text-white text-l font-bold">{leaderboardData?.leagueName} Standings</p>
-            {(await leaderboard()).map(x => <LeaderboardEntry
-                key={x.position}
-                entry={x}
-                isUser={x.user.userId === userId}
-            />)}
+            <LeaderboardPagination leaderboardInners={await leaderboard()} userId={userId}/>
         </>
     )
 }
