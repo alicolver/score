@@ -7,6 +7,8 @@ import Share from "./share";
 import {isLoggedIn} from "@/app/auth/jtw-handler";
 import {redirect} from "next/navigation";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
+import Leave from "./leave";
+
 
 export default async function Home({ params }: { params: { leagueId: string } }): Promise<React.JSX.Element> {
     const loggedIn = await isLoggedIn()
@@ -24,6 +26,7 @@ export default async function Home({ params }: { params: { leagueId: string } })
                         </Link>
                     </div>
                     <div>
+                        <Leave leagueId={params.leagueId}/>
                         <Share leagueId={params.leagueId} />
                     </div>
                 </div>
