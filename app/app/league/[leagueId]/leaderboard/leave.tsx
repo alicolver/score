@@ -15,7 +15,7 @@ export default function Leave({leagueId}: { leagueId: string}): React.JSX.Elemen
         setIsLoading(true)
         try {
             const leagueApi = new LeagueApi(await getConfigWithAuthHeaderClient())
-            await leagueApi.leaveLeague({leagueId: "test"})
+            await leagueApi.leaveLeague({leagueId: leagueId})
             setIsLoading(false)
             toast.success("Left league")
             navigateTo(`app/`)
@@ -28,9 +28,9 @@ export default function Leave({leagueId}: { leagueId: string}): React.JSX.Elemen
     if (leagueId === "global") return <></>
 
     return (
-        <>
+        <div className="mr-2">
             <Toaster/>
-            <Button onPress={leaveLeague} color="danger" isLoading={isLoading}>Leave League</Button>
-        </>
+            <Button className="flex-row" onPress={leaveLeague} color="danger" isLoading={isLoading}>Leave League</Button>
+        </div>
     )
 }

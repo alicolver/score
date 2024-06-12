@@ -1,8 +1,8 @@
 import React from "react";
 import Leaderboard from "@/app/components/leaderboard/leaderboard";
 import Link from "next/link";
-import {Button} from "@nextui-org/react";
-import {BackIcon} from "@/app/util/back";
+import { Button } from "@nextui-org/react";
+import { BackIcon } from "@/app/util/back";
 import Share from "./share";
 import {isLoggedIn} from "@/app/auth/jtw-handler";
 import {redirect} from "next/navigation";
@@ -25,7 +25,7 @@ export default async function Home({ params }: { params: { leagueId: string } })
                             </Button>
                         </Link>
                     </div>
-                    <div>
+                    <div className="flex justify-around">
                         <Leave leagueId={params.leagueId}/>
                         <Share leagueId={params.leagueId} />
                     </div>
