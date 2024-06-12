@@ -16,7 +16,7 @@ export default async function Home({ params }: { params: { leagueId: string } })
         <div className="min-h-svh bg-gray-900">
             <div className="w-full max-w-4xl mx-auto relative">
                 <div className="flex justify-between p-4">
-                    <div className="absolute">
+                    <div>
                         <Link href="/app">
                             <Button isIconOnly className={BUTTON_CLASS}>
                                 <BackIcon  />
