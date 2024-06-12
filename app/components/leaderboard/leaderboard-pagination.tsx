@@ -16,7 +16,8 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
 
     const [currentPage, setCurrentPage] = useState(0)
     const windowsSize = useWindowDimensions()
-    const itemsPerPage = windowsSize.height !== undefined ? Math.max(windowsSize.height / 100 - 1, 1) : 10;
+    const itemsPerPage = windowsSize.height !== undefined ? Math.max((Math.round(windowsSize.height / 100)) - 1, 1) : 10;
+    console.log(itemsPerPage)
 
     const getPaginatedLeaderboard = (leaderboard: any[]) => {
         const startIndex = currentPage * itemsPerPage;
@@ -39,6 +40,7 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
         ))}
         {totalPages > 1 &&
             <Pagination showControls radius="full" total={totalPages} initialPage={1} onChange={handlePageChange}
+                        className="fixed bottom-4"
                         classNames={{
                             cursor: BUTTON_CLASS,
                             item: "bg-transparent text-white hover:text-black"
