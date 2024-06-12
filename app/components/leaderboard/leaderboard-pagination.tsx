@@ -39,7 +39,7 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
             <Pagination showControls radius="full" total={totalPages} initialPage={1} onChange={handlePageChange}
                         classNames={{
                             cursor: BUTTON_CLASS,
-                            item: "bg-transparent text-white hover:text-black",
+                            item: "bg-transparent text-white hover:text-black"
                         }}
             />}
     </>
