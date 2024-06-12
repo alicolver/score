@@ -41,7 +41,7 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
                 isUser={entry.user.userId === props.userId}
             />
         ))}
-        {props.shouldPaginate &&
+        {props.shouldPaginate && totalPages > 1 &&
             <Pagination showControls radius="full" total={totalPages} initialPage={1} onChange={handlePageChange}
                         className="fixed bottom-4"
                         classNames={{
