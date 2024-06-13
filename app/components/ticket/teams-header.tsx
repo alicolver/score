@@ -10,11 +10,11 @@ interface TeamsHeaderProps {
 }
 
 export default function TeamsHeader(props: TeamsHeaderProps) {
-    return <div className="w-full">
+    return <div className="w-full relative">
         <PointsOnTop prediction={props.match.prediction}/>
         <LivePulse matchState={props.match.state}/>
         <div className="flex justify-around"
-             style={{opacity: props.match.prediction?.points === undefined ? "100%" : "30%"}}
+             style={{opacity: props.match.prediction?.points === undefined ? "100%" : "50%"}}
         >
             <div className="content-center">
                 <div style={getClippedTextForTeam(getFlagUrlForCountry(props.match.homeTeam))}>

@@ -7,10 +7,14 @@ interface PointsOnTopProps {
 
 export default function PointsOnTop(props: PointsOnTopProps) {
     return <div
-        className="absolute mt-4 z-40"
+        className="w-full absolute text-center mt-1 z-40"
         style={{
             visibility: props.prediction?.points === undefined ? "hidden" : "visible"
         }}>
-        <span className="font-bold text-7xl text-gray-900">{props.prediction?.points}</span>
+        <span
+            className="font-bold text-8xl bg-gradient-to-r from-blue-600 to-green-300 inline-block text-transparent bg-clip-text"
+        >
+            {props.prediction?.points}
+        </span>
     </div>
 }
