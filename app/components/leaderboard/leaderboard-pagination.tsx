@@ -46,7 +46,7 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
                         className="fixed bottom-4"
                         classNames={{
                             cursor: BUTTON_CLASS,
-                            item: "bg-transparent text-white hover:text-black"
+                            item: "bg-transparent text-white hover:text-black hover:bg-white"
                         }}
             />}
     </>
