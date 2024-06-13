@@ -7,7 +7,7 @@ export default function LiveMatches(): React.JSX.Element {
     return (
         <div className="flex flex-wrap w-full content-center justify-center">
             <Suspense fallback={<></>}>
-                <Tickets title={"Live Matches"} filterType={ListMatchesFilterTypeEnum.Live}/>
+                <Tickets title={"Live Matches"} showInfoButton={false} filterType={ListMatchesFilterTypeEnum.Live}/>
             </Suspense>
         </div>
     )

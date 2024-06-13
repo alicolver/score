@@ -2,10 +2,12 @@ import Ticket from "@/app/components/ticket/ticket";
 import React from "react";
 import {ListMatchesFilterTypeEnum, Match, MatchApi} from "@/client";
 import {getConfigWithAuthHeader} from "@/app/api/client-config";
+import {MatchesHeader} from "@/app/components/ticket/matches-header";
 
 interface TicketsProps {
     title: string,
-    filterType: ListMatchesFilterTypeEnum
+    filterType: ListMatchesFilterTypeEnum,
+    showInfoButton: boolean
 }
 
 export default async function Tickets(props: TicketsProps): Promise<React.JSX.Element> {
@@ -25,9 +27,10 @@ export default async function Tickets(props: TicketsProps): Promise<React.JSX.El
     return (
         <>
             {games.length > 0 && <>
-                <p className="w-full text-center text-white text-l font-bold mt-3">{props.title}</p>
+                <MatchesHeader showInfoButton={props.showInfoButton} title={props.title}/>
                 {games.map((match, index) => {
-                    return (<Ticket match={match} key={match.matchId} collapse={index !== 0} filterType={props.filterType}/>)
+                    return (<Ticket match={match} key={match.matchId} collapse={index !== 0}
+                                    filterType={props.filterType}/>)
                 })}
             </>
             }

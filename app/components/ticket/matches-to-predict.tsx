@@ -7,7 +7,7 @@ export default function MatchesToPredict(): React.JSX.Element {
     return (
         <div className="flex flex-wrap w-full content-center justify-center">
             <Suspense fallback={<EmptyTicket />}>
-                <Tickets title={"Upcoming Matches"} filterType={ListMatchesFilterTypeEnum.Upcoming}/>
+                <Tickets title={"Upcoming Matches"} showInfoButton={true} filterType={ListMatchesFilterTypeEnum.Upcoming}/>
             </Suspense>
         </div>
     )
