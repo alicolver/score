@@ -70,8 +70,8 @@ export default function Entry(props: EntryProps): React.JSX.Element {
     function getPredictionOrSubmitButton() {
         return !isUpcoming ? (props.match.prediction !== undefined &&
                 <div className="text-center">
-                    <p className="text-white text-sm">Prediction</p>
-                    <p className="text-white text-sm">{props.match.prediction?.homeScore}{props.match.prediction?.awayScore}</p>
+                    <p className="text-white text-sm">Live Score</p>
+                    <p className="text-white text-sm">{props.match.homeScore}-{props.match.awayScore}</p>
                 </div>
             )
             : (
@@ -95,7 +95,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     <div className={Styles.inputBox}>
                         <input
                             type="text"
-                            value={isUpcoming ? homeScore : props.match.homeScore}
+                            value={isUpcoming ? homeScore : props.match.prediction?.homeScore}
                             onChange={handleHomeScore}
                             maxLength={1}
                             placeholder={"_"}
@@ -104,7 +104,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     </div>
                     <div className={Styles.inputBox}>
                         <input type="text"
-                               value={isUpcoming ? awayScore : props.match.awayScore}
+                               value={isUpcoming ? awayScore : props.match.prediction?.awayScore}
                                onChange={handleAwayScore}
                                maxLength={1}
                                placeholder={"_"}
