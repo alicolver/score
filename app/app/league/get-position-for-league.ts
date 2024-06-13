@@ -11,7 +11,7 @@ export async function getPositionForLeague(
 
     try {
         const leagueClient = new LeagueApi(config)
-        const league = await leagueClient.getLeagueLeaderboard({ leagueId: leagueId })
+        const league = await leagueClient.getLeagueLeaderboard({ leagueId: leagueId, pageSize: "200" })
         const position = league
             .leaderboard
             .find(entry => entry.user.userId === userId)

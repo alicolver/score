@@ -18,7 +18,7 @@ export default async function Entries(props: EntriesProps): Promise<React.JSX.El
     async function getLeaderboard(): Promise<GetLeagueLeaderboard200Response | undefined> {
         try {
             const leagueApi = new LeagueApi(await getConfigWithAuthHeader())
-            return await leagueApi.getLeagueLeaderboard({leagueId: props.leagueId})
+            return await leagueApi.getLeagueLeaderboard({leagueId: props.leagueId, pageSize: "200"})
         } catch (error) {
             return undefined
         }
