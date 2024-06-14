@@ -1,12 +1,10 @@
-import { getConfigWithAuthHeader } from "@/app/api/client-config"
-import { MatchesHeader } from "@/app/components/ticket/matches-header"
+import {getConfigWithAuthHeader} from "@/app/api/client-config"
+import {MatchesHeader} from "@/app/components/ticket/matches-header"
 import Ticket from "@/app/components/ticket/ticket"
-import { BackIcon } from "@/app/util/back"
-import { BUTTON_CLASS } from "@/app/util/css-classes"
-import { ListMatchesFilterTypeEnum, Match, MatchApi } from "@/client"
-import { Button } from "@nextui-org/react"
-import Link from "next/link"
-import { redirect } from "next/navigation"
+import {ListMatchesFilterTypeEnum, Match, MatchApi} from "@/client"
+import {redirect} from "next/navigation"
+import BackButton from "@/app/components/back-button";
+import React from "react";
 
 export default async function Home({
     params,
@@ -46,11 +44,7 @@ export default async function Home({
             <div className="w-full max-w-4xl mx-auto relative">
                 <div className="flex justify-between p-4">
                     <div>
-                        <Link href="/app">
-                            <Button isIconOnly className={BUTTON_CLASS}>
-                                <BackIcon />
-                            </Button>
-                        </Link>
+                        <BackButton/>
                     </div>
                 </div>
                 <div className="p-2 w-full bg-gray-900 flex flex-col items-center">
