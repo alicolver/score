@@ -25,6 +25,7 @@ export default function SignUp({
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(true)
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [validLength, setIsValidLength] = useState(false)
     const [containsDigit, setContainsDigit] = useState(false)
     const [containsLowerCase, setContainsLowerCase] = useState(false)
@@ -61,10 +62,12 @@ export default function SignUp({
         setContainsDigit(doesContainDigit(val))
         setContainsLowerCase(doesContainLowerCase(val))
         setPassword(val)
+        setDoPasswordsMatch(val === confirmPassword)
     }
 
     function handleConfirmPasswordChange(val: string): void {
         setDoPasswordsMatch(val === password)
+        setConfirmPassword(val)
     }
 
     function handleEmailChange(val: string): void {
