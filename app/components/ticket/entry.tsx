@@ -150,7 +150,9 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                         <p className="text-white text-sm">
                             {entryState === EntryState.LIVE ? "Live" : "Final" + " Score"}
                         </p>
-                        <p className="text-white text-sm">{props.match.homeScore} - {props.match.awayScore}</p>
+                        <p className="text-white text-sm">
+                            {props.match.homeScore} - {props.match.awayScore}
+                        </p>
                     </div>
                 )
             case EntryState.UPCOMING:
