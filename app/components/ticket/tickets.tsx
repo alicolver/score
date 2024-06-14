@@ -35,7 +35,6 @@ export default async function Tickets(props: TicketsProps): Promise<React.JSX.El
                             match={match} 
                             key={match.matchId} 
                             collapse={index !== 0}
-                            filterType={props.filterType}
                             admin={props.admin}
                         />
                     )

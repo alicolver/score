@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from "react";
-import {ListMatchesFilterTypeEnum, Match, MatchRoundEnum} from "@/client";
+import {Match, MatchRoundEnum} from "@/client";
 import {UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
 import {DROP_DOWN, DROP_UP} from "@/app/components/ticket/drop-downs";
@@ -11,7 +11,6 @@ import { LocalTime } from "./local-time";
 interface TicketProps {
     match: Match,
     collapse: boolean,
-    filterType: ListMatchesFilterTypeEnum,
     admin: boolean
 }
 

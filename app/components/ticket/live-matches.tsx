@@ -1,6 +1,5 @@
 import React, {Suspense} from "react";
 import Tickets from "@/app/components/ticket/tickets";
-import EmptyTicket from "@/app/components/ticket/empty-ticket";
 import {ListMatchesFilterTypeEnum} from "@/client";
 
 export default function LiveMatches(props: {admin: boolean}): React.JSX.Element {
