@@ -2,6 +2,7 @@ import {cookies} from "next/headers";
 import {TOKEN_COOKIE_KEY} from "@/app/api/api";
 import {jwtDecode} from "jwt-decode";
 import {CognitoJwtVerifier} from "aws-jwt-verify";
+import { JwtPayload } from "aws-jwt-verify/jwt-model"
 
 export function getUserId(): string | undefined {
     try {
@@ -10,6 +11,19 @@ export function getUserId(): string | undefined {
             return undefined
         }
         return jwtDecode(token).sub
+    } catch (error) {
+        console.log(error)
+        return undefined
+    }
+}
+
+export function getToken(): JwtPayload | undefined {
+    try {
+        const token: string | undefined = cookies().get(TOKEN_COOKIE_KEY)?.value
+        if (token === undefined) {
+            return undefined
+        }
+        return jwtDecode(token)
     } catch (error) {
         console.log(error)
         return undefined

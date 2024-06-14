@@ -4,13 +4,14 @@ import MatchesToPredict from "@/app/components/ticket/matches-to-predict";
 import Link from "next/link";
 import SignOutButton from "@/app/components/sign-out-button";
 import Dashboard from "@/app/components/leaderboard/dashboard";
-import { isAdmin, isLoggedIn } from "../auth/jtw-handler";
+import { getUserId, isAdmin, isLoggedIn } from "../auth/jtw-handler";
 import { redirect } from "next/navigation";
 import { Button } from "@nextui-org/react";
 import { BUTTON_CLASS } from "../util/css-classes";
 import HeadlineSuspense from "@/app/components/points/headline-suspense";
 import { Toaster } from "react-hot-toast";
 import LiveMatches from "@/app/components/ticket/live-matches";
+import LinkToHistory from "@/app/components/link-to-history"
 
 
 const Home = async () => {
@@ -33,6 +34,7 @@ const Home = async () => {
                 <HeadlineSuspense />
                 <LiveMatches admin={false} />
                 <MatchesToPredict />
+                <LinkToHistory/>
                 <Dashboard />
                 <Leaderboard shouldPaginate={false} leagueId={"global"} limit={true} />
             </div>
