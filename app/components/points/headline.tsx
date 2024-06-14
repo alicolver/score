@@ -39,7 +39,7 @@ export default async function Headline(): Promise<React.JSX.Element> {
                 <div className="w-1/3">
                     <div className="flex-row">
                         <div className="font-bold text-white mb-1">Points</div>
-                        <div className="text-5xl rounded bg-gray-100 h-24 content-center"><CountUpWrapped end={fetchedData?.fixedPoints || 0} /></div>
+                        <div className="text-5xl rounded bg-gray-100 h-24 content-center"><CountUpWrapped end={(fetchedData?.fixedPoints || 0) + (fetchedData?.livePoints || 0)} /></div>
                     </div>
                 </div>
                 <div className="w-1/5">
