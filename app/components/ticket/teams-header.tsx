@@ -6,12 +6,13 @@ import {getFlagUrlForCountry} from "@/app/util/flag";
 import {COUNTRY_CODES} from "@/app/util/teams";
 
 interface TeamsHeaderProps {
-    match: Match
+    match: Match,
+    showPoints: boolean
 }
 
 export default function TeamsHeader(props: TeamsHeaderProps) {
     return <div className="w-full relative">
-        <PointsOnTop prediction={props.match.prediction}/>
+        {props.showPoints && <PointsOnTop prediction={props.match.prediction}/>}
         <LivePulse matchState={props.match.state}/>
         <div className="flex justify-around"
              style={{opacity: props.match.prediction?.points === undefined ? "100%" : "50%"}}

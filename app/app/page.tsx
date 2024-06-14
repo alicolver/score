@@ -31,7 +31,7 @@ const Home = async () => {
                 </div>}
                 <p className="text-xl font-bold mt-4 text-white text-center">PREDICTABALL</p>
                 <HeadlineSuspense />
-                <LiveMatches />
+                <LiveMatches admin={false} />
                 <MatchesToPredict />
                 <Dashboard />
                 <Leaderboard shouldPaginate={false} leagueId={"global"} limit={true} />

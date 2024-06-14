@@ -11,11 +11,11 @@ import { LocalTime } from "./local-time";
 interface TicketProps {
     match: Match,
     collapse: boolean,
-    filterType: ListMatchesFilterTypeEnum
+    filterType: ListMatchesFilterTypeEnum,
+    admin: boolean
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
-
     const [collapse, setCollapse] = useState<boolean>(props.collapse)
 
     const RoundToString: Map<MatchRoundEnum, string> = new Map([
@@ -31,7 +31,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200"
                  style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
-                    <TeamsHeader match={props.match}/>
+                    <TeamsHeader match={props.match} showPoints={!props.admin}/>
                 </div>
                 <div className={"w-full flex justify-center content-center items-center animate-bounce"}
                      style={{marginTop: "-25px"}}>
@@ -79,7 +79,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
             </div>}
             <div
                 className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
-                <Entry match={props.match}/>
+                <Entry match={props.match} admin={props.admin}/>
             </div>
         </div>
     )

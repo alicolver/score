@@ -7,7 +7,8 @@ import {MatchesHeader} from "@/app/components/ticket/matches-header";
 interface TicketsProps {
     title: string,
     filterType: ListMatchesFilterTypeEnum,
-    showInfoButton: boolean
+    showInfoButton: boolean,
+    admin: boolean
 }
 
 export default async function Tickets(props: TicketsProps): Promise<React.JSX.Element> {
@@ -29,8 +30,15 @@ export default async function Tickets(props: TicketsProps): Promise<React.JSX.El
             {games.length > 0 && <>
                 <MatchesHeader showInfoButton={props.showInfoButton} title={props.title}/>
                 {games.map((match, index) => {
-                    return (<Ticket match={match} key={match.matchId} collapse={index !== 0}
-                                    filterType={props.filterType}/>)
+                    return (
+                        <Ticket 
+                            match={match} 
+                            key={match.matchId} 
+                            collapse={index !== 0}
+                            filterType={props.filterType}
+                            admin={props.admin}
+                        />
+                    )
                 })}
             </>
             }
