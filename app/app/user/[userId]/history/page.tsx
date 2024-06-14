@@ -31,7 +31,8 @@ export default async function Home({
                 userId: params.userId
             })
             const completed: Match[] = await matchApi.listMatches({
-                filterType: ListMatchesFilterTypeEnum.Completed
+                filterType: ListMatchesFilterTypeEnum.Completed,
+                userId: params.userId
             })
             return [...liveMatches, ...completed]
         } catch (error) {
