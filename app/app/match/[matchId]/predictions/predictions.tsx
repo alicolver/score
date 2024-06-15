@@ -43,7 +43,10 @@ export default function Predictions(
                     .getMatchPredictions({
                         matchId: props.matchId,
                         leagueId: leagueId
-                    }).then(preds =>  setPredictions(preds))
+                    }).then(preds =>  {
+                        setPredictions(preds)
+                        setCurrentPage(0)
+                    })
                 })
         } catch (error) {
             console.log(error)
