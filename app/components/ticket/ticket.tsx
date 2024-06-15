@@ -12,7 +12,7 @@ interface TicketProps {
     match: Match,
     collapse: boolean,
     admin: boolean,
-    forMatchDataPage?: boolean
+    forPredictionPage?: boolean
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
@@ -77,10 +77,10 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
                     </div>
                 </div>
             </div>}
-            {(props.forMatchDataPage === undefined || !props.forMatchDataPage) && <div
+            <div
                 className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
-                <Entry match={props.match} admin={props.admin}/>
-            </div>}
+                <Entry match={props.match} admin={props.admin} forPredictionPage={props.forPredictionPage}/>
+            </div>
         </div>
     )
 }

@@ -13,7 +13,8 @@ import {navigateTo} from "@/app/actions";
 
 interface EntryProps {
     match: Match,
-    admin: boolean
+    admin: boolean,
+    forPredictionPage?: boolean
 }
 
 enum EntryState {
@@ -147,7 +148,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
         switch (entryState) {
             case EntryState.LIVE:
             case EntryState.ENDED:
-                return (
+                return !props.forPredictionPage && (
                     <>
                         <div className="text-center">
                             <p className="text-white text-sm">
@@ -163,7 +164,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                                     size="sm"
                                     onClick={() => {
                                         setIsNavigatingToMatchPage(true)
-                                        navigateTo(`/app/match/${props.match.matchId}/predictions`)
+                                        navigateTo(`app/match/${props.match.matchId}/predictions`)
                                     }}
                             >
                                 View Predictions
@@ -219,7 +220,9 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     <div className={Styles.inputBox}>
                         <input
                             type="text"
-                            value={canInput ? homeScore : props.match.prediction?.homeScore}
+                            value={props.forPredictionPage 
+                                ? props.match.homeScore 
+                                : (canInput ? homeScore : props.match.prediction?.homeScore)}
                             onChange={handleHomeScore}
                             maxLength={1}
                             placeholder={"_"}
@@ -228,7 +231,10 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     </div>
                     <div className={Styles.inputBox}>
                         <input type="text"
-                               value={canInput ? awayScore : props.match.prediction?.awayScore}
+                               value={
+                                props.forPredictionPage 
+                                ? props.match.awayScore
+                                : (canInput ? awayScore : props.match.prediction?.awayScore)}
                                onChange={handleAwayScore}
                                maxLength={1}
                                placeholder={"_"}
