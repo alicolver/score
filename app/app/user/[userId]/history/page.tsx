@@ -35,7 +35,10 @@ export default async function Home({
                 filterType: ListMatchesFilterTypeEnum.Completed,
                 userId: params.userId
             })
-            return [...liveMatches, ...completed]
+            return [
+                ...liveMatches,
+                ...completed.sort((a, b) => b.datetime.valueOf() - a.datetime.valueOf())
+            ]
         } catch (error) {
             console.log(error)
             return []
