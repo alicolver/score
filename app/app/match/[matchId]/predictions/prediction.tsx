@@ -2,6 +2,7 @@ import React from "react";
 import {PredictionWithUser} from "@/client";
 import {failStyle, neutralStyle, successStyle} from "@/app/util/css-styles";
 import Link from "next/link";
+import {generateHistoryPageLinkForUser} from "@/app/app/user/[userId]/history/user-link-generator";
 
 enum Result {
     SCORE, RESULT, NEITHER
@@ -31,7 +32,7 @@ export default function PredictionData(props: {
         <Link
             className="w-full flex items-center mt-2 max-w-xl text-center p-3 rounded-3xl animate-appearance-in animation-delay-0"
             style={MOVEMENT_TO_COLOR.get(calculateResult(props.predictionWithUser.prediction.points!))!}
-            href={`/app/user/${props.predictionWithUser.user.userId}/history?first=${props.predictionWithUser.user.firstName.replace(/\s/g,'')}&last=${props.predictionWithUser.user.familyName.replace(/\s/g,'')}`}
+            href={generateHistoryPageLinkForUser(props.predictionWithUser.user)}
         >
             <div className="w-3/4 text-gray-200">
                 <div className="w-full font-bold">

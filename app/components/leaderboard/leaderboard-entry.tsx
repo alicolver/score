@@ -3,6 +3,7 @@ import {LeaderboardInner, LeaderboardInnerMovementEnum} from "@/client";
 import {DOWN_ARROW, NEUTRAL_ARROW, UP_ARROW} from "@/app/components/leaderboard/icons";
 import Link from "next/link"
 import {failStyle, neutralStyle, successStyle} from "@/app/util/css-styles";
+import {generateHistoryPageLinkForUser} from "@/app/app/user/[userId]/history/user-link-generator";
 
 interface LeaderboardEntryProps {
     entry: LeaderboardInner,
@@ -27,7 +28,8 @@ export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JS
     return (
         <Link 
             className="max-w-2xl w-full"
-            href={`/app/user/${props.entry.user.userId}/history?first=${props.entry.user.firstName.replace(/\s/g,'')}&last=${props.entry.user.familyName.replace(/\s/g,'')}`}>
+            href={generateHistoryPageLinkForUser(props.entry.user)}
+        >
             <div
                 className="max-w-2xl w-full p-4 flex flex-row rounded-3xl text-white mb-5"
                 style={MOVEMENT_TO_COLOR.get(props.entry.movement)!}
