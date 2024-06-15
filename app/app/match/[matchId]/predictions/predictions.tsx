@@ -22,7 +22,7 @@ export default function Predictions(
     const [predictions, setPredictions] = useState<PredictionWithUser[]>([])
     const [currentPage, setCurrentPage] = useState(0)
     const windowsSize = useWindowDimensions()
-    const itemsPerPage = windowsSize.height !== undefined ? Math.max((Math.round(windowsSize.height / 80)) - 6, 1) : 5
+    const itemsPerPage = windowsSize.height !== undefined ? Math.max((Math.round(windowsSize.height / 80)) - 5, 1) : 5
 
     const getPaginatedPredictions = (leaderboard: any[]) => {
         const startIndex = currentPage * itemsPerPage;
@@ -60,12 +60,10 @@ export default function Predictions(
                     <div>
                         <BackButton/>
                     </div>
-                </div>
-                <div className="p-2 -mt-4 w-full bg-gray-900 flex flex-col items-center">
-                    {<Ticket forPredictionPage match={props.match} collapse admin={false}/>}
                     <Select
-                        label="Pick A League"
+                        label="Filter By League"
                         className="w-1/2"
+                        size="sm"
                         onChange={(event) => {
                             setLeagueId(event.target.value)
                         }}
@@ -78,6 +76,9 @@ export default function Predictions(
                             )
                         })}
                     </Select>
+                </div>
+                <div className="p-2 -mt-4 w-full bg-gray-900 flex flex-col items-center">
+                    {<Ticket forPredictionPage match={props.match} collapse admin={false}/>}
                     {getPaginatedPredictions(predictions).map((predictionWithUser, index) => <PredictionData key={index} predictionWithUser={predictionWithUser}/>)}
                     {totalPages > 1 &&
                         <Pagination showControls radius="full" total={totalPages} initialPage={1} onChange={handlePageChange}

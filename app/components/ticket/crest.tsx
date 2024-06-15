@@ -17,10 +17,10 @@ export default function Crest(props: CrestProps): React.JSX.Element {
                 height={0}
                 unoptimized={true}
                 style={{
-                    maxWidth: props.large ? "90px" : "75px",
+                    maxWidth: props.large ? "80px" : "75px",
                     width: "auto",
                     height: "auto",
-                    maxHeight: props.large ? "90px" : "75px"
+                    maxHeight: props.large ? "80px" : "75px"
             }}
             />
             <span className="text-center text-xs font-bold text-white">
