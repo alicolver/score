@@ -71,7 +71,7 @@ export default function Predictions(
                         {props.leagues.map(league => {
                             return(
                                 <SelectItem key={league.leagueId}>
-                                    {props.leagueId !== undefined && league.name === undefined ? props.leagueId : league.name}
+                                    {league.name}
                                 </SelectItem>
                             )
                         })}
