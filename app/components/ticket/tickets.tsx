@@ -36,6 +36,7 @@ export default async function Tickets(props: TicketsProps): Promise<React.JSX.El
                             key={match.matchId} 
                             collapse={index !== 0}
                             admin={props.admin}
+                            forPredictionPage={false}
                         />
                     )
                 })}

@@ -59,6 +59,7 @@ export default async function Home({
                             key={match.matchId} 
                             collapse={true}
                             admin={false}
+                            forPredictionPage={false}
                         />
                     )
                 })}

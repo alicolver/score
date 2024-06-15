@@ -44,7 +44,8 @@ export default function Predictions(
                         matchId: props.matchId,
                         leagueId: leagueId
                     }).then(preds =>  {
-                        setPredictions(preds)
+                        const sortedPreds = preds.sort((a, b) => b.prediction.points! - a.prediction.points!)
+                        setPredictions(sortedPreds)
                         setCurrentPage(0)
                     })
                 })

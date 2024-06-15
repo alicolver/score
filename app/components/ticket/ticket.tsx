@@ -12,7 +12,7 @@ interface TicketProps {
     match: Match,
     collapse: boolean,
     admin: boolean,
-    forPredictionPage?: boolean
+    forPredictionPage: boolean
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
@@ -27,18 +27,23 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
     ])
 
     return (
-        <div className="w-full max-w-lg p-3 text-gray-600 relative">
+        <div
+            className="w-full max-w-lg p-3 text-gray-600 relative"
+        >
             <div className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200"
-                 style={{height: "6.5rem"}} onClick={() => setCollapse(!collapse)}>
+                 style={{height: "6.5rem"}} onClick={() => {
+                if (props.forPredictionPage) return
+                setCollapse(!collapse)
+            }}>
                 <div className="flex justify-around" style={{marginTop: "-20px"}}>
                     <TeamsHeader match={props.match} showPoints={!props.admin}/>
                 </div>
-                <div className={"w-full flex justify-center content-center items-center animate-bounce"}
+                {!props.forPredictionPage && <div className={"w-full flex justify-center content-center items-center animate-bounce"}
                      style={{marginTop: "-25px"}}>
                     {collapse ? DROP_DOWN : DROP_UP}
-                </div>
+                </div>}
             </div>
-            {!collapse && <div
+            {!collapse && !props.forPredictionPage && <div
                 className="w-full p-3 flex-row justify-between max-w-xl rounded-large bg-gray-200 animate-appearance-in">
                 <div className="w-full flex justify-between">
                     <div className="flex-row">
