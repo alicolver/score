@@ -213,7 +213,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
     return (
         <div className="flex items-center">
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
-                <Crest country={props.match.homeTeam}/>
+                <Crest country={props.match.homeTeam} large={props.match.state !== MatchStateEnum.Upcoming}/>
             </div>
             <div className="flex flex-col justify-center items-center" style={{width: "33.3%"}}>
                 <div className="flex space-x-4 p-1 justify-around items-center">
@@ -247,7 +247,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                 </div>
             </div>
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
-                <Crest country={props.match.awayTeam}/>
+                <Crest country={props.match.awayTeam} large={props.match.state !== MatchStateEnum.Upcoming}/>
             </div>
         </div>
     )
