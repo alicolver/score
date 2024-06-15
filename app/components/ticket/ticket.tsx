@@ -6,13 +6,12 @@ import {UEFA_RANKINGS} from "@/app/util/teams";
 import Entry from "@/app/components/ticket/entry";
 import {DROP_DOWN, DROP_UP} from "@/app/components/ticket/drop-downs";
 import TeamsHeader from "@/app/components/ticket/teams-header";
-import {LocalTime} from "./local-time";
+import { LocalTime } from "./local-time";
 
 interface TicketProps {
     match: Match,
     collapse: boolean,
-    admin: boolean,
-    forPredictionPage?: boolean
+    admin: boolean
 }
 
 export default function Ticket(props: TicketProps): React.JSX.Element {
@@ -79,7 +78,7 @@ export default function Ticket(props: TicketProps): React.JSX.Element {
             </div>}
             <div
                 className="w-full max-w-xl p-3 rounded-large border-gray-200 border-2 animate-appearance-in animation-delay-0">
-                <Entry match={props.match} admin={props.admin} forPredictionPage={props.forPredictionPage}/>
+                <Entry match={props.match} admin={props.admin}/>
             </div>
         </div>
     )

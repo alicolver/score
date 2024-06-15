@@ -8,13 +8,11 @@ import {Button} from "@nextui-org/react";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import {handlePrediction} from "./submit-prediction"
 import toast from "react-hot-toast";
-import {endMatch, submitScore} from "./submit-score";
-import {navigateTo} from "@/app/actions";
+import { endMatch, submitScore } from "./submit-score";
 
 interface EntryProps {
     match: Match,
-    admin: boolean,
-    forPredictionPage?: boolean
+    admin: boolean
 }
 
 enum EntryState {
@@ -63,7 +61,6 @@ export default function Entry(props: EntryProps): React.JSX.Element {
     const [predictionSetSuccess, setPredictionSetSuccess] = useState(false)
     const [isEnding, setIsEnding] = useState(false)
     const [ended, setEnded] = useState(false)
-    const [isNavigatingToMatchPage, setIsNavigatingToMatchPage] = useState(false)
 
     function handleHomeScore(event: React.ChangeEvent<HTMLInputElement>) {
         if (/^\d*$/.test(event.target.value)) { // Only allow digits
@@ -114,7 +111,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
         } finally {
             setIsEnding(false);
         }
-    }
+    } 
 
     async function handleSubmit(): Promise<void> {
         if (!validateInputs()) return
@@ -148,29 +145,15 @@ export default function Entry(props: EntryProps): React.JSX.Element {
         switch (entryState) {
             case EntryState.LIVE:
             case EntryState.ENDED:
-                return !props.forPredictionPage && (
-                    <>
-                        <div className="text-center">
-                            <p className="text-white text-sm">
-                                {(entryState === EntryState.LIVE ? "Live" : "Final") + " Score"}
-                            </p>
-                            <p className="text-white text-sm">
-                                {props.match.homeScore} - {props.match.awayScore}
-                            </p>
-                        </div>
-                        <div className="mt-2">
-                            <Button className={BUTTON_CLASS}
-                                    isLoading={isNavigatingToMatchPage}
-                                    size="sm"
-                                    onClick={() => {
-                                        setIsNavigatingToMatchPage(true)
-                                        navigateTo(`app/match/${props.match.matchId}/predictions`)
-                                    }}
-                            >
-                                View Predictions
-                            </Button>
-                        </div>
-                    </>
+                return (
+                    <div className="text-center">
+                        <p className="text-white text-sm">
+                            {entryState === EntryState.LIVE ? "Live" : "Final" + " Score"}
+                        </p>
+                        <p className="text-white text-sm">
+                            {props.match.homeScore} - {props.match.awayScore}
+                        </p>
+                    </div>
                 )
             case EntryState.UPCOMING:
                 return (
@@ -186,7 +169,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                 return (
                     <>
                         <Button
-                            onClick={() => handleSubmit()}
+                            onClick={() => handleSubmit()} 
                             isLoading={isSending}
                             style={{height: "25px"}}
                             className={"mt-1 " + BUTTON_CLASS}
@@ -194,10 +177,10 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                         >
                             Update Score
                         </Button>
-                        <Button
-                            color="danger"
-                            className="mt-3"
-                            style={{height: "25px"}}
+                        <Button 
+                            color="danger" 
+                            className="mt-3" 
+                            style={{height: "25px"}} 
                             onPress={handleEndMatch}
                             isLoading={isEnding}
                             disabled={ended}
@@ -205,7 +188,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                             End Match
                         </Button>
                     </>
-
+                    
                 )
         }
     }
@@ -213,16 +196,14 @@ export default function Entry(props: EntryProps): React.JSX.Element {
     return (
         <div className="flex items-center">
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
-                <Crest country={props.match.homeTeam} large={props.match.state !== MatchStateEnum.Upcoming}/>
+                <Crest country={props.match.homeTeam}/>
             </div>
             <div className="flex flex-col justify-center items-center" style={{width: "33.3%"}}>
                 <div className="flex space-x-4 p-1 justify-around items-center">
                     <div className={Styles.inputBox}>
                         <input
                             type="text"
-                            value={props.forPredictionPage 
-                                ? props.match.homeScore 
-                                : (canInput ? homeScore : props.match.prediction?.homeScore)}
+                            value={canInput ? homeScore : props.match.prediction?.homeScore}
                             onChange={handleHomeScore}
                             maxLength={1}
                             placeholder={"_"}
@@ -231,10 +212,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                     </div>
                     <div className={Styles.inputBox}>
                         <input type="text"
-                               value={
-                                props.forPredictionPage 
-                                ? props.match.awayScore
-                                : (canInput ? awayScore : props.match.prediction?.awayScore)}
+                               value={canInput ? awayScore : props.match.prediction?.awayScore}
                                onChange={handleAwayScore}
                                maxLength={1}
                                placeholder={"_"}
@@ -247,7 +225,7 @@ export default function Entry(props: EntryProps): React.JSX.Element {
                 </div>
             </div>
             <div className="flex justify-around items-center" style={{width: "33.3%", height: "80px"}}>
-                <Crest country={props.match.awayTeam} large={props.match.state !== MatchStateEnum.Upcoming}/>
+                <Crest country={props.match.awayTeam}/>
             </div>
         </div>
     )
