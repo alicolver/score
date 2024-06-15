@@ -5,6 +5,7 @@ import {ListMatchesFilterTypeEnum, Match, MatchApi} from "@/client"
 import {redirect} from "next/navigation"
 import BackButton from "@/app/components/back-button";
 import React from "react";
+import {isLoggedIn} from "@/app/auth/jtw-handler";
 
 export default async function Home({
     params,
@@ -13,10 +14,12 @@ export default async function Home({
     params: { userId: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }): Promise<React.JSX.Element> {
-
     if (searchParams["first"] === undefined || searchParams["last"] === undefined) {
         redirect("/app")
     }
+
+    const loggedIn = await isLoggedIn()
+    if (!loggedIn) redirect("/login")
 
     const firstName = searchParams["first"] 
     const lastName = searchParams["last"]
