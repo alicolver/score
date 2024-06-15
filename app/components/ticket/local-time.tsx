@@ -1,6 +1,7 @@
 'use client'
 
 import { Suspense, useEffect, useState } from 'react'
+import dateFormat from "dateformat";
 
 function useHydration() {
   const [hydrated, setHydrated] = useState(false)
@@ -15,7 +16,7 @@ export function LocalTime({ date }: { date: Date }) {
   return (
     <Suspense key={hydrated ? 'local' : 'utc'}>
       <p>
-        {date.toLocaleDateString() + " " + date.toLocaleTimeString()}
+        {dateFormat(date, "ddd dd/mm - HH:MM")}
         {hydrated ? '' : ' (UTC)'}
       </p>
     </Suspense>
