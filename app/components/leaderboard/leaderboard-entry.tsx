@@ -14,8 +14,8 @@ export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JS
 
     const MOVEMENT_TO_COLOR: Map<LeaderboardInnerMovementEnum, React.CSSProperties> = new Map([
         [LeaderboardInnerMovementEnum.Improved, {
-            background: "#10b981",
-            backgroundImage: "linear-gradient(225deg, #10b981, #0ea5e9)",
+            background: "#16a34a",
+            backgroundImage: "linear-gradient(225deg, #16a34a, #14b8a6)",
             scale: scale
         }],
         [LeaderboardInnerMovementEnum.Worsened, {
