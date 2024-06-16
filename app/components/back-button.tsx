@@ -11,7 +11,13 @@ export default function BackButton(): React.JSX.Element {
     const router = useRouter()
 
     return (
-        <Button isIconOnly className={BUTTON_CLASS} onClick={() => router.back()}>
+        <Button isIconOnly className={BUTTON_CLASS} onClick={() => {
+            if (window.history?.length && window.history.length > 1) {
+                router.back()
+             } else {
+                router.push("/app")
+             }
+        }}>
             <BackIcon/>
         </Button>
     )
