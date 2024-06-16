@@ -1,37 +1,16 @@
 import React from "react";
 import {PredictionWithUser} from "@/client";
-import {failStyle, neutralStyle, successStyle} from "@/app/util/css-styles";
 import Link from "next/link";
 import {generateHistoryPageLinkForUser} from "@/app/app/user/[userId]/history/user-link-generator";
-
-enum Result {
-    SCORE, RESULT, NEITHER
-}
+import { calculateResult, RESULT_TO_STYLE } from "@/app/components/points/result-styles"
 
 export default function PredictionData(props: {
     predictionWithUser: PredictionWithUser
 }): React.JSX.Element {
-
-    const MOVEMENT_TO_COLOR: Map<Result, React.CSSProperties> = new Map([
-        [Result.SCORE, successStyle],
-        [Result.NEITHER, failStyle],
-        [Result.RESULT, neutralStyle]
-    ])
-
-    function calculateResult(points: number): Result {
-        if (points === 5) {
-            return Result.SCORE
-        }
-        if (points === 2) {
-            return Result.RESULT
-        }
-        return Result.NEITHER
-    }
-
     return (
         <Link
             className="w-full flex items-center mt-2 max-w-xl text-center p-3 rounded-3xl animate-appearance-in animation-delay-0"
-            style={MOVEMENT_TO_COLOR.get(calculateResult(props.predictionWithUser.prediction.points!))!}
+            style={RESULT_TO_STYLE.get(calculateResult(props.predictionWithUser.prediction.points!))!}
             href={generateHistoryPageLinkForUser(props.predictionWithUser.user)}
         >
             <div className="w-3/4 text-gray-200">

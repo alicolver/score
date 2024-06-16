@@ -1,8 +1,8 @@
 import React from "react";
 
 export const successStyle: React.CSSProperties = {
-    background: "#16a34a",
-    backgroundImage: "linear-gradient(225deg, #16a34a, #14b8a6)"
+    backgroundColor: "#16a34a",
+    backgroundImage: "linear-gradient(225deg, #16a34a 0%, #14b8a6 100%)"
 }
 export const neutralStyle: React.CSSProperties = {
     backgroundColor: "#21D4FD",
