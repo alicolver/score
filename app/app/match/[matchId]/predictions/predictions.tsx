@@ -43,12 +43,20 @@ export default function Predictions(
                     .getMatchPredictions({
                         matchId: props.matchId,
                         leagueId: leagueId
-                    }).then(preds =>  {
-                        const sortedPreds = preds.sort((a, b) => b.prediction.points! - a.prediction.points!)
-                        setPredictions(sortedPreds)
-                        setCurrentPage(0)
-                    })
+                    }).then(preds => {
+                        const sortedPreds = preds.sort((a, b) => {
+                            const pointsComparison = b.prediction.points! - a.prediction.points!;
+                            if (pointsComparison !== 0) return pointsComparison;
+
+                            const familyNameComparison = a.user.familyName.localeCompare(b.user.familyName);
+                            if (familyNameComparison !== 0) return familyNameComparison;
+
+                            return a.user.firstName.localeCompare(b.user.firstName)
+                        })
+                    setPredictions(sortedPreds)
+                    setCurrentPage(0)
                 })
+            })
         } catch (error) {
             console.log(error)
         }
@@ -70,7 +78,7 @@ export default function Predictions(
                         }}
                     >
                         {props.leagues.map(league => {
-                            return(
+                            return (
                                 <SelectItem key={league.leagueId}>
                                     {league.name}
                                 </SelectItem>
@@ -80,9 +88,11 @@ export default function Predictions(
                 </div>
                 <div className="p-2 -mt-4 w-full bg-gray-900 flex flex-col items-center">
                     {<Ticket forPredictionPage match={props.match} collapse admin={false}/>}
-                    {getPaginatedPredictions(predictions).map((predictionWithUser, index) => <PredictionData key={index} predictionWithUser={predictionWithUser}/>)}
+                    {getPaginatedPredictions(predictions).map((predictionWithUser, index) => <PredictionData key={index}
+                                                                                                             predictionWithUser={predictionWithUser}/>)}
                     {totalPages > 1 &&
-                        <Pagination showControls radius="full" total={totalPages} initialPage={1} onChange={handlePageChange}
+                        <Pagination showControls radius="full" total={totalPages} initialPage={1}
+                                    onChange={handlePageChange}
                                     className="fixed bottom-4"
                                     classNames={{
                                         cursor: BUTTON_CLASS,
