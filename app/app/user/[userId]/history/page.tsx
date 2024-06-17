@@ -15,15 +15,8 @@ export default async function Home({
     params: { userId: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }): Promise<React.JSX.Element> {
-    if (searchParams["first"] === undefined || searchParams["last"] === undefined) {
-        redirect("/app")
-    }
-
     const loggedIn = await isLoggedIn()
     if (!loggedIn) redirect("/login")
-
-    const firstName = searchParams["first"] 
-    const lastName = searchParams["last"]
 
     async function getGames(): Promise<Match[]> {
         try {
