@@ -9,11 +9,9 @@ import {isLoggedIn} from "@/app/auth/jtw-handler";
 import LeaderboardEntry from "@/app/components/leaderboard/leaderboard-entry";
 
 export default async function Home({
-    params,
-    searchParams,
-  }: {
+    params
+}: {
     params: { userId: string }
-    searchParams: { [key: string]: string | string[] | undefined }
 }): Promise<React.JSX.Element> {
     const loggedIn = await isLoggedIn()
     if (!loggedIn) redirect("/login")
