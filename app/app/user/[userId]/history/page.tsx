@@ -1,11 +1,12 @@
 import {getConfigWithAuthHeader} from "@/app/api/client-config"
 import {MatchesHeader} from "@/app/components/ticket/matches-header"
 import Ticket from "@/app/components/ticket/ticket"
-import {ListMatchesFilterTypeEnum, Match, MatchApi} from "@/client"
+import {LeaderboardInner, LeagueApi, ListMatchesFilterTypeEnum, Match, MatchApi} from "@/client"
 import {redirect} from "next/navigation"
 import BackButton from "@/app/components/back-button";
 import React from "react";
 import {isLoggedIn} from "@/app/auth/jtw-handler";
+import LeaderboardEntry from "@/app/components/leaderboard/leaderboard-entry";
 
 export default async function Home({
     params,
@@ -45,6 +46,19 @@ export default async function Home({
         }
     }
 
+    async function getEntry(): Promise<LeaderboardInner | undefined> {
+        try {
+            const leaderboardApi = new LeagueApi(await getConfigWithAuthHeader())
+            const league = await leaderboardApi.getLeagueLeaderboard({ leagueId: "global", pageSize: "200" })
+            return league.leaderboard.find(entry => entry.user.userId === params.userId)
+        } catch (error) {
+            console.log(error)
+            return undefined
+        }
+    }
+
+    const leaderboardEntry = await getEntry()
+
     return(
         <div className="min-h-svh bg-gray-900">
             <div className="w-full max-w-4xl mx-auto relative">
@@ -54,7 +68,7 @@ export default async function Home({
                     </div>
                 </div>
                 <div className="p-2 w-full bg-gray-900 flex flex-col items-center">
-                    <MatchesHeader showInfoButton={false} title={`${firstName} ${lastName}`}/>
+                    {leaderboardEntry !== undefined && <LeaderboardEntry entry={leaderboardEntry} isUser={true}/>}
                     {(await getGames()).map((match, index) => {
                     return (
                         <Ticket 
