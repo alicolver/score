@@ -59,7 +59,7 @@ export default async function Home({
                     </div>
                 </div>
                 <div className="p-2 w-full bg-gray-900 flex flex-col items-center">
-                    {leaderboardEntry !== undefined && <LeaderboardEntry disablePulse={true} entry={leaderboardEntry} isUser={true}/>}
+                    {leaderboardEntry !== undefined && <LeaderboardEntry disablePulse entry={leaderboardEntry} isUser={true}/>}
                     {(await getGames()).map((match, index) => {
                     return (
                         <Ticket 
