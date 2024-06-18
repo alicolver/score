@@ -21,6 +21,7 @@ const config: Config = {
                 wiggle: 'wiggle 1s ease-in-out infinite',
                 slide: 'slide 10s linear infinite',
                 slideslow: 'slide 20s linear infinite',
+                fastpulse: 'pulsing 1s linear infinite'
             },
             keyframes: {
                 wiggle: {
@@ -34,6 +35,14 @@ const config: Config = {
                     },
                     '100%': {transform: 'translateX(calc(-100vw))'},
                 },
+                pulsing: {
+                    '0%,100%': {
+                        opacity: '1'
+                    },
+                    '50%': {
+                        opacity: '.5'
+                    }
+                }
             }
         },
     },
