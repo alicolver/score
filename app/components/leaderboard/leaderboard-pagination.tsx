@@ -39,6 +39,7 @@ export default function LeaderboardPagination(props: LeaderboardPaginationProps)
                 key={index}
                 entry={entry}
                 isUser={entry.user.userId === props.userId}
+                disablePulse={false}
             />
         ))}
         {props.shouldPaginate && totalPages > 1 &&

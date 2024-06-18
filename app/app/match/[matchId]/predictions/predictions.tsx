@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from "react";
 import {League, Match, MatchApi, PredictionWithUser} from "@/client";
 import {getConfigWithAuthHeaderClient} from "@/app/api/client-config-client-side";
-import PredictionData from "@/app/app/match/[matchId]/predictions/prediction";
+import PredictionWithLink from "@/app/app/match/[matchId]/predictions/prediction";
 import Ticket from "@/app/components/ticket/ticket";
 import {Pagination, Select, SelectItem} from "@nextui-org/react"
 import BackButton from "@/app/components/back-button"
@@ -88,8 +88,9 @@ export default function Predictions(
                 </div>
                 <div className="p-2 -mt-4 w-full bg-gray-900 flex flex-col items-center">
                     {<Ticket forPredictionPage match={props.match} collapse admin={false}/>}
-                    {getPaginatedPredictions(predictions).map((predictionWithUser, index) => <PredictionData key={index}
-                                                                                                             predictionWithUser={predictionWithUser}/>)}
+                    {getPaginatedPredictions(predictions).map((predictionWithUser, index) =>
+                        <PredictionWithLink disablePulse={true} key={index} predictionWithUser={predictionWithUser}/>
+                    )}
                     {totalPages > 1 &&
                         <Pagination showControls radius="full" total={totalPages} initialPage={1}
                                     onChange={handlePageChange}
