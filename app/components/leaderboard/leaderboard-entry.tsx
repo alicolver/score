@@ -8,7 +8,8 @@ import Entry from "@/app/components/leaderboard/entry";
 
 interface LeaderboardEntryProps {
     entry: LeaderboardInner,
-    isUser: boolean
+    isUser: boolean,
+    disablePulse: boolean
 }
 
 export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JSX.Element {
@@ -35,7 +36,7 @@ export default function LeaderboardEntry(props: LeaderboardEntryProps): React.JS
                 entry={props.entry}
                 color={MOVEMENT_TO_COLOR.get(props.entry.movement)!}
                 icon={MOVEMENT_TO_ICON.get(props.entry.movement)!}
-                disablePulse={false}
+                disablePulse={props.disablePulse}
             />
         </Link>
     )

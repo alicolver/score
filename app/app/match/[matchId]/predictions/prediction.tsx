@@ -3,9 +3,11 @@ import {PredictionWithUser} from "@/client";
 import Link from "next/link";
 import {generateHistoryPageLinkForUser} from "@/app/app/user/[userId]/history/user-link-generator";
 import {calculateResult, RESULT_TO_STYLE} from "@/app/components/points/result-styles"
+import PredictionData from "@/app/app/match/[matchId]/predictions/prediction-data";
 
-export default function PredictionData(props: {
-    predictionWithUser: PredictionWithUser
+export default function PredictionWithLink(props: {
+    predictionWithUser: PredictionWithUser,
+    disablePulse: boolean
 }): React.JSX.Element {
     return (
         <Link
@@ -13,7 +15,7 @@ export default function PredictionData(props: {
             style={RESULT_TO_STYLE.get(calculateResult(props.predictionWithUser.prediction.points!))!}
             href={generateHistoryPageLinkForUser(props.predictionWithUser.user)}
         >
-            <PredictionData predictionWithUser={props.predictionWithUser}/>
+            <PredictionData predictionWithUser={props.predictionWithUser} disablePulse={props.disablePulse}/>
         </Link>
     )
 }

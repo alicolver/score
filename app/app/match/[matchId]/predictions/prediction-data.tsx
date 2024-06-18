@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import {PredictionWithUser} from "@/client";
 
 export default function PredictionData(props: {
-    predictionWithUser: PredictionWithUser
+    predictionWithUser: PredictionWithUser,
+    disablePulse: boolean
 }): React.JSX.Element {
 
     const [isLoading, setIsLoading] = useState(false)
@@ -12,7 +13,7 @@ export default function PredictionData(props: {
     return (
         <div
             className="flex w-full items-center"
-            onClick={() => setIsLoading(true)}
+            onClick={() => setIsLoading(!props.disablePulse)}
             style={{animation: isLoading ? "pulse 0.5s infinite" : ""}}
         >
             <div className="w-3/4 text-gray-200">
