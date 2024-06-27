@@ -8,7 +8,8 @@ interface TicketsProps {
     title: string,
     filterType: ListMatchesFilterTypeEnum,
     showInfoButton: boolean,
-    admin: boolean
+    admin: boolean,
+    extraInfo?: string
 }
 
 export default async function Tickets(props: TicketsProps): Promise<React.JSX.Element> {
@@ -28,7 +29,7 @@ export default async function Tickets(props: TicketsProps): Promise<React.JSX.El
     return (
         <>
             {games.length > 0 && <>
-                <MatchesHeader showInfoButton={props.showInfoButton} title={props.title}/>
+                <MatchesHeader showInfoButton={props.showInfoButton} title={props.title} extraInfo={props.extraInfo}/>
                 {games.map((match, index) => {
                     return (
                         <Ticket 
