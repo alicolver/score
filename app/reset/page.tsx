@@ -8,6 +8,7 @@ import {Button, Input} from "@nextui-org/react";
 import {EyeFilledIcon, EyeSlashFilledIcon} from "@nextui-org/shared-icons";
 import {BUTTON_CLASS} from "@/app/util/css-classes";
 import Link from "next/link";
+import { doesContainDigit, doesContainLowerCase } from "../util/regex";
 
 export default function Reset() {
 
@@ -20,7 +21,22 @@ export default function Reset() {
     const [isRequested, setIsRequested] = useState(false)
     const [didFail, setDidFail] = useState(false)
 
+    const [validLength, setIsValidLength] = useState(false)
+    const [containsDigit, setContainsDigit] = useState(false)
+    const [containsLowerCase, setContainsLowerCase] = useState(false)
+
     const toggleVisibility = () => setIsVisible(!isVisible);
+
+    function handlePasswordChange(val: string): void {
+        setIsValidLength(val.length >= 6)
+        setContainsDigit(doesContainDigit(val))
+        setContainsLowerCase(doesContainLowerCase(val))
+        setPassword(val)
+    }
+
+    function isPasswordValid(): boolean {
+        return containsDigit && validLength && containsLowerCase
+    }
 
     const handleVerificationCodeRequest: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault()
@@ -43,6 +59,8 @@ export default function Reset() {
 
     const handlePasswordResetRequest: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault()
+
+        if (!isPasswordValid()) return
 
         const requestBody: ResetPasswordConfirmRequest = {
             email: email,
@@ -116,7 +134,7 @@ export default function Reset() {
                             <Input
                                 label="New Password"
                                 onChange={(event) => {
-                                    setPassword(event.target.value)
+                                    handlePasswordChange(event.target.value)
                                     setDidFail(false)
                                 }}
                                 value={password}
@@ -136,13 +154,20 @@ export default function Reset() {
                                 isInvalid={didFail}
                                 isDisabled={!isRequested}
                             />
+                            {password.length !== 0 &&
+                                    <div className="p-2 text-xs">
+                                        <p><span className="font-bold" style={containsLowerCase ? {"color": "green"} : {"color": "red"}}>{containsLowerCase ? "✓" : "x"}</span> At least one lowercase letter</p>
+                                        <p><span className="font-bold" style={containsDigit ? {"color": "green"} : {"color": "red"}}>{containsDigit ? "✓" : "x"}</span> At least one digit</p>
+                                        <p><span className="font-bold" style={validLength ? {"color": "green"} : {"color": "red"}}>{validLength ? "✓" : "x"}</span> At least 6 characters in length</p>
+                                    </div>
+                                }
                         </div>
                         <Button
-                            disabled={!isRequested}
+                            disabled={!isRequested || !isPasswordValid()}
                             onClick={handlePasswordResetRequest}
                             isLoading={isLoadingConfirmation}
                             type="submit"
-                            className={"w-full " + (!isRequested ? "bg-gray-300" : BUTTON_CLASS)}>
+                            className={"w-full " + ((!isRequested || !isPasswordValid()) ? "bg-gray-300" : BUTTON_CLASS)}>
                             Reset Password
                         </Button>
                     </div>
